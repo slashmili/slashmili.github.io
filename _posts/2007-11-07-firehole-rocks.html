@@ -1,0 +1,11 @@
+---
+layout: post
+title: "FireHole ROCKS !"
+date: 2007-11-07
+comments: false
+categories:
+ - GNU/Linux
+---
+
+<div class='post'>
+I always had a problem with iptables !<br />For this reason about 3 years ago I bought <a href="http://www.oreilly.com/catalog/lnxiptablespr/">Linux iptables Pocket Reference</a> Book.<br />But I never read it completely, always read it until page 7-8 and after that I through it away !<br />A few days ago <a href="http://www.oreilly.com/catalog/lnxiptablespr/">Siavash</a> suggested me <a href="http://firehol.sourceforge.net/">FireHole</a>, I install it but didn't use it until 1 hour ago   !<br />I used it for sharing internet connection.<br />It has too fast config ! it's too cool !<br />FireHole's document is enough good but I write down my config here (maybe you don't like read that document because you are as lazy as me !) <br /><pre class="code"><br />#/etc/firehol/firehol.conf<br />version 5<br />#your LAN card config<br />home_ips="192.168.0.1/24"<br />&nbsp;<br />#my lan interface was eth2<br />interface eth2 home  src "${home_ips}"<br />        policy reject<br />        server "ssh ftp http"    accept #allow use this services from LAN to eth2<br />&nbsp;<br />#my internet interface was name ppp0 - don't change anything else !<br />interface ppp0 internet src not "${home_ips} ${UNROUTABLE_IPS}"<br />        protection strong 10/sec 10<br />        server          custom          fb              tcp/1511        default accept<br />        server          ident           reject          with            tcp-reset<br />        client          all             accept<br />&nbsp;<br />#we want share internet from ppp0 to our LAN (eth2)<br />router home2internet inface eth2 outface ppp0<br />        masquerade<br />        route all accept</pre><br />After this change, restart your firehole.<br /><br />If you just want share internet and don't like face with this configs I suggest you <a href="http://parsix.org">Parsix</a> ics script.<br />All you thing you should do is "/etc/init.d/ics start" without any config !!!</div>

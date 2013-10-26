@@ -1,0 +1,11 @@
+---
+layout: post
+title: "Matching List and Map in Scala"
+date: 2011-03-06
+comments: false
+categories:
+ - Scala
+---
+
+<div class='post'>
+<div class='posterous_autopost'><p>For a while that I've been reading Scala I find it as a strong and powerfull language which helps you to write your application perfectly, it's not like Java that ties you to follow some&nbsp;arid rules and it's not like PHP that let you screw in your application(of course you can handle your code in PHP). Programing in Scala is fun as programming Python and it's powerful as Java!</p>  <p>Scala's Match syntax is liitle like Switch-Case but you can match value, type, regex, special type of class and more.&nbsp;</p>  <p>Here is a syntax of matching for List and map in Scala, for finding these codes I search a lot to ! so I wrote these samples for future usage.&nbsp;</p>  <p><code>    val foobar = Map("foo"-&gt;"bar")    foobar&nbsp;match {&nbsp;    &nbsp;&nbsp;case map :&nbsp;&nbsp;scala.collection.Map[_, _] =&gt; println(map)    }    </code></p>  <p>&nbsp;</p>  <p><code>    val foobar = List("foo","bar")    foobar&nbsp;match {&nbsp;    &nbsp;&nbsp;case &nbsp;list:Seq[_] =&gt; println(list)    }    </code></p>  <p>&nbsp;</p>  <p>So maybe you ask that why you need to handle something like this ?</p>  <p>It's real world senario: I wanna to pass mix value of Map and List and String to function and get JSON string from that. some thing like this :</p>  <p><code>    def toJson(ob: Any):String = {    &nbsp;&nbsp;ob match {    &nbsp;&nbsp; &nbsp;case s : String&nbsp;&nbsp; =&gt; return "\""+ s + "\""    &nbsp;&nbsp;&nbsp; case d:Double&nbsp;&nbsp; =&gt; return "\""+ d.toString + "\""    &nbsp;&nbsp;&nbsp; case map:scala.collection.Map[_, _] =&gt; return "{" + ((for((k,v) &lt;- map) yield toJson(k) + ":" + toJson(v) ).reduceLeft(_ + ", " + _) ) + "}"    &nbsp;&nbsp;&nbsp; case list @ List(_*)&nbsp;&nbsp; =&gt; return "[" + ((for (m&lt;-list) yield toJson(m)).reduceLeft(_ + ", " + _) )&nbsp;&nbsp; + "]"    }    </code></p>  <p>Mabye last code doesn't work probably ! because I write it to just show you how you can use this feature</p></div></div>

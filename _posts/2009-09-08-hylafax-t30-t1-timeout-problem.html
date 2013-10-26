@@ -1,0 +1,12 @@
+---
+layout: post
+title: "Hylafax T.30 T1 Timeout Problem"
+date: 2009-09-08
+comments: false
+categories:
+ - Halafax
+ - Asterisk
+---
+
+<div class='post'>
+I configured  iaxmodem and hylafax for on of our customer last week. I test FAX with sending fax internal extensions and everything worked prefect.<div>But today they called me and said they have a problem in sending and receiving FAX ! Again troubleshooting !</div><div><br /></div><div>I checked out log file log file was :</div><div><span class="Apple-style-span" style="font-weight: bold;">SEND FAILED: JOB 4 DEST 88276650 ERR [126] No receiver protocol (T.30 T1 timeout)</span><br /></div><div><br /></div><div>I googled about this problem and there was no direct answer to this. someone said there is a problem on connection your device and you have some thing like "UDP being a lossy medium".</div><div><br /></div><div>Anyway after question from friends problem solved with changing <a href="http://www.quintum.com/">Tenor</a> configure:</div><div><br /><code>#config<br />#iprg<br />#set FaxRelay G.711 Mu-Law</code></div><div><br /></div>If you have a same problem set FaxRelay to Mu-Law maybe cause to solve yours.<br /><div><br /></div></div>

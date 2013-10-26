@@ -1,0 +1,12 @@
+---
+layout: post
+title: "How to Config Slave DNS Server"
+date: 2009-09-08
+comments: false
+categories:
+ - BIND
+ - GNU/Linux
+---
+
+<div class='post'>
+In a project we have servers which were in different cities, and they connected to each other with Radio connection.<div>We want to setup DNS server in each server for easy use, but configuring dns in each server was to painful if server of one IP changed. we should change config in all server.</div><div><br /></div><div>So I setup a master DNS server and config other server as Slave.</div><div>Slave config is :</div><div><br /></div><div><div>zone "sip.server.loc"{</div><div>        type slave;</div><div>        file "/etc/bind/sip.server.loc";</div><div>        masters {172.16.20.1;};</div><div>};</div><div><br /></div><div>Setting file value is useful when Master server is not accessible and Slave response requests with last config file(which updated that file from Master)</div></div></div>

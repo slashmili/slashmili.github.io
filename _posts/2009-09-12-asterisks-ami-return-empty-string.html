@@ -1,0 +1,12 @@
+---
+layout: post
+title: "Asterisk's AMI Return Empty String"
+date: 2009-09-12
+comments: false
+categories:
+ - Asterisk
+ - VoIP
+---
+
+<div class='post'>
+About 2 months a ago, one day server of our customer decided to response empty string on <a href="http://www.voip-info.org/wiki/view/Asterisk+Manager+API+Action+Command">Command Action</a>. we feed bunch of data for reporting with AMI and especially with Command Action.<div><br /><div>It was so mystery for us ! what happen suddenly ? anyway we were lucky, we had a backup and moved server to backup ones.</div><div><br /></div><div>After works on that server we discovered this problem solved when we run asterisk as a root !</div><div>Anyway we did not work on that server until today. I get asterisk source code and debug lines and found a problem :</div><div>For unknown reason ownership of /tmp was different from always and a function wants to create temporary file but could not access to /tmp (file main/manager.c about line 1736).</div><div><br /></div><div>If Asterisk Developers checks  return value of mkstemp and debug if value is -1, life would be more pleasure </div></div></div>

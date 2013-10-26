@@ -1,0 +1,12 @@
+---
+layout: post
+title: "Configure Asterisk  and Zaptel on Ubuntu 6.*"
+date: 2008-06-02
+comments: false
+categories:
+ - Asterisk
+ - GNU/Linux
+---
+
+<div class='post'>
+Always I installed <a href="http://www.asterisk.org/">Asterisk</a> and <a href="http://www.zaptel.com">Zaptel</a> on Ubutnu 6.*, I got a error and couldn't find  any files in folder /dev/zap/ !<br />Actually he said true ! because Zaptel file was in /dev/ folder.<br />When servers restart, I should create link to real device file(I try put this command on file rc.local but still had a problem on creating link). Until I goggled and find some manual for this problem.our problem will solved by udev.<br /><br />Create File : /etc/udev/rules.d/50-udev.rules<br /><code><br />KERNEL="zapctl",     NAME="zap/ctl" , GROUP = "asterisk"<br />KERNEL="zaptimer",   NAME="zap/timer" , GROUP = "asterisk"<br />KERNEL="zapchannel", NAME="zap/channel" , GROUP = "asterisk"<br />KERNEL="zappseudo",  NAME="zap/pseudo" , GROUP = "asterisk"<br />KERNEL="zap[0-9]*",  NAME="zap/%n" , GROUP = "asterisk"<br /></code><br /><br />Restart udev : /etc/init.d/udev restart<br /><br />Now every time server restart udev create device in place where Asterisk wanted.</div>

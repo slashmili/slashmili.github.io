@@ -1,0 +1,12 @@
+---
+layout: post
+title: "SIP Channel Stuck on Asterisk"
+date: 2010-01-30
+comments: false
+categories:
+ - SIP
+ - Asterisk
+---
+
+<div class='post'>
+In some case we need to set call-limit=1 in sip config but after a while a SIP channel stuck and we got problem on sending new call to that SIP number.<br />Logger save this error :<br />"Call from peer XXX rejected due to usage limit of 1"<br /><span style="font-size:85%;">Asterisk*CLI> sip show channels<br />172.16.35.20     111         1e436b221c0  00102/00000  0x0 (nothing)    No  (d)  Tx: ACK                   </span><br /><br />Even when turn of that SIP, we got that error !<br />I always try to fixed that but every time this event happen we forced to fix this problem.<br /><br />Now it seems this problem solved in Asterisk 1.4.26 !<br />If you have problem like me check new version of asterisk</div>

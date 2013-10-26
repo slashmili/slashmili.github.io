@@ -1,0 +1,12 @@
+---
+layout: post
+title: "PHP AGI is so slow"
+date: 2010-04-13
+comments: false
+categories:
+ - Asterisk
+ - AGI
+---
+
+<div class='post'>
+In one case exactly in our customer's server, AGI which I wrote it was so slow !<br />I checked line by line of codes but it was hooked in some line of code. because <a href="http://www.parspooyesh.com/">we</a> are pythonic company, immediately I want from team to rewrite that code with python ! (python AGI is more better that PHP ones)<br /><br />A few days ago on that server , tail of syslog was opened and suddenly another PHP AGI run and I saw bunch of error in syslog which said that you didn't set TimeZone in php.ini !<br /><br />And bingo! I guess problem is here, I add TimeZone in php.ini and AGI works fine !</div>

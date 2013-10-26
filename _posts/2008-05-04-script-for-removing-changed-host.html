@@ -1,0 +1,11 @@
+---
+layout: post
+title: "Script For Removing Changed Host Identification"
+date: 2008-05-04
+comments: false
+categories:
+ - GNU/Linux
+---
+
+<div class='post'>
+As I am working as a system administer this days and always had a problem with changing Remote Identification of servers, I write simple script which you can delete a line from your ~/.ssh/known_hosts<br /><br /><code><br />#!/bin/bash<br />#rm_known_hosts bash script<br />tmp_head=$(mktemp)<br />tmp_tail=$(mktemp)<br />tmp_dest=$(mktemp)<br /><br />file_name="$HOME/.ssh/known_hosts"<br />line_nums=$(cat $file_name | wc -l )<br /><br />cat $file_name | head -n`echo "$1 -1 " | bc ` > $tmp_head<br />cat $file_name | tail -n`echo "$line_nums - $1 "| bc` > $tmp_tail<br /><br />cat $tmp_head  > $tmp_dest<br />cat $tmp_tail >> $tmp_dest<br /><br />cp $tmp_dest $file_name<br /><br />#remove tmps<br />rm -f $tmp_head<br />rm -f $tmp_tail<br />rm -f $tmp_dest<br /></code><br /><br />for example run when you got error like this : <br /><code><br />@@@@@@@@@@@@@@@@@@@@@@@@@@@@@<br />@ WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!<br />@@@@@@@@@@@@@@@@@@@@@@@@@@@@@<br />IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!<br />Someone could be eavesdropping on you right now (man-in-the-middle attack)!<br />It is also possible that the RSA host key has just been changed.<br />The fingerprint for the RSA key sent by the remote host is<br />ac:2c:99:de:a6:f4:7d:4a:81:93:7e:9c:67:a6:14:45.<br />Please contact your system administrator.<br />Add correct host key in /root/.ssh/known_hosts to get rid of this message.<br />Offending key in /root/.ssh/known_hosts:90<br />RSA host key for 10.10.10.10 has changed and you have requested strict checking.<br />Host key verification failed.<br /></code><br /><br />you just run<br /><code><br />./rm_known_hosts 90<br /></code><br />Life will be essayer with tiny scripts !</div>
