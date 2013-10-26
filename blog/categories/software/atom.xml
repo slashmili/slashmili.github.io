@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Software | /mili]]></title>
+  <link href="http://slashmili.github.io/blog/categories/software/atom.xml" rel="self"/>
+  <link href="http://slashmili.github.io/"/>
+  <updated>2013-10-26T17:14:34+08:00</updated>
+  <id>http://slashmili.github.io/</id>
+  <author>
+    <name><![CDATA[Milad Rastian]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Monitor your app's behaviour]]></title>
+    <link href="http://slashmili.github.io/blog/2013/08/11/monitor-your-apps-behaviour/"/>
+    <updated>2013-08-11T00:00:00+08:00</updated>
+    <id>http://slashmili.github.io/blog/2013/08/11/monitor-your-apps-behaviour</id>
+    <content type="html"><![CDATA[<div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on"><div style="color: #444444; font-family: 'Helvetica Neue', HelveticaNeue, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 19px;">I had a talk&nbsp;at&nbsp;<a data-mce-href="https://www.facebook.com/groups/klxrb/" href="https://www.facebook.com/groups/klxrb/" style="color: #444444;">KL Ruby Brigade</a>&nbsp;about Monitoring App's behaviour. You can find the&nbsp;presentation in&nbsp;<a data-mce-href="https://docs.google.com/presentation/d/1nsEUW9s5_YoxXWgrwl3mvmIdkhWamYlIwADfKfJEpkc/edit?usp=sharing" href="https://docs.google.com/presentation/d/1nsEUW9s5_YoxXWgrwl3mvmIdkhWamYlIwADfKfJEpkc/edit?usp=sharing" style="color: #444444;">here</a>&nbsp;or flip it here:</div><div style="color: #444444; font-family: 'Helvetica Neue', HelveticaNeue, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 19px;"><iframe allowfullscreen="" frameborder="0" height="356" marginheight="0" marginwidth="0" mozallowfullscreen="" scrolling="no" src="http://www.slideshare.net/slideshow/embed_code/25139283" style="border-width: 1px 1px 0; border: 1px solid #CCC; margin-bottom: 5px; max-width: 427px;" webkitallowfullscreen="" width="100%"> </iframe> <br /><div style="margin-bottom: 5px;"><strong> <a href="http://www.slideshare.net/miladrastian/monitor-your-apps-behaviour-25139283" target="_blank" title="Monitor your app&amp;#39;s behaviour">Monitor your app&amp;#39;s behaviour</a> </strong> from <strong><a href="http://www.slideshare.net/miladrastian" target="_blank">Milad Rastian</a></strong> <br /><br /></div></div><div style="color: #444444; font-family: 'Helvetica Neue', HelveticaNeue, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 19px;">My talk was mainly about why and how you can monitor your app's behaviour through monitoring systems like&nbsp;<a data-mce-href="http://www.zenoss.org/" href="http://www.zenoss.org/" style="color: #444444;">Zenoss</a>&nbsp;and&nbsp;<a data-mce-href="https://github.com/etsy/statsd/" href="https://github.com/etsy/statsd/" style="color: #444444;">Statsd</a>&nbsp;&amp;&nbsp;<a data-mce-href="http://graphite.wikidot.com/" href="http://graphite.wikidot.com/" style="color: #444444;">Graphite</a>.</div><div style="color: #444444; font-family: 'Helvetica Neue', HelveticaNeue, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 19px;"><br /></div><div style="color: #444444; font-family: 'Helvetica Neue', HelveticaNeue, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 19px;"><br /></div></div></div>
+
+]]></content>
+  </entry>
+  
+</feed>

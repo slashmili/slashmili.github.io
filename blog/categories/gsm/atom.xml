@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: GSM | /mili]]></title>
+  <link href="http://slashmili.github.io/blog/categories/gsm/atom.xml" rel="self"/>
+  <link href="http://slashmili.github.io/"/>
+  <updated>2013-10-26T17:14:34+08:00</updated>
+  <id>http://slashmili.github.io/</id>
+  <author>
+    <name><![CDATA[Milad Rastian]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Play With Your GSM Cell Phone]]></title>
+    <link href="http://slashmili.github.io/blog/2007/10/28/play-with-your-gsm-cell-phone/"/>
+    <updated>2007-10-28T00:00:00+08:00</updated>
+    <id>http://slashmili.github.io/blog/2007/10/28/play-with-your-gsm-cell-phone</id>
+    <content type="html"><![CDATA[<div class='post'>
+Tonight suddenly I interested in using <a href="http://en.wikipedia.org/wiki/AT_command">AT Command</a> on Cell Phone From Python.<br />It was so fantastic for me, I can connect to my Cell Phone. really Python powered me so much !<br /><br />All you need are Cell Phone and USB connector, when it connect, you could see device as /dev/ttyACM0  (or /dev/ttyACM[number] )<br />Don't forget check your device connected correctly by this command :<pre>$ls -l /dev/ttyACM*<br />crw-rw---- 1 root dialout 166, 0 2007-10-28 00:40 /dev/ttyACM0</pre>And here is sample code which show Manufacturer, Model and IMEI of your Cell Phone.<br /><pre class="code" id="codemain" style="margin: 6px;"><span class="keyword">import</span> serial<br />&nbsp;<br /><span class="keyword">def</span> send(ser,command):<br />    <span class="keyword">if</span> ser.isOpen():<br />        ser.write(command)<br />        <span class="keyword">while</span> 1:<br />            out=ser.readline()<br />            <span class="keyword">if</span> out.strip()==<span class="literal">'OK\r\n'</span>:<br />                <span class="keyword">break</span>  <br />            <span class="keyword">if</span> out.strip()!=<span class="literal">''</span>:<br />                <span class="keyword">print</span> out<br />&nbsp;<br />ser=serial.Serial(<span class="literal">'/dev/ttyACM0'</span>)<br />ser.open()&nbsp;<br /><span class="keyword">if</span> ser.isOpen():<br />    send(ser,<span class="literal">'at+cgmi\r'</span>) <span class="comment">#Get Manufacturer<br /></span>    send(ser,<span class="literal">'at+cgmm\r'</span>) <span class="comment">#Get Model<br /></span>    send(ser,<span class="literal">'at+cgsn\r'</span>) <span class="comment">#Get IMEI<br /></span>ser.close()</pre><br />It's my output :<pre><br />at+cgmi<br />Nokia<br />at+cgmm<br />Nokia 3230<br />at+cgsn<br />X5X399X06X34X5X (sorry I replace some numbers with X)</pre>It isn't all you can do! see more AT Commands <a href="http://doc.trolltech.com/qtopia4.1/atcommands.html">here</a> also see <a href="http://pyserial.sourceforge.net/">pyserial</a> manual .</div>
+
+]]></content>
+  </entry>
+  
+</feed>

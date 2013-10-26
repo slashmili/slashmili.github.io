@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Hallucination | /mili]]></title>
+  <link href="http://slashmili.github.io/blog/categories/hallucination/atom.xml" rel="self"/>
+  <link href="http://slashmili.github.io/"/>
+  <updated>2013-10-26T17:14:34+08:00</updated>
+  <id>http://slashmili.github.io/</id>
+  <author>
+    <name><![CDATA[Milad Rastian]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Save Your Dreams With Dream Demon !]]></title>
+    <link href="http://slashmili.github.io/blog/2007/10/28/save-your-dreams-with-dream-demon/"/>
+    <updated>2007-10-28T00:00:00+08:00</updated>
+    <id>http://slashmili.github.io/blog/2007/10/28/save-your-dreams-with-dream-demon</id>
+    <content type="html"><![CDATA[<div class='post'>
+When I wake up today as my usual task I do in my computer, try to find logs in my brain !!!<br />Logs about my dreams saw last night !<br />I know, I will be mad soon<br />Anyway if you want run dream demon like me, run this code in your brain when you want sleep :<br /><pre class="code" id="codemain" style="margin: 6px;"><span class="keyword">import</span> dream<br /><span class="keyword">import</span> time<br /><span class="keyword">import</span> threading&nbsp;<br /><span class="keyword">class </span>Milad ( threading.Thread ):<br />        <span class="keyword">def</span> run ( self ):<br />                <span class="keyword">try</span> :<br />                        <span class="comment">#don't fear ! if you want wake up just want <br />                        #after that time.Wakeup exception will be happen</span><br />                        time.sleep(dream.ONE_YEAR)<br />                <span class="keyword">except</span> dream.StartStory story:<br />                        f=open(<span class="literal">"dreams.txt"</span>)<br />                        f.write(<span class="literal">"%s\n"</span>%(story))<br />                        f.close()<br />                        self.run()<br />                <span class="keyword">except</span> time.Wakeup :<br />                        <span class="keyword">pass</span>&nbsp;<br />Milad().start()</pre>of course don't forget to change class name with your name, else I don't know it would work for you or not !</div>
+
+]]></content>
+  </entry>
+  
+</feed>

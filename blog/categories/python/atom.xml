@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Python | /mili]]></title>
+  <link href="http://slashmili.github.io/blog/categories/python/atom.xml" rel="self"/>
+  <link href="http://slashmili.github.io/"/>
+  <updated>2013-10-26T17:14:34+08:00</updated>
+  <id>http://slashmili.github.io/</id>
+  <author>
+    <name><![CDATA[Milad Rastian]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[First View of TurboGears Framework]]></title>
+    <link href="http://slashmili.github.io/blog/2008/01/31/first-view-of-turebogears-framework/"/>
+    <updated>2008-01-31T00:00:00+08:00</updated>
+    <id>http://slashmili.github.io/blog/2008/01/31/first-view-of-turebogears-framework</id>
+    <content type="html"><![CDATA[<div class='post'>
+I am going to work some place which needs learning  <a href="http://turbogears.com/">TurboGears</a> framework.<br /><br />Before this I played with <a href="http://djangoproject.com/">Django</a> and until now that I am in chapter 5 from <a href="http://turbogearsbook.com/">Rapid Web Applications with TurboGears</a> book, I think  Django is more easy and faster.<br /><br />One thing that can be effect on selection of those, TG has a built-in AJAX widgets (I didn't see any thing like <a href="http://cakephp.org/">CakePHP</a>'s build-in widgets until now)<br /><br />And other limitation I see in TG, you should insert all of your model in model.py file and all your controller in  controller.py file. when you working in a group, you will know how it's bad idea, because all developer working in single file !<br /><br />Other reason I don't like TG until now is TG using <a href="http://mochikit.com/">MochiKit</a> for JavaScript and AJAX. I like <a href="http://script.aculo.us/">script.aculo.us</a> much more and I have good style on that but it seems I should change my way :(<br /><br />Any way maybe I am newbie in TG and don't know how it solve that problem and what is exactly it is !<br /><br />OH ! I forget to say, Django has a <a href="http://www.djangobook.com/">Free book</a>, but TG don't.</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Save Your Dreams With Dream Demon !]]></title>
+    <link href="http://slashmili.github.io/blog/2007/10/28/save-your-dreams-with-dream-demon/"/>
+    <updated>2007-10-28T00:00:00+08:00</updated>
+    <id>http://slashmili.github.io/blog/2007/10/28/save-your-dreams-with-dream-demon</id>
+    <content type="html"><![CDATA[<div class='post'>
+When I wake up today as my usual task I do in my computer, try to find logs in my brain !!!<br />Logs about my dreams saw last night !<br />I know, I will be mad soon<br />Anyway if you want run dream demon like me, run this code in your brain when you want sleep :<br /><pre class="code" id="codemain" style="margin: 6px;"><span class="keyword">import</span> dream<br /><span class="keyword">import</span> time<br /><span class="keyword">import</span> threading&nbsp;<br /><span class="keyword">class </span>Milad ( threading.Thread ):<br />        <span class="keyword">def</span> run ( self ):<br />                <span class="keyword">try</span> :<br />                        <span class="comment">#don't fear ! if you want wake up just want <br />                        #after that time.Wakeup exception will be happen</span><br />                        time.sleep(dream.ONE_YEAR)<br />                <span class="keyword">except</span> dream.StartStory story:<br />                        f=open(<span class="literal">"dreams.txt"</span>)<br />                        f.write(<span class="literal">"%s\n"</span>%(story))<br />                        f.close()<br />                        self.run()<br />                <span class="keyword">except</span> time.Wakeup :<br />                        <span class="keyword">pass</span>&nbsp;<br />Milad().start()</pre>of course don't forget to change class name with your name, else I don't know it would work for you or not !</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Play With Your GSM Cell Phone]]></title>
+    <link href="http://slashmili.github.io/blog/2007/10/28/play-with-your-gsm-cell-phone/"/>
+    <updated>2007-10-28T00:00:00+08:00</updated>
+    <id>http://slashmili.github.io/blog/2007/10/28/play-with-your-gsm-cell-phone</id>
+    <content type="html"><![CDATA[<div class='post'>
+Tonight suddenly I interested in using <a href="http://en.wikipedia.org/wiki/AT_command">AT Command</a> on Cell Phone From Python.<br />It was so fantastic for me, I can connect to my Cell Phone. really Python powered me so much !<br /><br />All you need are Cell Phone and USB connector, when it connect, you could see device as /dev/ttyACM0  (or /dev/ttyACM[number] )<br />Don't forget check your device connected correctly by this command :<pre>$ls -l /dev/ttyACM*<br />crw-rw---- 1 root dialout 166, 0 2007-10-28 00:40 /dev/ttyACM0</pre>And here is sample code which show Manufacturer, Model and IMEI of your Cell Phone.<br /><pre class="code" id="codemain" style="margin: 6px;"><span class="keyword">import</span> serial<br />&nbsp;<br /><span class="keyword">def</span> send(ser,command):<br />    <span class="keyword">if</span> ser.isOpen():<br />        ser.write(command)<br />        <span class="keyword">while</span> 1:<br />            out=ser.readline()<br />            <span class="keyword">if</span> out.strip()==<span class="literal">'OK\r\n'</span>:<br />                <span class="keyword">break</span>  <br />            <span class="keyword">if</span> out.strip()!=<span class="literal">''</span>:<br />                <span class="keyword">print</span> out<br />&nbsp;<br />ser=serial.Serial(<span class="literal">'/dev/ttyACM0'</span>)<br />ser.open()&nbsp;<br /><span class="keyword">if</span> ser.isOpen():<br />    send(ser,<span class="literal">'at+cgmi\r'</span>) <span class="comment">#Get Manufacturer<br /></span>    send(ser,<span class="literal">'at+cgmm\r'</span>) <span class="comment">#Get Model<br /></span>    send(ser,<span class="literal">'at+cgsn\r'</span>) <span class="comment">#Get IMEI<br /></span>ser.close()</pre><br />It's my output :<pre><br />at+cgmi<br />Nokia<br />at+cgmm<br />Nokia 3230<br />at+cgsn<br />X5X399X06X34X5X (sorry I replace some numbers with X)</pre>It isn't all you can do! see more AT Commands <a href="http://doc.trolltech.com/qtopia4.1/atcommands.html">here</a> also see <a href="http://pyserial.sourceforge.net/">pyserial</a> manual .</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PyGTK gksu Module]]></title>
+    <link href="http://slashmili.github.io/blog/2007/10/24/pygtk-gksu-module/"/>
+    <updated>2007-10-24T00:00:00+08:00</updated>
+    <id>http://slashmili.github.io/blog/2007/10/24/pygtk-gksu-module</id>
+    <content type="html"><![CDATA[<div class='post'>
+These days I am trying to use gksu from python but this module has no documention <br />Until last night <a href="http://mces.blogspot.com/">Behdad</a> opened a new world to me ! he showed me <a href="http://docs.python.org/lib/built-in-funcs.html" title="Find more detail in this page">help(...)</a>.<br />Any way I hope this sample code help you understand methods and relations between objects.<br /><br /><pre class="code" id="codemain" style="margin: 6px;"><span class="keyword">import</span> gtk<br /><span class="keyword">import</span> gksu<br /><span class="keyword">import</span> gksu.ui<br /><br /><span class="keyword">import</span> gobject<br />&nbsp;<br />dialog=gksu.ui.Dialog()<br />dialog.set_message(<span class="literal">"Hi dear geek\nTo do your request I need your root password !"</span>)<br />result=dialog.run()<br />&nbsp;<br />dialog.hide()<br /><span class="keyword">if</span> result==gtk.RESPONSE_OK:<br />        <span class="keyword">try</span>:<br />                cont=gksu.Context()<br />                <span class="comment">#default user is root<br /></span>                <span class="comment">#cont.set_user('root')</span><br />                cont.set_password(dialog.get_password())<br />                cont.set_command(<span class="literal">'synaptic'</span>)<br />                cont.sudo_run()<br />        <span class="keyword">except</span> gobject.GError , errormsg:<br />                <span class="keyword">print</span> errormsg</pre><br />When run this sample a new dialog open and ask root password from you after that if you give correct password open synaptic with root roles, else tarp in exception and give you error message in console</div>
+
+]]></content>
+  </entry>
+  
+</feed>

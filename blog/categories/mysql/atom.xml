@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: MySQL | /mili]]></title>
+  <link href="http://slashmili.github.io/blog/categories/mysql/atom.xml" rel="self"/>
+  <link href="http://slashmili.github.io/"/>
+  <updated>2013-10-26T17:14:34+08:00</updated>
+  <id>http://slashmili.github.io/</id>
+  <author>
+    <name><![CDATA[Milad Rastian]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Monitor Slow Queries in MySQL]]></title>
+    <link href="http://slashmili.github.io/blog/2009/11/03/monitor-slow-queries-in-mysql/"/>
+    <updated>2009-11-03T00:00:00+08:00</updated>
+    <id>http://slashmili.github.io/blog/2009/11/03/monitor-slow-queries-in-mysql</id>
+    <content type="html"><![CDATA[<div class='post'>
+In an application we had  many connection to  MySQL database to insert and select data.<div>Always MySQL cup usage was about 30%, I googled and found a MySQL option which store slow queries in a log file.</div><div>That's awesome !  </div><div>You should add log-slow-queries to file /etc/my.cnf and restart MySQL service and here it is !</div><div><br /></div><div>Go and check around ! make a tea for your self and after a while check log file in /var/run/mysqld/mysqld-slow.log</div><div><br /></div><div>You can read more about this config in <a href="http://dev.mysql.com/doc/refman/5.1/en/slow-query-log.html">MySQL Reference</a> </div></div>
+
+]]></content>
+  </entry>
+  
+</feed>

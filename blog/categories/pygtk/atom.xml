@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: PyGTK | /mili]]></title>
+  <link href="http://slashmili.github.io/blog/categories/pygtk/atom.xml" rel="self"/>
+  <link href="http://slashmili.github.io/"/>
+  <updated>2013-10-26T17:14:34+08:00</updated>
+  <id>http://slashmili.github.io/</id>
+  <author>
+    <name><![CDATA[Milad Rastian]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[PyGTK gksu Module]]></title>
+    <link href="http://slashmili.github.io/blog/2007/10/24/pygtk-gksu-module/"/>
+    <updated>2007-10-24T00:00:00+08:00</updated>
+    <id>http://slashmili.github.io/blog/2007/10/24/pygtk-gksu-module</id>
+    <content type="html"><![CDATA[<div class='post'>
+These days I am trying to use gksu from python but this module has no documention <br />Until last night <a href="http://mces.blogspot.com/">Behdad</a> opened a new world to me ! he showed me <a href="http://docs.python.org/lib/built-in-funcs.html" title="Find more detail in this page">help(...)</a>.<br />Any way I hope this sample code help you understand methods and relations between objects.<br /><br /><pre class="code" id="codemain" style="margin: 6px;"><span class="keyword">import</span> gtk<br /><span class="keyword">import</span> gksu<br /><span class="keyword">import</span> gksu.ui<br /><br /><span class="keyword">import</span> gobject<br />&nbsp;<br />dialog=gksu.ui.Dialog()<br />dialog.set_message(<span class="literal">"Hi dear geek\nTo do your request I need your root password !"</span>)<br />result=dialog.run()<br />&nbsp;<br />dialog.hide()<br /><span class="keyword">if</span> result==gtk.RESPONSE_OK:<br />        <span class="keyword">try</span>:<br />                cont=gksu.Context()<br />                <span class="comment">#default user is root<br /></span>                <span class="comment">#cont.set_user('root')</span><br />                cont.set_password(dialog.get_password())<br />                cont.set_command(<span class="literal">'synaptic'</span>)<br />                cont.sudo_run()<br />        <span class="keyword">except</span> gobject.GError , errormsg:<br />                <span class="keyword">print</span> errormsg</pre><br />When run this sample a new dialog open and ask root password from you after that if you give correct password open synaptic with root roles, else tarp in exception and give you error message in console</div>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Persian | /mili]]></title>
+  <link href="http://slashmili.github.io/blog/categories/persian/atom.xml" rel="self"/>
+  <link href="http://slashmili.github.io/"/>
+  <updated>2013-10-26T17:14:34+08:00</updated>
+  <id>http://slashmili.github.io/</id>
+  <author>
+    <name><![CDATA[Milad Rastian]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Samsung Galaxy Farsi fonts and Keyboard]]></title>
+    <link href="http://slashmili.github.io/blog/2009/08/12/samsung-galaxy-farsi-fonts-and-keyboard/"/>
+    <updated>2009-08-12T00:00:00+08:00</updated>
+    <id>http://slashmili.github.io/blog/2009/08/12/samsung-galaxy-farsi-fonts-and-keyboard</id>
+    <content type="html"><![CDATA[<div class='post'>
+After I change my G1 fonts to read farsi SMS and also farsi keyboard some one post me a comment which want from me to check if I could do same things on his <a href="http://tinyurl.com/lylnp2">Samsung Galaxy</a> .<div><br /></div><div>And now I do that staff. rooting Samsung Galaxy was bit little more difficult  than G1 !</div><div><br /></div><div><a onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}" href="http://rastian.com/mili/blog/uploaded_images/samsung_galaxy_persian-730788.png"><img src="http://rastian.com/mili/blog/uploaded_images/samsung_galaxy_persian-730786.png" border="0" alt="" style="cursor: pointer; width: 133px; height: 200px; " /></a><br /></div><div><br /></div><img src="http://anddev.ir/uploads/persian_keyboard_android0.png" /><div><br /></div></div>
+
+]]></content>
+  </entry>
+  
+</feed>

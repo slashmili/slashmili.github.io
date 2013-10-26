@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: AGI | /mili]]></title>
+  <link href="http://slashmili.github.io/blog/categories/agi/atom.xml" rel="self"/>
+  <link href="http://slashmili.github.io/"/>
+  <updated>2013-10-26T17:14:34+08:00</updated>
+  <id>http://slashmili.github.io/</id>
+  <author>
+    <name><![CDATA[Milad Rastian]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[PHP AGI is so slow]]></title>
+    <link href="http://slashmili.github.io/blog/2010/04/13/php-agi-is-so-slow/"/>
+    <updated>2010-04-13T00:00:00+08:00</updated>
+    <id>http://slashmili.github.io/blog/2010/04/13/php-agi-is-so-slow</id>
+    <content type="html"><![CDATA[<div class='post'>
+In one case exactly in our customer's server, AGI which I wrote it was so slow !<br />I checked line by line of codes but it was hooked in some line of code. because <a href="http://www.parspooyesh.com/">we</a> are pythonic company, immediately I want from team to rewrite that code with python ! (python AGI is more better that PHP ones)<br /><br />A few days ago on that server , tail of syslog was opened and suddenly another PHP AGI run and I saw bunch of error in syslog which said that you didn't set TimeZone in php.ini !<br /><br />And bingo! I guess problem is here, I add TimeZone in php.ini and AGI works fine !</div>
+
+]]></content>
+  </entry>
+  
+</feed>

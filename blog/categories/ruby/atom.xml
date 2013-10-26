@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ruby | /mili]]></title>
+  <link href="http://slashmili.github.io/blog/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://slashmili.github.io/"/>
+  <updated>2013-10-26T17:14:34+08:00</updated>
+  <id>http://slashmili.github.io/</id>
+  <author>
+    <name><![CDATA[Milad Rastian]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Online Course with Coursera]]></title>
+    <link href="http://slashmili.github.io/blog/2012/03/16/online-course-with-coursera/"/>
+    <updated>2012-03-16T00:00:00+08:00</updated>
+    <id>http://slashmili.github.io/blog/2012/03/16/online-course-with-coursera</id>
+    <content type="html"><![CDATA[<div class='post'>
+<div class='posterous_autopost'><p><a href="https://www.coursera.org/">Coursera</a> is online education center, it's aim is to bring education for free to any person who is seeking for that.</p>  <p>I enrolled for three courses but I've only managed to attend one of them since 1 week ago that I registered.&nbsp;</p>  <p><strong>Software as a Service</strong> course is really great course for person who wants to learn <a href="http://en.wikipedia.org/wiki/Software_as_a_service">SaaS</a>,&nbsp;<a href="http://www.ruby-lang.org/en/" title="Ruby">Ruby</a>&nbsp;and <a href="http://rubyonrails.org/">Rails</a> and beside that you have fun class. Even though is so soon to judge about Rails but I've already missed <a href="https://www.djangoproject.com/">Django</a>.</p>  <p>I like their teaching method, you follow&nbsp;lectures and do homework related to the lectures, and they give you a score for you works(apparently your submitted files is runed with unittest and each test has score). I've already learnt a lot about Ruby just with following course and doing homework.</p>  <p>After all don't miss.</p></div></div>
+
+]]></content>
+  </entry>
+  
+</feed>

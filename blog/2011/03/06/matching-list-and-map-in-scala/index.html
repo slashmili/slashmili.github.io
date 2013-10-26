@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Matching List and Map in Scala - /mili</title>
+  <meta name="author" content="Milad Rastian">
+
+  
+  <meta name="description" content="For a while that I&#8217;ve been reading Scala I find it as a strong and powerfull language which helps you to write your application perfectly, it &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://slashmili.github.io/blog/2011/03/06/matching-list-and-map-in-scala">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="/mili" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-45055199-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">/mili</a></h1>
+  
+    <h2>Lets try bloging again!</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:slashmili.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Matching List and Map in Scala</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-06T00:00:00+08:00" pubdate data-updated="true">Mar 6<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><div class='post'>
+<div class='posterous_autopost'><p>For a while that I&#8217;ve been reading Scala I find it as a strong and powerfull language which helps you to write your application perfectly, it&#8217;s not like Java that ties you to follow some&nbsp;arid rules and it&#8217;s not like PHP that let you screw in your application(of course you can handle your code in PHP). Programing in Scala is fun as programming Python and it&#8217;s powerful as Java!</p>  <p>Scala&#8217;s Match syntax is liitle like Switch-Case but you can match value, type, regex, special type of class and more.&nbsp;</p>  <p>Here is a syntax of matching for List and map in Scala, for finding these codes I search a lot to ! so I wrote these samples for future usage.&nbsp;</p>  <p><code>    val foobar = Map("foo"-&gt;"bar")    foobar&nbsp;match {&nbsp;    &nbsp;&nbsp;case map :&nbsp;&nbsp;scala.collection.Map[_, _] =&gt; println(map)    }    </code></p>  <p>&nbsp;</p>  <p><code>    val foobar = List("foo","bar")    foobar&nbsp;match {&nbsp;    &nbsp;&nbsp;case &nbsp;list:Seq[_] =&gt; println(list)    }    </code></p>  <p>&nbsp;</p>  <p>So maybe you ask that why you need to handle something like this ?</p>  <p>It&#8217;s real world senario: I wanna to pass mix value of Map and List and String to function and get JSON string from that. some thing like this :</p>  <p><code>    def toJson(ob: Any):String = {    &nbsp;&nbsp;ob match {    &nbsp;&nbsp; &nbsp;case s : String&nbsp;&nbsp; =&gt; return "\""+ s + "\""    &nbsp;&nbsp;&nbsp; case d:Double&nbsp;&nbsp; =&gt; return "\""+ d.toString + "\""    &nbsp;&nbsp;&nbsp; case map:scala.collection.Map[_, _] =&gt; return "{" + ((for((k,v) &lt;- map) yield toJson(k) + ":" + toJson(v) ).reduceLeft(_ + ", " + _) ) + "}"    &nbsp;&nbsp;&nbsp; case list @ List(_*)&nbsp;&nbsp; =&gt; return "[" + ((for (m&lt;-list) yield toJson(m)).reduceLeft(_ + ", " + _) )&nbsp;&nbsp; + "]"    }    </code></p>  <p>Mabye last code doesn&#8217;t work probably ! because I write it to just show you how you can use this feature</p></div></div>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Milad Rastian</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-06T00:00:00+08:00" pubdate data-updated="true">Mar 6<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/scala/'>Scala</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://slashmili.github.io/blog/2011/03/06/matching-list-and-map-in-scala/" data-via="slashmili" data-counturl="http://slashmili.github.io/blog/2011/03/06/matching-list-and-map-in-scala/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2010/12/15/yet-another-programming-language-scala/" title="Previous Post: Yet Another Programming Language : Scala">&laquo; Yet Another Programming Language : Scala</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/03/06/when-you-are-not-free-even-to-do-rm-rf/" title="Next Post: When you are not free even to do rm -rf / !">When you are not free even to do rm -rf / ! &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/08/11/monitor-your-apps-behaviour/">Monitor Your App's Behaviour</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/03/16/online-course-with-coursera/">Online Course With Coursera</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/03/16/monitor-zenoss-with-chrome-plugin/">Monitor Zenoss With Chrome's Plugin</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/02/03/configure-and-manage-your-servers-in/">Configure and Manage Your Servers in a FLASH</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/07/03/zendroid-android-application-to-monitor/">Zendroid - Android Application to Monitor Zenoss's Events</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/slashmili">@slashmili</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'slashmili',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Milad Rastian -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
