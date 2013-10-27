@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: SIP | /mili]]></title>
-  <link href="http://slashmili.github.io/blog/categories/sip/atom.xml" rel="self"/>
-  <link href="http://slashmili.github.io/"/>
-  <updated>2013-10-26T17:14:34+08:00</updated>
-  <id>http://slashmili.github.io/</id>
+  <link href="http://slashmili.org/blog/categories/sip/atom.xml" rel="self"/>
+  <link href="http://slashmili.org/"/>
+  <updated>2013-10-27T08:42:19+08:00</updated>
+  <id>http://slashmili.org/</id>
   <author>
     <name><![CDATA[Milad Rastian]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[SIP Channel Stuck on Asterisk]]></title>
-    <link href="http://slashmili.github.io/blog/2010/01/30/sip-channel-stuck-on-asterisk/"/>
+    <link href="http://slashmili.org/blog/2010/01/30/sip-channel-stuck-on-asterisk/"/>
     <updated>2010-01-30T00:00:00+08:00</updated>
-    <id>http://slashmili.github.io/blog/2010/01/30/sip-channel-stuck-on-asterisk</id>
+    <id>http://slashmili.org/blog/2010/01/30/sip-channel-stuck-on-asterisk</id>
     <content type="html"><![CDATA[<div class='post'>
 In some case we need to set call-limit=1 in sip config but after a while a SIP channel stuck and we got problem on sending new call to that SIP number.<br />Logger save this error :<br />"Call from peer XXX rejected due to usage limit of 1"<br /><span style="font-size:85%;">Asterisk*CLI> sip show channels<br />172.16.35.20     111         1e436b221c0  00102/00000  0x0 (nothing)    No  (d)  Tx: ACK                   </span><br /><br />Even when turn of that SIP, we got that error !<br />I always try to fixed that but every time this event happen we forced to fix this problem.<br /><br />Now it seems this problem solved in Asterisk 1.4.26 !<br />If you have problem like me check new version of asterisk</div>
 

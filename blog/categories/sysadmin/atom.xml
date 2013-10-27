@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: sysadmin | /mili]]></title>
-  <link href="http://slashmili.github.io/blog/categories/sysadmin/atom.xml" rel="self"/>
-  <link href="http://slashmili.github.io/"/>
-  <updated>2013-10-26T17:14:34+08:00</updated>
-  <id>http://slashmili.github.io/</id>
+  <link href="http://slashmili.org/blog/categories/sysadmin/atom.xml" rel="self"/>
+  <link href="http://slashmili.org/"/>
+  <updated>2013-10-27T08:42:19+08:00</updated>
+  <id>http://slashmili.org/</id>
   <author>
     <name><![CDATA[Milad Rastian]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Configure and Manage your servers in a FLASH]]></title>
-    <link href="http://slashmili.github.io/blog/2012/02/03/configure-and-manage-your-servers-in/"/>
+    <link href="http://slashmili.org/blog/2012/02/03/configure-and-manage-your-servers-in/"/>
     <updated>2012-02-03T00:00:00+08:00</updated>
-    <id>http://slashmili.github.io/blog/2012/02/03/configure-and-manage-your-servers-in</id>
+    <id>http://slashmili.org/blog/2012/02/03/configure-and-manage-your-servers-in</id>
     <content type="html"><![CDATA[<div class='post'>
 <div class='posterous_autopost'><p>About a 3 months ago I had a speech in <a href="http://webcamp.my/">Webcamp KL Group</a> about <a href="http://puppetlabs.com/">Puppet</a></p>  <p>You can get the voice from <a href="http://webcamp.my/2011/11/milad-rastian-configure-and-manage-your-servers-in-a-flash-with-puppet/">here</a>&nbsp;and watch the presntation from here :</p>  <p style="text-align: center;"><iframe src="https://docs.google.com/present/embed?id=dfk6jgws_2dh2r4xf7" frameborder="0" height="342" width="410"></iframe></p></div></div>
 

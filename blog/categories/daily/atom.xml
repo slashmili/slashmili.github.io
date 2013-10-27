@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: daily | /mili]]></title>
-  <link href="http://slashmili.github.io/blog/categories/daily/atom.xml" rel="self"/>
-  <link href="http://slashmili.github.io/"/>
-  <updated>2013-10-26T17:14:34+08:00</updated>
-  <id>http://slashmili.github.io/</id>
+  <link href="http://slashmili.org/blog/categories/daily/atom.xml" rel="self"/>
+  <link href="http://slashmili.org/"/>
+  <updated>2013-10-27T08:42:19+08:00</updated>
+  <id>http://slashmili.org/</id>
   <author>
     <name><![CDATA[Milad Rastian]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Yet Another Programming Language : Scala]]></title>
-    <link href="http://slashmili.github.io/blog/2010/12/15/yet-another-programming-language-scala/"/>
+    <link href="http://slashmili.org/blog/2010/12/15/yet-another-programming-language-scala/"/>
     <updated>2010-12-15T00:00:00+08:00</updated>
-    <id>http://slashmili.github.io/blog/2010/12/15/yet-another-programming-language-scala</id>
+    <id>http://slashmili.org/blog/2010/12/15/yet-another-programming-language-scala</id>
     <content type="html"><![CDATA[<div class='post'>
 WTF !<div>Every day you wake up, you hear new language is growing in town. after that language becomes mature, you fill unstable in your current position. </div><div><br /></div><div>You think why they ever think about another language while there are bunch of languages out ?you think there is many languages still waiting in your TODO list which you want try so how can you skip them and try this new guy !</div><div><br /></div><div>Anyway I am going to interest in this one : Scala ! </div><div><br /></div><div>My first reason is <a href="http://www.blogger.com/www.rememberthemilk.com">Remember The Milk</a>. I am actually in love with this app.</div><div>Second one is, it smells Java! I don't like Java to much because of it's complexity but Scala give me power of Java.</div><div><br /></div><div>In my new job, I should learn more about Perl so this year will be funniest year in my life.</div><div> Fight between obsolescence and adolescent.</div><div><br /></div><div>Let's who will win !</div></div>
 

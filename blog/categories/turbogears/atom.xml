@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: TurboGears | /mili]]></title>
-  <link href="http://slashmili.github.io/blog/categories/turbogears/atom.xml" rel="self"/>
-  <link href="http://slashmili.github.io/"/>
-  <updated>2013-10-26T17:14:34+08:00</updated>
-  <id>http://slashmili.github.io/</id>
+  <link href="http://slashmili.org/blog/categories/turbogears/atom.xml" rel="self"/>
+  <link href="http://slashmili.org/"/>
+  <updated>2013-10-27T08:42:19+08:00</updated>
+  <id>http://slashmili.org/</id>
   <author>
     <name><![CDATA[Milad Rastian]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[First View of TurboGears Framework]]></title>
-    <link href="http://slashmili.github.io/blog/2008/01/31/first-view-of-turebogears-framework/"/>
+    <link href="http://slashmili.org/blog/2008/01/31/first-view-of-turebogears-framework/"/>
     <updated>2008-01-31T00:00:00+08:00</updated>
-    <id>http://slashmili.github.io/blog/2008/01/31/first-view-of-turebogears-framework</id>
+    <id>http://slashmili.org/blog/2008/01/31/first-view-of-turebogears-framework</id>
     <content type="html"><![CDATA[<div class='post'>
 I am going to work some place which needs learning  <a href="http://turbogears.com/">TurboGears</a> framework.<br /><br />Before this I played with <a href="http://djangoproject.com/">Django</a> and until now that I am in chapter 5 from <a href="http://turbogearsbook.com/">Rapid Web Applications with TurboGears</a> book, I think  Django is more easy and faster.<br /><br />One thing that can be effect on selection of those, TG has a built-in AJAX widgets (I didn't see any thing like <a href="http://cakephp.org/">CakePHP</a>'s build-in widgets until now)<br /><br />And other limitation I see in TG, you should insert all of your model in model.py file and all your controller in  controller.py file. when you working in a group, you will know how it's bad idea, because all developer working in single file !<br /><br />Other reason I don't like TG until now is TG using <a href="http://mochikit.com/">MochiKit</a> for JavaScript and AJAX. I like <a href="http://script.aculo.us/">script.aculo.us</a> much more and I have good style on that but it seems I should change my way :(<br /><br />Any way maybe I am newbie in TG and don't know how it solve that problem and what is exactly it is !<br /><br />OH ! I forget to say, Django has a <a href="http://www.djangobook.com/">Free book</a>, but TG don't.</div>
 

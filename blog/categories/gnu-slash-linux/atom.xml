@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: GNU/Linux | /mili]]></title>
-  <link href="http://slashmili.github.io/blog/categories/gnu-slash-linux/atom.xml" rel="self"/>
-  <link href="http://slashmili.github.io/"/>
-  <updated>2013-10-26T17:14:34+08:00</updated>
-  <id>http://slashmili.github.io/</id>
+  <link href="http://slashmili.org/blog/categories/gnu-slash-linux/atom.xml" rel="self"/>
+  <link href="http://slashmili.org/"/>
+  <updated>2013-10-27T08:42:19+08:00</updated>
+  <id>http://slashmili.org/</id>
   <author>
     <name><![CDATA[Milad Rastian]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[How to Config Slave DNS Server]]></title>
-    <link href="http://slashmili.github.io/blog/2009/09/08/how-to-config-slave-dns-server/"/>
+    <link href="http://slashmili.org/blog/2009/09/08/how-to-config-slave-dns-server/"/>
     <updated>2009-09-08T00:00:00+08:00</updated>
-    <id>http://slashmili.github.io/blog/2009/09/08/how-to-config-slave-dns-server</id>
+    <id>http://slashmili.org/blog/2009/09/08/how-to-config-slave-dns-server</id>
     <content type="html"><![CDATA[<div class='post'>
 In a project we have servers which were in different cities, and they connected to each other with Radio connection.<div>We want to setup DNS server in each server for easy use, but configuring dns in each server was to painful if server of one IP changed. we should change config in all server.</div><div><br /></div><div>So I setup a master DNS server and config other server as Slave.</div><div>Slave config is :</div><div><br /></div><div><div>zone "sip.server.loc"{</div><div>        type slave;</div><div>        file "/etc/bind/sip.server.loc";</div><div>        masters {172.16.20.1;};</div><div>};</div><div><br /></div><div>Setting file value is useful when Master server is not accessible and Slave response requests with last config file(which updated that file from Master)</div></div></div>
 
@@ -26,9 +26,9 @@ In a project we have servers which were in different cities, and they connected 
   
   <entry>
     <title type="html"><![CDATA[How To Use libjalali]]></title>
-    <link href="http://slashmili.github.io/blog/2008/06/17/how-to-use-libjalali/"/>
+    <link href="http://slashmili.org/blog/2008/06/17/how-to-use-libjalali/"/>
     <updated>2008-06-17T00:00:00+08:00</updated>
-    <id>http://slashmili.github.io/blog/2008/06/17/how-to-use-libjalali</id>
+    <id>http://slashmili.org/blog/2008/06/17/how-to-use-libjalali</id>
     <content type="html"><![CDATA[<div class='post'>
 About 2 years ago my friend <a href="http://ashkan.selfip.org/">Ashkan Ghassemi</a> developed a <a href="https://savannah.nongnu.org/projects/jcal">Jalali Calender</a> for use in terminal and as Eric S. Raymond says in his book <span style="font-weight: bold;">The Art of Unix Programming</span> : "Write simple parts connected by clean interfaces", Ashkan  followed Raymond and create beautiful program .<br /><br />In a project I need to use that library so I get source file and install it, but there was no any documentation for developer. here I write fast tutorial :<br /><br /><code><font color="0000ff"><strong>#include<font color="#008000">&lt;jalali.h&gt;</font></strong></font><br /><font color="0000ff"><strong>#include<font color="#008000">&lt;stdio.h&gt;</font></strong></font><br /><strong>int</strong> <font color="#2040a0">main</font> <font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF"><strong>{</strong></font><br /><font color="#2040a0">j_date</font> <font color="#2040a0">jcal</font><font color="4444FF">;</font><font color="#2040a0">calc_current</font><font color="4444FF">(</font><font color="4444FF">&amp;</font><font color="#2040a0">jcal</font><font color="4444FF">)</font> <font color="4444FF">;</font><br /><font color="#2040a0">printf</font><font color="4444FF">(</font><font color="#008000">&quot;curentdate is :%d/%d/%d<font color="#77dd77">\n</font> &quot;</font>,<font color="#2040a0">jcal</font>.<font color="#2040a0">year</font>,<font color="#2040a0">jcal</font>.<font color="#2040a0">month</font>,<font color="#2040a0">jcal</font>.<font color="#2040a0">day</font><font color="4444FF">)</font><font color="4444FF">;</font><font color="4444FF"><strong>}</strong></font><br /></code><br />and after that compile this code :<br />cc jcaltest.c -I/usr/local/include/jalali/ -L/usr/local/lib/ -ljalali -o jalal.bin<br /><br />and run jalal.bin</div>
 
@@ -37,9 +37,9 @@ About 2 years ago my friend <a href="http://ashkan.selfip.org/">Ashkan Ghassemi<
   
   <entry>
     <title type="html"><![CDATA[Configure Asterisk  and Zaptel on Ubuntu 6.*]]></title>
-    <link href="http://slashmili.github.io/blog/2008/06/02/configure-asterisk-and-zaptel-on-ubuntu/"/>
+    <link href="http://slashmili.org/blog/2008/06/02/configure-asterisk-and-zaptel-on-ubuntu/"/>
     <updated>2008-06-02T00:00:00+08:00</updated>
-    <id>http://slashmili.github.io/blog/2008/06/02/configure-asterisk-and-zaptel-on-ubuntu</id>
+    <id>http://slashmili.org/blog/2008/06/02/configure-asterisk-and-zaptel-on-ubuntu</id>
     <content type="html"><![CDATA[<div class='post'>
 Always I installed <a href="http://www.asterisk.org/">Asterisk</a> and <a href="http://www.zaptel.com">Zaptel</a> on Ubutnu 6.*, I got a error and couldn't find  any files in folder /dev/zap/ !<br />Actually he said true ! because Zaptel file was in /dev/ folder.<br />When servers restart, I should create link to real device file(I try put this command on file rc.local but still had a problem on creating link). Until I goggled and find some manual for this problem.our problem will solved by udev.<br /><br />Create File : /etc/udev/rules.d/50-udev.rules<br /><code><br />KERNEL="zapctl",     NAME="zap/ctl" , GROUP = "asterisk"<br />KERNEL="zaptimer",   NAME="zap/timer" , GROUP = "asterisk"<br />KERNEL="zapchannel", NAME="zap/channel" , GROUP = "asterisk"<br />KERNEL="zappseudo",  NAME="zap/pseudo" , GROUP = "asterisk"<br />KERNEL="zap[0-9]*",  NAME="zap/%n" , GROUP = "asterisk"<br /></code><br /><br />Restart udev : /etc/init.d/udev restart<br /><br />Now every time server restart udev create device in place where Asterisk wanted.</div>
 
@@ -48,9 +48,9 @@ Always I installed <a href="http://www.asterisk.org/">Asterisk</a> and <a href="
   
   <entry>
     <title type="html"><![CDATA[Script For Removing Changed Host Identification]]></title>
-    <link href="http://slashmili.github.io/blog/2008/05/04/script-for-removing-changed-host/"/>
+    <link href="http://slashmili.org/blog/2008/05/04/script-for-removing-changed-host/"/>
     <updated>2008-05-04T00:00:00+08:00</updated>
-    <id>http://slashmili.github.io/blog/2008/05/04/script-for-removing-changed-host</id>
+    <id>http://slashmili.org/blog/2008/05/04/script-for-removing-changed-host</id>
     <content type="html"><![CDATA[<div class='post'>
 As I am working as a system administer this days and always had a problem with changing Remote Identification of servers, I write simple script which you can delete a line from your ~/.ssh/known_hosts<br /><br /><code><br />#!/bin/bash<br />#rm_known_hosts bash script<br />tmp_head=$(mktemp)<br />tmp_tail=$(mktemp)<br />tmp_dest=$(mktemp)<br /><br />file_name="$HOME/.ssh/known_hosts"<br />line_nums=$(cat $file_name | wc -l )<br /><br />cat $file_name | head -n`echo "$1 -1 " | bc ` > $tmp_head<br />cat $file_name | tail -n`echo "$line_nums - $1 "| bc` > $tmp_tail<br /><br />cat $tmp_head  > $tmp_dest<br />cat $tmp_tail >> $tmp_dest<br /><br />cp $tmp_dest $file_name<br /><br />#remove tmps<br />rm -f $tmp_head<br />rm -f $tmp_tail<br />rm -f $tmp_dest<br /></code><br /><br />for example run when you got error like this : <br /><code><br />@@@@@@@@@@@@@@@@@@@@@@@@@@@@@<br />@ WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!<br />@@@@@@@@@@@@@@@@@@@@@@@@@@@@@<br />IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!<br />Someone could be eavesdropping on you right now (man-in-the-middle attack)!<br />It is also possible that the RSA host key has just been changed.<br />The fingerprint for the RSA key sent by the remote host is<br />ac:2c:99:de:a6:f4:7d:4a:81:93:7e:9c:67:a6:14:45.<br />Please contact your system administrator.<br />Add correct host key in /root/.ssh/known_hosts to get rid of this message.<br />Offending key in /root/.ssh/known_hosts:90<br />RSA host key for 10.10.10.10 has changed and you have requested strict checking.<br />Host key verification failed.<br /></code><br /><br />you just run<br /><code><br />./rm_known_hosts 90<br /></code><br />Life will be essayer with tiny scripts !</div>
 
@@ -59,9 +59,9 @@ As I am working as a system administer this days and always had a problem with c
   
   <entry>
     <title type="html"><![CDATA[FireHole ROCKS !]]></title>
-    <link href="http://slashmili.github.io/blog/2007/11/07/firehole-rocks/"/>
+    <link href="http://slashmili.org/blog/2007/11/07/firehole-rocks/"/>
     <updated>2007-11-07T00:00:00+08:00</updated>
-    <id>http://slashmili.github.io/blog/2007/11/07/firehole-rocks</id>
+    <id>http://slashmili.org/blog/2007/11/07/firehole-rocks</id>
     <content type="html"><![CDATA[<div class='post'>
 I always had a problem with iptables !<br />For this reason about 3 years ago I bought <a href="http://www.oreilly.com/catalog/lnxiptablespr/">Linux iptables Pocket Reference</a> Book.<br />But I never read it completely, always read it until page 7-8 and after that I through it away !<br />A few days ago <a href="http://www.oreilly.com/catalog/lnxiptablespr/">Siavash</a> suggested me <a href="http://firehol.sourceforge.net/">FireHole</a>, I install it but didn't use it until 1 hour ago   !<br />I used it for sharing internet connection.<br />It has too fast config ! it's too cool !<br />FireHole's document is enough good but I write down my config here (maybe you don't like read that document because you are as lazy as me !) <br /><pre class="code"><br />#/etc/firehol/firehol.conf<br />version 5<br />#your LAN card config<br />home_ips="192.168.0.1/24"<br />&nbsp;<br />#my lan interface was eth2<br />interface eth2 home  src "${home_ips}"<br />        policy reject<br />        server "ssh ftp http"    accept #allow use this services from LAN to eth2<br />&nbsp;<br />#my internet interface was name ppp0 - don't change anything else !<br />interface ppp0 internet src not "${home_ips} ${UNROUTABLE_IPS}"<br />        protection strong 10/sec 10<br />        server          custom          fb              tcp/1511        default accept<br />        server          ident           reject          with            tcp-reset<br />        client          all             accept<br />&nbsp;<br />#we want share internet from ppp0 to our LAN (eth2)<br />router home2internet inface eth2 outface ppp0<br />        masquerade<br />        route all accept</pre><br />After this change, restart your firehole.<br /><br />If you just want share internet and don't like face with this configs I suggest you <a href="http://parsix.org">Parsix</a> ics script.<br />All you thing you should do is "/etc/init.d/ics start" without any config !!!</div>
 

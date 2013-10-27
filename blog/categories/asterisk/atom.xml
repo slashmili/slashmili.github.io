@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Asterisk | /mili]]></title>
-  <link href="http://slashmili.github.io/blog/categories/asterisk/atom.xml" rel="self"/>
-  <link href="http://slashmili.github.io/"/>
-  <updated>2013-10-26T17:14:34+08:00</updated>
-  <id>http://slashmili.github.io/</id>
+  <link href="http://slashmili.org/blog/categories/asterisk/atom.xml" rel="self"/>
+  <link href="http://slashmili.org/"/>
+  <updated>2013-10-27T08:42:19+08:00</updated>
+  <id>http://slashmili.org/</id>
   <author>
     <name><![CDATA[Milad Rastian]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[PHP AGI is so slow]]></title>
-    <link href="http://slashmili.github.io/blog/2010/04/13/php-agi-is-so-slow/"/>
+    <link href="http://slashmili.org/blog/2010/04/13/php-agi-is-so-slow/"/>
     <updated>2010-04-13T00:00:00+08:00</updated>
-    <id>http://slashmili.github.io/blog/2010/04/13/php-agi-is-so-slow</id>
+    <id>http://slashmili.org/blog/2010/04/13/php-agi-is-so-slow</id>
     <content type="html"><![CDATA[<div class='post'>
 In one case exactly in our customer's server, AGI which I wrote it was so slow !<br />I checked line by line of codes but it was hooked in some line of code. because <a href="http://www.parspooyesh.com/">we</a> are pythonic company, immediately I want from team to rewrite that code with python ! (python AGI is more better that PHP ones)<br /><br />A few days ago on that server , tail of syslog was opened and suddenly another PHP AGI run and I saw bunch of error in syslog which said that you didn't set TimeZone in php.ini !<br /><br />And bingo! I guess problem is here, I add TimeZone in php.ini and AGI works fine !</div>
 
@@ -26,9 +26,9 @@ In one case exactly in our customer's server, AGI which I wrote it was so slow !
   
   <entry>
     <title type="html"><![CDATA[SIP Channel Stuck on Asterisk]]></title>
-    <link href="http://slashmili.github.io/blog/2010/01/30/sip-channel-stuck-on-asterisk/"/>
+    <link href="http://slashmili.org/blog/2010/01/30/sip-channel-stuck-on-asterisk/"/>
     <updated>2010-01-30T00:00:00+08:00</updated>
-    <id>http://slashmili.github.io/blog/2010/01/30/sip-channel-stuck-on-asterisk</id>
+    <id>http://slashmili.org/blog/2010/01/30/sip-channel-stuck-on-asterisk</id>
     <content type="html"><![CDATA[<div class='post'>
 In some case we need to set call-limit=1 in sip config but after a while a SIP channel stuck and we got problem on sending new call to that SIP number.<br />Logger save this error :<br />"Call from peer XXX rejected due to usage limit of 1"<br /><span style="font-size:85%;">Asterisk*CLI> sip show channels<br />172.16.35.20     111         1e436b221c0  00102/00000  0x0 (nothing)    No  (d)  Tx: ACK                   </span><br /><br />Even when turn of that SIP, we got that error !<br />I always try to fixed that but every time this event happen we forced to fix this problem.<br /><br />Now it seems this problem solved in Asterisk 1.4.26 !<br />If you have problem like me check new version of asterisk</div>
 
@@ -37,9 +37,9 @@ In some case we need to set call-limit=1 in sip config but after a while a SIP c
   
   <entry>
     <title type="html"><![CDATA[MusicOnHold is Choppy in Asterisk]]></title>
-    <link href="http://slashmili.github.io/blog/2010/01/27/musiconhold-is-choppy-in-asterisk/"/>
+    <link href="http://slashmili.org/blog/2010/01/27/musiconhold-is-choppy-in-asterisk/"/>
     <updated>2010-01-27T00:00:00+08:00</updated>
-    <id>http://slashmili.github.io/blog/2010/01/27/musiconhold-is-choppy-in-asterisk</id>
+    <id>http://slashmili.org/blog/2010/01/27/musiconhold-is-choppy-in-asterisk</id>
     <content type="html"><![CDATA[<div class='post'>
 Sometimes after you setup your Asterisk system maybe you hear MOH-Music so choppy.<br /><br />Solutions which I test and solved problems are :<br /><ol><li>check your Zaptel  and especially module ztdummy (you can use <a href="http://tinyurl.com/ye2gb5g">this guide</a>)</li><li>check you VoiceGateway <span style="font-weight: bold;">VAD</span> (Voice Activity Detection) config and <span style="font-weight: bold;">Disabled it</span> !  you can follow my samples for Cisco AS5300 and Quintum Tenor<br /></li></ol><span style="font-weight: bold;">VAD Configurations : </span><br />1. Cisco AS5300 :<br /><ol><li>Login to your Cisco<br /></li><li>Type : "conf terminal"</li><li>Enter your voip dial peer : "dial-peer voice 200 voip" (200 is my dial-peer, yours maybe is something else )</li><li>Type : "no vad"</li><li>Press Ctr+C</li><li>write your configuration by typing write command : " write"</li></ol>2.  Quintum Tenor<br /><ol><li>Login to your Tenor</li><li>Type: "config"</li><li>Type : "IPRoutingGroup" (depends on your config maybe need to add a number after this command )</li><li>Type : "set VADEnable 0"</li><li>Save your config with command : "Submit"<br /></li></ol></div>
 
@@ -48,9 +48,9 @@ Sometimes after you setup your Asterisk system maybe you hear MOH-Music so chopp
   
   <entry>
     <title type="html"><![CDATA[Asterisk's AMI Return Empty String]]></title>
-    <link href="http://slashmili.github.io/blog/2009/09/12/asterisks-ami-return-empty-string/"/>
+    <link href="http://slashmili.org/blog/2009/09/12/asterisks-ami-return-empty-string/"/>
     <updated>2009-09-12T00:00:00+08:00</updated>
-    <id>http://slashmili.github.io/blog/2009/09/12/asterisks-ami-return-empty-string</id>
+    <id>http://slashmili.org/blog/2009/09/12/asterisks-ami-return-empty-string</id>
     <content type="html"><![CDATA[<div class='post'>
 About 2 months a ago, one day server of our customer decided to response empty string on <a href="http://www.voip-info.org/wiki/view/Asterisk+Manager+API+Action+Command">Command Action</a>. we feed bunch of data for reporting with AMI and especially with Command Action.<div><br /><div>It was so mystery for us ! what happen suddenly ? anyway we were lucky, we had a backup and moved server to backup ones.</div><div><br /></div><div>After works on that server we discovered this problem solved when we run asterisk as a root !</div><div>Anyway we did not work on that server until today. I get asterisk source code and debug lines and found a problem :</div><div>For unknown reason ownership of /tmp was different from always and a function wants to create temporary file but could not access to /tmp (file main/manager.c about line 1736).</div><div><br /></div><div>If Asterisk Developers checks  return value of mkstemp and debug if value is -1, life would be more pleasure </div></div></div>
 
@@ -59,9 +59,9 @@ About 2 months a ago, one day server of our customer decided to response empty s
   
   <entry>
     <title type="html"><![CDATA[Asterisk's Chanspy is Out of Sync]]></title>
-    <link href="http://slashmili.github.io/blog/2009/09/10/asterisks-chanspy-is-out-of-sync/"/>
+    <link href="http://slashmili.org/blog/2009/09/10/asterisks-chanspy-is-out-of-sync/"/>
     <updated>2009-09-10T00:00:00+08:00</updated>
-    <id>http://slashmili.github.io/blog/2009/09/10/asterisks-chanspy-is-out-of-sync</id>
+    <id>http://slashmili.org/blog/2009/09/10/asterisks-chanspy-is-out-of-sync</id>
     <content type="html"><![CDATA[<div class='post'>
 About 3 month ago we had a problem on ChanSpy in Asterisk. sounds were out of sync.<div>We do everything ! changing asterisk version, compiling different version of asterisk ! </div><div>Users of that customer use EyeBeam as SIP Client, in asterisk bug tracker someone wrote there is a problem with onboard sound cards. so that we take a PAP2 and test ChanSpy with ordinary telephone and Bingoo ! everything was sync !</div><div><br /></div><div>We did update  EyeBeams and problem solved.</div><div><br /></div><div>These days I have problem like before, this time problem is files which recorded by MixMonitor are out of sync. tomorrow I am going to take PAP2 to that location and test files. I hope problem solves by changing EyeBeam or even add PCI sound card.</div><div><br /></div><div>I will update this post when get answer.<span style="font-weight: bold;"><br />Update<span style="font-weight: bold;"> : </span></span><span><br />problem solved by updating asterisk to 1.4.27.3</span><span style="font-weight: bold;"><span style="font-weight: bold;"></span> !<br /><span style="font-weight: bold;"><span style="font-weight: bold;"><span style="font-weight: bold;"></span></span></span><br /></span></div></div>
 

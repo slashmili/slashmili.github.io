@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Monitoring | /mili]]></title>
-  <link href="http://slashmili.github.io/blog/categories/monitoring/atom.xml" rel="self"/>
-  <link href="http://slashmili.github.io/"/>
-  <updated>2013-10-26T17:14:34+08:00</updated>
-  <id>http://slashmili.github.io/</id>
+  <link href="http://slashmili.org/blog/categories/monitoring/atom.xml" rel="self"/>
+  <link href="http://slashmili.org/"/>
+  <updated>2013-10-27T08:42:19+08:00</updated>
+  <id>http://slashmili.org/</id>
   <author>
     <name><![CDATA[Milad Rastian]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Monitor Slow Queries in MySQL]]></title>
-    <link href="http://slashmili.github.io/blog/2009/11/03/monitor-slow-queries-in-mysql/"/>
+    <link href="http://slashmili.org/blog/2009/11/03/monitor-slow-queries-in-mysql/"/>
     <updated>2009-11-03T00:00:00+08:00</updated>
-    <id>http://slashmili.github.io/blog/2009/11/03/monitor-slow-queries-in-mysql</id>
+    <id>http://slashmili.org/blog/2009/11/03/monitor-slow-queries-in-mysql</id>
     <content type="html"><![CDATA[<div class='post'>
 In an application we had  many connection to  MySQL database to insert and select data.<div>Always MySQL cup usage was about 30%, I googled and found a MySQL option which store slow queries in a log file.</div><div>That's awesome !  </div><div>You should add log-slow-queries to file /etc/my.cnf and restart MySQL service and here it is !</div><div><br /></div><div>Go and check around ! make a tea for your self and after a while check log file in /var/run/mysqld/mysqld-slow.log</div><div><br /></div><div>You can read more about this config in <a href="http://dev.mysql.com/doc/refman/5.1/en/slow-query-log.html">MySQL Reference</a> </div></div>
 
@@ -26,9 +26,9 @@ In an application we had  many connection to  MySQL database to insert and selec
   
   <entry>
     <title type="html"><![CDATA[Create Custom SNMP Tree With Bash]]></title>
-    <link href="http://slashmili.github.io/blog/2009/08/30/create-custom-snmp-tree-with-bash/"/>
+    <link href="http://slashmili.org/blog/2009/08/30/create-custom-snmp-tree-with-bash/"/>
     <updated>2009-08-30T00:00:00+08:00</updated>
-    <id>http://slashmili.github.io/blog/2009/08/30/create-custom-snmp-tree-with-bash</id>
+    <id>http://slashmili.org/blog/2009/08/30/create-custom-snmp-tree-with-bash</id>
     <content type="html"><![CDATA[<div class='post'>
 In some case you need to monitor your service, and SNMP is ROCKs in reporting.<div>But if you don't like to read bunch of document about SNMP protocol and creating server flow this instructions.</div><div><br /></div><div>snmpd helps you so much with <b>pass</b> config, it run your command when request comes for  a exact MIB.</div><div>Just open /etc/snmpd.conf and add this line to end of config file :</div><div><div><code>pass .1.3.6.1.4.1.2021.256  /bin/sh /usr/local/snmp_script/snmp_asterisk</code></div><div><br /></div><div>With this config when you request snmp walk on .1.3.6.1.4.1.2021.256 returns this result :</div><code>$ snmpwalk -v 1 pbx -c public .1.3.6.1.4.1.2021.256<br />UCD-SNMP-MIB::ucdavis.256.1 = Gauge32: 3<br />UCD-SNMP-MIB::ucdavis.256.2 = Gauge32: 10<br />UCD-SNMP-MIB::ucdavis.256.3 = Gauge32: 1<br />UCD-SNMP-MIB::ucdavis.256.4 = Gauge32: 3<br />UCD-SNMP-MIB::ucdavis.256.5 = Gauge32: 3<br /></code><br /><div>Yes ! I monitored my asterisk's important status.</div><div>Now what's line of that bash script ? you can <b>locate passtest </b>and create your file from that sample but I put my file for more sample !</div></div><code>#!/bin/sh -f<br />PATH=$path:/bin:/usr/bin:/usr/ucb:/usr/local/snmp_script/<br />PLACE=".1.3.6.1.4.1.2021.256"<br />REQ="$2"<br /><br />if [ "$1" = "-s" ]; then<br />echo $* >> /tmp/passtest.log<br />exit 0<br />fi<br /><br />if [ "$1" = "-n" ]; then<br />case "$REQ" in<br />$PLACE)      RET=$PLACE.1 ;;<br />$PLACE.1)    RET=$PLACE.2 ;;<br />$PLACE.2)  RET=$PLACE.3 ;;<br />$PLACE.3)    RET=$PLACE.4 ;;<br />$PLACE.4)    RET=$PLACE.5 ;;<br />*)           exit 0 ;;<br />esac<br />else<br />case "$REQ" in<br />$PLACE)    exit 0 ;;<br />*)         RET=$REQ ;;<br />esac<br />fi<br /><br />echo "$RET"<br />case "$RET" in<br />$PLACE.1) echo "gauge"; echo `member_in_queue` ; exit 0 ;;<br />$PLACE.2) echo "gauge"; echo `number_of_answerd_call` ; exit 0 ;;<br />$PLACE.3) echo "gauge"; echo `number_of_missed_call`; exit 0 ;;<br />$PLACE.4) echo "gauge"; echo `rate_answerd_call` ;;<br />$PLACE.5) echo "gauge"; echo `rate_missed_call` ; exit 0 ;;<br />*) echo "string"; echo "ack... $RET $REQ"; exit 0 ;;<br />esac<br /></code><br /><br />You can use this MIBS in Monitoring System like Zenoss and ...</div>
 

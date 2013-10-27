@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: BIND | /mili]]></title>
-  <link href="http://slashmili.github.io/blog/categories/bind/atom.xml" rel="self"/>
-  <link href="http://slashmili.github.io/"/>
-  <updated>2013-10-26T17:14:34+08:00</updated>
-  <id>http://slashmili.github.io/</id>
+  <link href="http://slashmili.org/blog/categories/bind/atom.xml" rel="self"/>
+  <link href="http://slashmili.org/"/>
+  <updated>2013-10-27T08:42:19+08:00</updated>
+  <id>http://slashmili.org/</id>
   <author>
     <name><![CDATA[Milad Rastian]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[How to Setup Blogger Custom Domain with BIND]]></title>
-    <link href="http://slashmili.github.io/blog/2010/10/21/how-to-setup-blogger-custom-domain-with/"/>
+    <link href="http://slashmili.org/blog/2010/10/21/how-to-setup-blogger-custom-domain-with/"/>
     <updated>2010-10-21T00:00:00+08:00</updated>
-    <id>http://slashmili.github.io/blog/2010/10/21/how-to-setup-blogger-custom-domain-with</id>
+    <id>http://slashmili.org/blog/2010/10/21/how-to-setup-blogger-custom-domain-with</id>
     <content type="html"><![CDATA[<div class='post'>
 <div>Just for record in history !</div>1. You need to go in your blogger Setting->Publishing, click on custom domain, add your domain (with subdomain ) and save settings.<div><br /></div><div>2. Connect ssh to your BIND server and create file /etc/bind/named.mydomain with this content :</div><div><div><span class="Apple-style-span" style="font-size: x-small;">$TTL    86400</span></div><div><span class="Apple-style-span" style="font-size: x-small;">@ IN      SOA     ns.here. root.here.  (</span></div><div><span class="Apple-style-span" style="font-size: x-small;">                                      2          ; Serial</span></div><div><span class="Apple-style-span" style="font-size: x-small;">                                      28800      ; Refresh</span></div><div><span class="Apple-style-span" style="font-size: x-small;">                                      14400      ; Retry</span></div><div><span class="Apple-style-span" style="font-size: x-small;">                                      604800     ; Expire - 1 week</span></div><div><span class="Apple-style-span" style="font-size: x-small;">                                      86400 )    ; Minimum</span></div><div><span class="Apple-style-span" style="font-size: x-small;"><br /></span></div><div><span class="Apple-style-span" style="font-size: x-small;">blog <span class="Apple-tab-span" style="white-space:pre"> </span>IN <span class="Apple-tab-span" style="white-space:pre"> </span>CNAME     ghs.google.com.  ; don't remove  last dot</span></div><div><span class="Apple-style-span" style="font-size: medium;"><br /></span></div><div><span class="Apple-style-span"><span class="Apple-style-span" style="font-size: small;"></span></span></div><span><span>3. Open /etc/bind/named.conf.local and append these lines  :</span></span><div><span class="Apple-style-span" style="font-size: x-small;">zone "mydomain.org" IN {</span></div><div><span class="Apple-style-span" style="font-size: x-small;">        type master;</span></div><div><span class="Apple-style-span" style="font-size: x-small;">        file "/etc/bind/named.mydomain";</span></div><div><span class="Apple-style-span" style="font-size: x-small;">        allow-update { none; };</span></div><div><span class="Apple-style-span" style="font-size: x-small;">};</span></div><div><span class="Apple-style-span" style="font-size: medium; "> </span></div></div><div><span class="Apple-style-span"><span class="Apple-style-span" style="font-size: small;"></span></span></div><span><span>4. Restart your bind server /etc/init.d/bind9 restart</span></span><div><span class="Apple-style-span" style="font-size: medium; "><br /></span></div><div><span class="Apple-style-span"><span class="Apple-style-span" style="font-size: small;"><span><span>5. Open your blog with web browser.</span></span></span></span></div></div>
 
@@ -26,9 +26,9 @@
   
   <entry>
     <title type="html"><![CDATA[How to Config Slave DNS Server]]></title>
-    <link href="http://slashmili.github.io/blog/2009/09/08/how-to-config-slave-dns-server/"/>
+    <link href="http://slashmili.org/blog/2009/09/08/how-to-config-slave-dns-server/"/>
     <updated>2009-09-08T00:00:00+08:00</updated>
-    <id>http://slashmili.github.io/blog/2009/09/08/how-to-config-slave-dns-server</id>
+    <id>http://slashmili.org/blog/2009/09/08/how-to-config-slave-dns-server</id>
     <content type="html"><![CDATA[<div class='post'>
 In a project we have servers which were in different cities, and they connected to each other with Radio connection.<div>We want to setup DNS server in each server for easy use, but configuring dns in each server was to painful if server of one IP changed. we should change config in all server.</div><div><br /></div><div>So I setup a master DNS server and config other server as Slave.</div><div>Slave config is :</div><div><br /></div><div><div>zone "sip.server.loc"{</div><div>        type slave;</div><div>        file "/etc/bind/sip.server.loc";</div><div>        masters {172.16.20.1;};</div><div>};</div><div><br /></div><div>Setting file value is useful when Master server is not accessible and Slave response requests with last config file(which updated that file from Master)</div></div></div>
 
