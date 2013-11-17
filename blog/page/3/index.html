@@ -9,7 +9,7 @@
   <meta name="author" content="Milad Rastian">
 
   
-  <meta name="description" content="After I change my G1 fonts to read farsi SMS and also farsi keyboard some one post me a comment which want from me to check if I could do same &hellip;">
+  <meta name="description" content="In some case you need to monitor your service, and SNMP is ROCKs in reporting.But if you don&#8217;t like to read bunch of document about SNMP &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,46 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/08/30/create-custom-snmp-tree-with-bash/">Create Custom SNMP Tree With Bash</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-08-30T00:00:00+08:00" pubdate data-updated="true">Aug 30<span>th</span>, 2009</time>
+        
+           | <a href="/blog/2009/08/30/create-custom-snmp-tree-with-bash/#disqus_thread"
+             data-disqus-identifier="http://slashmili.org/blog/2009/08/30/create-custom-snmp-tree-with-bash/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+In some case you need to monitor your service, and SNMP is ROCKs in reporting.<div>But if you don&#8217;t like to read bunch of document about SNMP protocol and creating server flow this instructions.</div><div><br /></div><div>snmpd helps you so much with <b>pass</b> config, it run your command when request comes for  a exact MIB.</div><div>Just open /etc/snmpd.conf and add this line to end of config file :</div><div><div><code>pass .1.3.6.1.4.1.2021.256  /bin/sh /usr/local/snmp_script/snmp_asterisk</code></div><div><br /></div><div>With this config when you request snmp walk on .1.3.6.1.4.1.2021.256 returns this result :</div><code>$ snmpwalk -v 1 pbx -c public .1.3.6.1.4.1.2021.256<br />UCD-SNMP-MIB::ucdavis.256.1 = Gauge32: 3<br />UCD-SNMP-MIB::ucdavis.256.2 = Gauge32: 10<br />UCD-SNMP-MIB::ucdavis.256.3 = Gauge32: 1<br />UCD-SNMP-MIB::ucdavis.256.4 = Gauge32: 3<br />UCD-SNMP-MIB::ucdavis.256.5 = Gauge32: 3<br /></code><br /><div>Yes ! I monitored my asterisk&#8217;s important status.</div><div>Now what&#8217;s line of that bash script ? you can <b>locate passtest </b>and create your file from that sample but I put my file for more sample !</div></div><code>#!/bin/sh -f<br />PATH=$path:/bin:/usr/bin:/usr/ucb:/usr/local/snmp_script/<br />PLACE=".1.3.6.1.4.1.2021.256"<br />REQ="$2"<br /><br />if [ "$1" = "-s" ]; then<br />echo $* >> /tmp/passtest.log<br />exit 0<br />fi<br /><br />if [ "$1" = "-n" ]; then<br />case "$REQ" in<br />$PLACE)      RET=$PLACE.1 ;;<br />$PLACE.1)    RET=$PLACE.2 ;;<br />$PLACE.2)  RET=$PLACE.3 ;;<br />$PLACE.3)    RET=$PLACE.4 ;;<br />$PLACE.4)    RET=$PLACE.5 ;;<br />*)           exit 0 ;;<br />esac<br />else<br />case "$REQ" in<br />$PLACE)    exit 0 ;;<br />*)         RET=$REQ ;;<br />esac<br />fi<br /><br />echo "$RET"<br />case "$RET" in<br />$PLACE.1) echo "gauge"; echo `member_in_queue` ; exit 0 ;;<br />$PLACE.2) echo "gauge"; echo `number_of_answerd_call` ; exit 0 ;;<br />$PLACE.3) echo "gauge"; echo `number_of_missed_call`; exit 0 ;;<br />$PLACE.4) echo "gauge"; echo `rate_answerd_call` ;;<br />$PLACE.5) echo "gauge"; echo `rate_missed_call` ; exit 0 ;;<br />*) echo "string"; echo "ack... $RET $REQ"; exit 0 ;;<br />esac<br /></code><br /><br />You can use this MIBS in Monitoring System like Zenoss and &#8230;</div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -438,47 +478,9 @@ Tonight suddenly I interested in using <a href="http://en.wikipedia.org/wiki/AT_
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2007/10/24/pygtk-gksu-module/">PyGTK Gksu Module</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-10-24T00:00:00+08:00" pubdate data-updated="true">Oct 24<span>th</span>, 2007</time>
-        
-           | <a href="/blog/2007/10/24/pygtk-gksu-module/#disqus_thread"
-             data-disqus-identifier="http://slashmili.org/blog/2007/10/24/pygtk-gksu-module/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-These days I am trying to use gksu from python but this module has no documention <br />Until last night <a href="http://mces.blogspot.com/">Behdad</a> opened a new world to me ! he showed me <a href="http://docs.python.org/lib/built-in-funcs.html" title="Find more detail in this page">help(&#8230;)</a>.<br />Any way I hope this sample code help you understand methods and relations between objects.<br /><br /><pre class="code" id="codemain" style="margin: 6px;"><span class="keyword">import</span> gtk<br /><span class="keyword">import</span> gksu<br /><span class="keyword">import</span> gksu.ui<br /><br /><span class="keyword">import</span> gobject<br />&nbsp;<br />dialog=gksu.ui.Dialog()<br />dialog.set_message(<span class="literal">"Hi dear geek\nTo do your request I need your root password !"</span>)<br />result=dialog.run()<br />&nbsp;<br />dialog.hide()<br /><span class="keyword">if</span> result==gtk.RESPONSE_OK:<br />        <span class="keyword">try</span>:<br />                cont=gksu.Context()<br />                <span class="comment">#default user is root<br /></span>                <span class="comment">#cont.set_user('root')</span><br />                cont.set_password(dialog.get_password())<br />                cont.set_command(<span class="literal">'synaptic'</span>)<br />                cont.sudo_run()<br />        <span class="keyword">except</span> gobject.GError , errormsg:<br />                <span class="keyword">print</span> errormsg</pre><br />When run this sample a new dialog open and ask root password from you after that if you give correct password open synaptic with root roles, else tarp in exception and give you error message in console</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/4/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -491,6 +493,10 @@ These days I am trying to use gksu from python but this module has no documentio
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/11/17/unleash-the-daemons/">Unleash the Daemons</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/08/11/monitor-your-apps-behaviour/">Monitor Your App&#8217;s Behaviour</a>
@@ -506,10 +512,6 @@ These days I am trying to use gksu from python but this module has no documentio
     
       <li class="post">
         <a href="/blog/2012/02/03/configure-and-manage-your-servers-in/">Configure and Manage Your Servers in a FLASH</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2011/07/03/zendroid-android-application-to-monitor/">Zendroid - Android Application to Monitor Zenoss&#8217;s Events</a>
       </li>
     
   </ul>

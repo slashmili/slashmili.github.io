@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Play With Your GSM Cell Phone - /mili</title>
+  <title>Unleash The Daemons - /mili</title>
   <meta name="author" content="Milad Rastian">
 
   
-  <meta name="description" content="Tonight suddenly I interested in using AT Command on Cell Phone From Python.It was so fantastic for me, I can connect to my Cell Phone. really &hellip;">
+  <meta name="description" content="I did a talk at KL Ruby Brigade monthly meeting about Daemons in Unix environment. If you want to know what the Daemon is, here is a quick &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://slashmili.org/blog/2007/10/28/play-with-your-gsm-cell-phone">
+  <link rel="canonical" href="http://slashmili.org/blog/2013/11/17/unleash-the-daemons">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="/mili" type="application/atom+xml">
@@ -80,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">Play With Your GSM Cell Phone</h1>
+      <h1 class="entry-title">Unleash the Daemons</h1>
     
     
       <p class="meta">
@@ -96,7 +96,7 @@
   
 
 
-<time datetime="2007-10-28T00:00:00+08:00" pubdate data-updated="true">Oct 28<span>th</span>, 2007</time>
+<time datetime="2013-11-17T22:43:00+08:00" pubdate data-updated="true">Nov 17<span>th</span>, 2013</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://slashmili.org">Comments</a>
@@ -106,8 +106,18 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-Tonight suddenly I interested in using <a href="http://en.wikipedia.org/wiki/AT_command">AT Command</a> on Cell Phone From Python.<br />It was so fantastic for me, I can connect to my Cell Phone. really Python powered me so much !<br /><br />All you need are Cell Phone and USB connector, when it connect, you could see device as /dev/ttyACM0  (or /dev/ttyACM[number] )<br />Don&#8217;t forget check your device connected correctly by this command :<pre>$ls -l /dev/ttyACM*<br />crw-rw---- 1 root dialout 166, 0 2007-10-28 00:40 /dev/ttyACM0</pre>And here is sample code which show Manufacturer, Model and IMEI of your Cell Phone.<br /><pre class="code" id="codemain" style="margin: 6px;"><span class="keyword">import</span> serial<br />&nbsp;<br /><span class="keyword">def</span> send(ser,command):<br />    <span class="keyword">if</span> ser.isOpen():<br />        ser.write(command)<br />        <span class="keyword">while</span> 1:<br />            out=ser.readline()<br />            <span class="keyword">if</span> out.strip()==<span class="literal">'OK\r\n'</span>:<br />                <span class="keyword">break</span>  <br />            <span class="keyword">if</span> out.strip()!=<span class="literal">''</span>:<br />                <span class="keyword">print</span> out<br />&nbsp;<br />ser=serial.Serial(<span class="literal">'/dev/ttyACM0'</span>)<br />ser.open()&nbsp;<br /><span class="keyword">if</span> ser.isOpen():<br />    send(ser,<span class="literal">'at+cgmi\r'</span>) <span class="comment">#Get Manufacturer<br /></span>    send(ser,<span class="literal">'at+cgmm\r'</span>) <span class="comment">#Get Model<br /></span>    send(ser,<span class="literal">'at+cgsn\r'</span>) <span class="comment">#Get IMEI<br /></span>ser.close()</pre><br />It&#8217;s my output :<pre><br />at+cgmi<br />Nokia<br />at+cgmm<br />Nokia 3230<br />at+cgsn<br />X5X399X06X34X5X (sorry I replace some numbers with X)</pre>It isn&#8217;t all you can do! see more AT Commands <a href="http://doc.trolltech.com/qtopia4.1/atcommands.html">here</a> also see <a href="http://pyserial.sourceforge.net/">pyserial</a> manual .</div>
+<div class="entry-content"><p>I did a talk at <a href="https://github.com/klxrb">KL Ruby Brigade</a> monthly meeting about Daemons in Unix environment.</p>
+
+<p>If you want to know what the Daemon is, here is a quick explanation:</p>
+
+<blockquote><p>In multitasking computer operating systems, a daemon (/ˈdeɪmən/ or /ˈdiːmən/) is a computer program that runs as a background process, rather than being under the direct control of an interactive user <a href="http://en.wikipedia.org/wiki/Daemon_%28computing%29">Wikipedia</a></p></blockquote>
+
+<p>You may find my presentation here:</p>
+
+<iframe src="http://www.slideshare.net/slideshow/embed_code/27922954 " width="595" height="446" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen></iframe>
+
+
+<p></p>
 </div>
 
 
@@ -130,12 +140,12 @@ Tonight suddenly I interested in using <a href="http://en.wikipedia.org/wiki/AT_
   
 
 
-<time datetime="2007-10-28T00:00:00+08:00" pubdate data-updated="true">Oct 28<span>th</span>, 2007</time>
+<time datetime="2013-11-17T22:43:00+08:00" pubdate data-updated="true">Nov 17<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/gsm/'>GSM</a>, <a class='category' href='/blog/categories/python/'>Python</a>
+    <a class='category' href='/blog/categories/ruby/'>Ruby</a>, <a class='category' href='/blog/categories/talks/'>Talks</a>, <a class='category' href='/blog/categories/unix/'>Unix</a>
   
 </span>
 
@@ -144,7 +154,7 @@ Tonight suddenly I interested in using <a href="http://en.wikipedia.org/wiki/AT_
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://slashmili.org/blog/2007/10/28/play-with-your-gsm-cell-phone/" data-via="slashmili" data-counturl="http://slashmili.org/blog/2007/10/28/play-with-your-gsm-cell-phone/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://slashmili.org/blog/2013/11/17/unleash-the-daemons/" data-via="slashmili" data-counturl="http://slashmili.org/blog/2013/11/17/unleash-the-daemons/" >Tweet</a>
   
   
   
@@ -155,10 +165,8 @@ Tonight suddenly I interested in using <a href="http://en.wikipedia.org/wiki/AT_
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2007/10/24/pygtk-gksu-module/" title="Previous Post: PyGTK gksu Module">&laquo; PyGTK gksu Module</a>
+        <a class="basic-alignment left" href="/blog/2013/08/11/monitor-your-apps-behaviour/" title="Previous Post: Monitor your app's behaviour">&laquo; Monitor your app's behaviour</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2007/10/28/save-your-dreams-with-dream-demon/" title="Next Post: Save Your Dreams With Dream Demon !">Save Your Dreams With Dream Demon ! &raquo;</a>
       
     </p>
   </footer>
@@ -253,8 +261,8 @@ Tonight suddenly I interested in using <a href="http://en.wikipedia.org/wiki/AT_
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://slashmili.org/blog/2007/10/28/play-with-your-gsm-cell-phone/';
-        var disqus_url = 'http://slashmili.org/blog/2007/10/28/play-with-your-gsm-cell-phone/';
+        var disqus_identifier = 'http://slashmili.org/blog/2013/11/17/unleash-the-daemons/';
+        var disqus_url = 'http://slashmili.org/blog/2013/11/17/unleash-the-daemons/';
         var disqus_script = 'embed.js';
       
     (function () {

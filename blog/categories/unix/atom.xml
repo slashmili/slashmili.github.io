@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Unix | /mili]]></title>
+  <link href="http://slashmili.org/blog/categories/unix/atom.xml" rel="self"/>
+  <link href="http://slashmili.org/"/>
+  <updated>2013-11-17T23:26:04+08:00</updated>
+  <id>http://slashmili.org/</id>
+  <author>
+    <name><![CDATA[Milad Rastian]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Unleash The Daemons]]></title>
+    <link href="http://slashmili.org/blog/2013/11/17/unleash-the-daemons/"/>
+    <updated>2013-11-17T22:43:00+08:00</updated>
+    <id>http://slashmili.org/blog/2013/11/17/unleash-the-daemons</id>
+    <content type="html"><![CDATA[<p>I did a talk at <a href="https://github.com/klxrb">KL Ruby Brigade</a> monthly meeting about Daemons in Unix environment.</p>
+
+<p>If you want to know what the Daemon is, here is a quick explanation:</p>
+
+<blockquote><p>In multitasking computer operating systems, a daemon (/ˈdeɪmən/ or /ˈdiːmən/) is a computer program that runs as a background process, rather than being under the direct control of an interactive user <a href="http://en.wikipedia.org/wiki/Daemon_%28computing%29">Wikipedia</a></p></blockquote>
+
+<p>You may find my presentation here:</p>
+
+<p><iframe src="http://www.slideshare.net/slideshow/embed_code/27922954 " width="595" height="446" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen></iframe> </p>
+]]></content>
+  </entry>
+  
+</feed>

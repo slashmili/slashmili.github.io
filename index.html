@@ -9,7 +9,7 @@
   <meta name="author" content="Milad Rastian">
 
   
-  <meta name="description" content="I had a talk&nbsp;at&nbsp;KL Ruby Brigade&nbsp;about Monitoring App&#8217;s behaviour. You can find the&nbsp;presentation in&nbsp;here&nbsp;or flip &hellip;">
+  <meta name="description" content="I did a talk at KL Ruby Brigade monthly meeting about Daemons in Unix environment. If you want to know what the Daemon is, here is a quick &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/17/unleash-the-daemons/">Unleash the Daemons</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-17T22:43:00+08:00" pubdate data-updated="true">Nov 17<span>th</span>, 2013</time>
+        
+           | <a href="/blog/2013/11/17/unleash-the-daemons/#disqus_thread"
+             data-disqus-identifier="http://slashmili.org/blog/2013/11/17/unleash-the-daemons/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I did a talk at <a href="https://github.com/klxrb">KL Ruby Brigade</a> monthly meeting about Daemons in Unix environment.</p>
+
+<p>If you want to know what the Daemon is, here is a quick explanation:</p>
+
+<blockquote><p>In multitasking computer operating systems, a daemon (/ˈdeɪmən/ or /ˈdiːmən/) is a computer program that runs as a background process, rather than being under the direct control of an interactive user <a href="http://en.wikipedia.org/wiki/Daemon_%28computing%29">Wikipedia</a></p></blockquote>
+
+<p>You may find my presentation here:</p>
+
+<iframe src="http://www.slideshare.net/slideshow/embed_code/27922954 " width="595" height="446" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen></iframe>
+
+
+<p></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -438,46 +488,6 @@ WTF !<div>Every day you wake up, you hear new language is growing in town. after
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2010/10/21/how-to-setup-blogger-custom-domain-with/">How to Setup Blogger Custom Domain With BIND</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-10-21T00:00:00+08:00" pubdate data-updated="true">Oct 21<span>st</span>, 2010</time>
-        
-           | <a href="/blog/2010/10/21/how-to-setup-blogger-custom-domain-with/#disqus_thread"
-             data-disqus-identifier="http://slashmili.org/blog/2010/10/21/how-to-setup-blogger-custom-domain-with/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<div>Just for record in history !</div>1. You need to go in your blogger Setting->Publishing, click on custom domain, add your domain (with subdomain ) and save settings.<div><br /></div><div>2. Connect ssh to your BIND server and create file /etc/bind/named.mydomain with this content :</div><div><div><span class="Apple-style-span" style="font-size: x-small;">$TTL    86400</span></div><div><span class="Apple-style-span" style="font-size: x-small;">@ IN      SOA     ns.here. root.here.  (</span></div><div><span class="Apple-style-span" style="font-size: x-small;">                                      2          ; Serial</span></div><div><span class="Apple-style-span" style="font-size: x-small;">                                      28800      ; Refresh</span></div><div><span class="Apple-style-span" style="font-size: x-small;">                                      14400      ; Retry</span></div><div><span class="Apple-style-span" style="font-size: x-small;">                                      604800     ; Expire - 1 week</span></div><div><span class="Apple-style-span" style="font-size: x-small;">                                      86400 )    ; Minimum</span></div><div><span class="Apple-style-span" style="font-size: x-small;"><br /></span></div><div><span class="Apple-style-span" style="font-size: x-small;">blog <span class="Apple-tab-span" style="white-space:pre"> </span>IN <span class="Apple-tab-span" style="white-space:pre"> </span>CNAME     ghs.google.com.  ; don&#8217;t remove  last dot</span></div><div><span class="Apple-style-span" style="font-size: medium;"><br /></span></div><div><span class="Apple-style-span"><span class="Apple-style-span" style="font-size: small;"></span></span></div><span><span>3. Open /etc/bind/named.conf.local and append these lines  :</span></span><div><span class="Apple-style-span" style="font-size: x-small;">zone &#8220;mydomain.org&#8221; IN {</span></div><div><span class="Apple-style-span" style="font-size: x-small;">        type master;</span></div><div><span class="Apple-style-span" style="font-size: x-small;">        file &#8220;/etc/bind/named.mydomain&#8221;;</span></div><div><span class="Apple-style-span" style="font-size: x-small;">        allow-update { none; };</span></div><div><span class="Apple-style-span" style="font-size: x-small;">};</span></div><div><span class="Apple-style-span" style="font-size: medium; "> </span></div></div><div><span class="Apple-style-span"><span class="Apple-style-span" style="font-size: small;"></span></span></div><span><span>4. Restart your bind server /etc/init.d/bind9 restart</span></span><div><span class="Apple-style-span" style="font-size: medium; "><br /></span></div><div><span class="Apple-style-span"><span class="Apple-style-span" style="font-size: small;"><span><span>5. Open your blog with web browser.</span></span></span></span></div></div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -493,6 +503,10 @@ WTF !<div>Every day you wake up, you hear new language is growing in town. after
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/11/17/unleash-the-daemons/">Unleash the Daemons</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/08/11/monitor-your-apps-behaviour/">Monitor Your App&#8217;s Behaviour</a>
       </li>
     
@@ -506,10 +520,6 @@ WTF !<div>Every day you wake up, you hear new language is growing in town. after
     
       <li class="post">
         <a href="/blog/2012/02/03/configure-and-manage-your-servers-in/">Configure and Manage Your Servers in a FLASH</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2011/07/03/zendroid-android-application-to-monitor/">Zendroid - Android Application to Monitor Zenoss&#8217;s Events</a>
       </li>
     
   </ul>

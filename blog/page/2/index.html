@@ -9,7 +9,7 @@
   <meta name="author" content="Milad Rastian">
 
   
-  <meta name="description" content="After 8 years it&#8217;s my second time which I try to learn drawing cartoons.I found this book useful but part 1 of book is so boring!Beginning of &hellip;">
+  <meta name="description" content="Just for record in history !1. You need to go in your blogger Setting->Publishing, click on custom domain, add your domain (with subdomain ) and &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,46 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/10/21/how-to-setup-blogger-custom-domain-with/">How to Setup Blogger Custom Domain With BIND</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-10-21T00:00:00+08:00" pubdate data-updated="true">Oct 21<span>st</span>, 2010</time>
+        
+           | <a href="/blog/2010/10/21/how-to-setup-blogger-custom-domain-with/#disqus_thread"
+             data-disqus-identifier="http://slashmili.org/blog/2010/10/21/how-to-setup-blogger-custom-domain-with/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div>Just for record in history !</div>1. You need to go in your blogger Setting->Publishing, click on custom domain, add your domain (with subdomain ) and save settings.<div><br /></div><div>2. Connect ssh to your BIND server and create file /etc/bind/named.mydomain with this content :</div><div><div><span class="Apple-style-span" style="font-size: x-small;">$TTL    86400</span></div><div><span class="Apple-style-span" style="font-size: x-small;">@ IN      SOA     ns.here. root.here.  (</span></div><div><span class="Apple-style-span" style="font-size: x-small;">                                      2          ; Serial</span></div><div><span class="Apple-style-span" style="font-size: x-small;">                                      28800      ; Refresh</span></div><div><span class="Apple-style-span" style="font-size: x-small;">                                      14400      ; Retry</span></div><div><span class="Apple-style-span" style="font-size: x-small;">                                      604800     ; Expire - 1 week</span></div><div><span class="Apple-style-span" style="font-size: x-small;">                                      86400 )    ; Minimum</span></div><div><span class="Apple-style-span" style="font-size: x-small;"><br /></span></div><div><span class="Apple-style-span" style="font-size: x-small;">blog <span class="Apple-tab-span" style="white-space:pre"> </span>IN <span class="Apple-tab-span" style="white-space:pre"> </span>CNAME     ghs.google.com.  ; don&#8217;t remove  last dot</span></div><div><span class="Apple-style-span" style="font-size: medium;"><br /></span></div><div><span class="Apple-style-span"><span class="Apple-style-span" style="font-size: small;"></span></span></div><span><span>3. Open /etc/bind/named.conf.local and append these lines  :</span></span><div><span class="Apple-style-span" style="font-size: x-small;">zone &#8220;mydomain.org&#8221; IN {</span></div><div><span class="Apple-style-span" style="font-size: x-small;">        type master;</span></div><div><span class="Apple-style-span" style="font-size: x-small;">        file &#8220;/etc/bind/named.mydomain&#8221;;</span></div><div><span class="Apple-style-span" style="font-size: x-small;">        allow-update { none; };</span></div><div><span class="Apple-style-span" style="font-size: x-small;">};</span></div><div><span class="Apple-style-span" style="font-size: medium; "> </span></div></div><div><span class="Apple-style-span"><span class="Apple-style-span" style="font-size: small;"></span></span></div><span><span>4. Restart your bind server /etc/init.d/bind9 restart</span></span><div><span class="Apple-style-span" style="font-size: medium; "><br /></span></div><div><span class="Apple-style-span"><span class="Apple-style-span" style="font-size: small;"><span><span>5. Open your blog with web browser.</span></span></span></span></div></div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -438,46 +478,6 @@ In a project we have servers which were in different cities, and they connected 
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/08/30/create-custom-snmp-tree-with-bash/">Create Custom SNMP Tree With Bash</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-08-30T00:00:00+08:00" pubdate data-updated="true">Aug 30<span>th</span>, 2009</time>
-        
-           | <a href="/blog/2009/08/30/create-custom-snmp-tree-with-bash/#disqus_thread"
-             data-disqus-identifier="http://slashmili.org/blog/2009/08/30/create-custom-snmp-tree-with-bash/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-In some case you need to monitor your service, and SNMP is ROCKs in reporting.<div>But if you don&#8217;t like to read bunch of document about SNMP protocol and creating server flow this instructions.</div><div><br /></div><div>snmpd helps you so much with <b>pass</b> config, it run your command when request comes for  a exact MIB.</div><div>Just open /etc/snmpd.conf and add this line to end of config file :</div><div><div><code>pass .1.3.6.1.4.1.2021.256  /bin/sh /usr/local/snmp_script/snmp_asterisk</code></div><div><br /></div><div>With this config when you request snmp walk on .1.3.6.1.4.1.2021.256 returns this result :</div><code>$ snmpwalk -v 1 pbx -c public .1.3.6.1.4.1.2021.256<br />UCD-SNMP-MIB::ucdavis.256.1 = Gauge32: 3<br />UCD-SNMP-MIB::ucdavis.256.2 = Gauge32: 10<br />UCD-SNMP-MIB::ucdavis.256.3 = Gauge32: 1<br />UCD-SNMP-MIB::ucdavis.256.4 = Gauge32: 3<br />UCD-SNMP-MIB::ucdavis.256.5 = Gauge32: 3<br /></code><br /><div>Yes ! I monitored my asterisk&#8217;s important status.</div><div>Now what&#8217;s line of that bash script ? you can <b>locate passtest </b>and create your file from that sample but I put my file for more sample !</div></div><code>#!/bin/sh -f<br />PATH=$path:/bin:/usr/bin:/usr/ucb:/usr/local/snmp_script/<br />PLACE=".1.3.6.1.4.1.2021.256"<br />REQ="$2"<br /><br />if [ "$1" = "-s" ]; then<br />echo $* >> /tmp/passtest.log<br />exit 0<br />fi<br /><br />if [ "$1" = "-n" ]; then<br />case "$REQ" in<br />$PLACE)      RET=$PLACE.1 ;;<br />$PLACE.1)    RET=$PLACE.2 ;;<br />$PLACE.2)  RET=$PLACE.3 ;;<br />$PLACE.3)    RET=$PLACE.4 ;;<br />$PLACE.4)    RET=$PLACE.5 ;;<br />*)           exit 0 ;;<br />esac<br />else<br />case "$REQ" in<br />$PLACE)    exit 0 ;;<br />*)         RET=$REQ ;;<br />esac<br />fi<br /><br />echo "$RET"<br />case "$RET" in<br />$PLACE.1) echo "gauge"; echo `member_in_queue` ; exit 0 ;;<br />$PLACE.2) echo "gauge"; echo `number_of_answerd_call` ; exit 0 ;;<br />$PLACE.3) echo "gauge"; echo `number_of_missed_call`; exit 0 ;;<br />$PLACE.4) echo "gauge"; echo `rate_answerd_call` ;;<br />$PLACE.5) echo "gauge"; echo `rate_missed_call` ; exit 0 ;;<br />*) echo "string"; echo "ack... $RET $REQ"; exit 0 ;;<br />esac<br /></code><br /><br />You can use this MIBS in Monitoring System like Zenoss and &#8230;</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -495,6 +495,10 @@ In some case you need to monitor your service, and SNMP is ROCKs in reporting.<d
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/11/17/unleash-the-daemons/">Unleash the Daemons</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/08/11/monitor-your-apps-behaviour/">Monitor Your App&#8217;s Behaviour</a>
       </li>
     
@@ -508,10 +512,6 @@ In some case you need to monitor your service, and SNMP is ROCKs in reporting.<d
     
       <li class="post">
         <a href="/blog/2012/02/03/configure-and-manage-your-servers-in/">Configure and Manage Your Servers in a FLASH</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2011/07/03/zendroid-android-application-to-monitor/">Zendroid - Android Application to Monitor Zenoss&#8217;s Events</a>
       </li>
     
   </ul>
