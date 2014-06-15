@@ -4,7 +4,7 @@
   <title><![CDATA[/mili]]></title>
   <link href="http://slashmili.org/atom.xml" rel="self"/>
   <link href="http://slashmili.org/"/>
-  <updated>2013-11-17T23:56:14+08:00</updated>
+  <updated>2014-06-16T06:57:13+08:00</updated>
   <id>http://slashmili.org/</id>
   <author>
     <name><![CDATA[Milad Rastian]]></name>
@@ -12,6 +12,151 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Debugging Application Crash in Linux]]></title>
+    <link href="http://slashmili.org/blog/2014/06/16/debugging-application-crash-in-linux/"/>
+    <updated>2014-06-16T06:56:00+08:00</updated>
+    <id>http://slashmili.org/blog/2014/06/16/debugging-application-crash-in-linux</id>
+    <content type="html"><![CDATA[<p>Recently we had an issue with <a href="http://www.rsyslog.com/">rsyslog</a> daemon, now and then it was crashing and the only way to debug such an application (especially if it&rsquo;s not something developed by your team) is using <a href="http://en.wikipedia.org/wiki/Core_dump">core dump</a>. It&rsquo;s not kind of task that you do every day and it took me a while to search and remember how did it last time.</p>
+
+<h2>Enable Core Dump</h2>
+
+<p>The first is step is to enable the Core Dump, It&rsquo;s pretty simple. Follow <a href="http://www.unixmen.com/how-to-enable-core-dumps-in-rhel6/">this guide</a> and you can enable it in no time.</p>
+
+<blockquote><p>The core dump only will be generated for those process that started after the above changes. Don&rsquo;t forget to restart the daemon or application you have problem with.</p></blockquote>
+
+<h2>Wait for the next crash!</h2>
+
+<p>Make coffee and enjoy the life and be prepared for the next crash :)</p>
+
+<blockquote><p>We are using <a href="http://zenoss.org">Zenoss</a>, it&rsquo;s monitoring the important services like apache, rsyslog and etc. If the process is not running we get an SMS right away.</p></blockquote>
+
+<h2>Install debugging packages</h2>
+
+<p>Make sure you have <strong>gdb</strong> package installed.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>yum install gdb</span></code></pre></td></tr></table></div></figure>
+
+
+<p>GDB is <a href="http://en.wikipedia.org/wiki/GNU_Debugger">GNU Debugger</a> is the standard debugger for the GNU operating system.</p>
+
+<p>If you are using Centos during the debugging you might see some messages like</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Reading symbols from /lib64/libc.so.6...(no debugging symbols found)...done.
+</span><span class='line'>Loaded symbols for /lib64/libc.so.6</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In order to be able to debug and see the full stacktrace you need to install <code>yum-utils</code>. Then you need to install the debugging packages for the application with <code>debuginfo-install</code>. It installs headers and debugging tools that are required to debug rsyslog daemon.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>yum install yum-utils
+</span><span class='line'>debuginfo-install  rsyslog-5.8.10-8.el6.x86_64</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Read the Core dump</h2>
+
+<p>What you are going to get out of this core dump is <a href="http://en.wikipedia.org/wiki/Stack_trace">stacktrace</a> of application and the exact line of code that caused this failure which requires some programming skills. . I&rsquo;m going to explain how did I debug and read the stacktrace for rsyslog but you can follow the same steps to do it for any other application.</p>
+
+<ul>
+<li>Run <code>gdb</code> for the core dump</li>
+</ul>
+
+
+<p>You need to run the following command to start the <code>gdb</code> for that specific core dump.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gdb /sbin/rsyslogd /tmp/core-rs-action-que-6-0-0-28309-1402524331
+</span><span class='line'>GNU gdb (GDB) Red Hat Enterprise Linux (7.2-60.el6_4.1)
+</span><span class='line'>...
+</span><span class='line'>
+</span><span class='line'>Core was generated by `/sbin/rsyslogd -i /var/run/syslogd.pid -c 5'.
+</span><span class='line'>Program terminated with signal 6, Aborted.
+</span><span class='line'> 0x00007fea37ff0925 in raise (sig=6) at ../nptl/sysdeps/unix/sysv/linux/raise.c:64
+</span><span class='line'>64  return INLINE_SYSCALL (tgkill, 3, pid, selftid, sig);
+</span><span class='line'>(gdb)</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>Based on my configuration the core dump saved under <code>/tmp/core-rs-action-que-6-0-0-28309-1402524331</code>.</p></blockquote>
+
+<ul>
+<li>Now gdb prompt is ready for a command.</li>
+</ul>
+
+
+<blockquote><p>If you are new to gdb give yourself a faviour and check this <a href="http://www.cprogramming.com/gdb.html">gdb crash course</a></p></blockquote>
+
+<p>The First command that I usally run especially in this suiation is <strong>where</strong>. It spits out the stacktrace and the line of code which was running when the crash happend.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>(gdb) where
+</span><span class='line'> #0  0x00007fea37ff0925 in raise (sig=6) at ../nptl/sysdeps/unix/sysv/linux/raise.c:64
+</span><span class='line'> #1  0x00007fea37ff2105 in abort () at abort.c:92
+</span><span class='line'> #2  0x00007fea38fece17 in sigsegvHdlr (signum=6) at debug.c:830
+</span><span class='line'> #3  &lt;signal handler called>
+</span><span class='line'> #4  0x00007fea37ff0925 in raise (sig=6) at ../nptl/sysdeps/unix/sysv/linux/raise.c:64
+</span><span class='line'> #5  0x00007fea37ff2105 in abort () at abort.c:92
+</span><span class='line'> #6  0x00007fea3802e837 in __ libc _ message (do_abort=2, fmt=0x7fea38116ac0 "*** glibc detected *** %s: %s: 0x%s ***\n")
+</span><span class='line'>    at ../sysdeps/unix/sysv/linux/libc_fatal.c:198
+</span><span class='line'>    #7  0x00007fea38034166 in malloc_printerr (action=3, str=0x7fea38114bdc "invalid fastbin entry (free)", ptr=&lt;value optimized out>)
+</span><span class='line'>        at malloc.c:6332
+</span><span class='line'>        #8  0x00007fea38ffadf9 in qDelLinkedList (pThis=&lt;value optimized out>) at queue.c:586
+</span><span class='line'>        #9  0x00007fea38ffb95c in DoDeleteBatchFromQStore (pThis=0x7fea398d9da0, nElem=1) at queue.c:1340
+</span><span class='line'>        #10 0x00007fea38ffe40d in DeleteBatchFromQStore (pThis=0x7fea398d9da0, pWti=&lt;value optimized out>) at queue.c:1368
+</span><span class='line'>        #11 DeleteProcessedBatch (pThis=0x7fea398d9da0, pWti=&lt;value optimized out>) at queue.c:1428
+</span><span class='line'>        #12 DequeueConsumableElements (pThis=0x7fea398d9da0, pWti=&lt;value optimized out>) at queue.c:1457
+</span><span class='line'>        #13 DequeueConsumable (pThis=0x7fea398d9da0, pWti=&lt;value optimized out>) at queue.c:1505
+</span><span class='line'>        #14 0x00007fea38ffe603 in DequeueForConsumer (pThis=&lt;value optimized out>, pWti=&lt;value optimized out>) at queue.c:1642
+</span><span class='line'>        #15 ConsumerReg (pThis=&lt;value optimized out>, pWti=&lt;value optimized out>) at queue.c:1696
+</span><span class='line'>        #16 0x00007fea38ff7126 in wtiWorker (pThis=0x7fea398da220) at wti.c:313
+</span><span class='line'>        #17 0x00007fea38ff6c1a in wtpWorker (arg=0x7fea398da220) at wtp.c:387
+</span><span class='line'>        #18 0x00007fea3897b9d1 in start_thread (arg=0x7fea17fff700) at pthread_create.c:301
+</span><span class='line'>        #19 0x00007fea380a6b6d in clone () at ../sysdeps/unix/sysv/linux/x86_64/clone.S:115
+</span><span class='line'>        (gdb)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What I can read from this output is the program crashed in queue.c in function qDelLinkedList at line 586. My gut feeling is it has something to do with memory allocation. In order to follow up more deeply I had to find the right source code that matches with my application. We found out that the application crashed on calling <strong>free</strong> system call over a variable. That looks like a dead end to me! Fortunately there was a new package of <strong>libc</strong> available on Centos, we upgraded it and so for everything works smoothly.</p>
+
+<blockquote><p>These steps are just a starting point for debugging a crash. I wish you a wonderful journey!</p></blockquote>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Unleash The Daemons]]></title>
@@ -213,16 +358,6 @@ About 3 month ago we had a problem on ChanSpy in Asterisk. sounds were out of sy
     <id>http://slashmili.org/blog/2009/09/08/hylafax-t30-t1-timeout-problem</id>
     <content type="html"><![CDATA[<div class='post'>
 I configured  iaxmodem and hylafax for on of our customer last week. I test FAX with sending fax internal extensions and everything worked prefect.<div>But today they called me and said they have a problem in sending and receiving FAX ! Again troubleshooting !</div><div><br /></div><div>I checked out log file log file was :</div><div><span class="Apple-style-span" style="font-weight: bold;">SEND FAILED: JOB 4 DEST 88276650 ERR [126] No receiver protocol (T.30 T1 timeout)</span><br /></div><div><br /></div><div>I googled about this problem and there was no direct answer to this. someone said there is a problem on connection your device and you have some thing like &#8220;UDP being a lossy medium&#8221;.</div><div><br /></div><div>Anyway after question from friends problem solved with changing <a href="http://www.quintum.com/">Tenor</a> configure:</div><div><br /><code>#config<br />#iprg<br />#set FaxRelay G.711 Mu-Law</code></div><div><br /></div>If you have a same problem set FaxRelay to Mu-Law maybe cause to solve yours.<br /><div><br /></div></div>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to Config Slave DNS Server]]></title>
-    <link href="http://slashmili.org/blog/2009/09/08/how-to-config-slave-dns-server/"/>
-    <updated>2009-09-08T00:00:00+08:00</updated>
-    <id>http://slashmili.org/blog/2009/09/08/how-to-config-slave-dns-server</id>
-    <content type="html"><![CDATA[<div class='post'>
-In a project we have servers which were in different cities, and they connected to each other with Radio connection.<div>We want to setup DNS server in each server for easy use, but configuring dns in each server was to painful if server of one IP changed. we should change config in all server.</div><div><br /></div><div>So I setup a master DNS server and config other server as Slave.</div><div>Slave config is :</div><div><br /></div><div><div>zone &#8220;sip.server.loc&#8221;{</div><div>        type slave;</div><div>        file &#8220;/etc/bind/sip.server.loc&#8221;;</div><div>        masters {172.16.20.1;};</div><div>};</div><div><br /></div><div>Setting file value is useful when Master server is not accessible and Slave response requests with last config file(which updated that file from Master)</div></div></div>
 ]]></content>
   </entry>
   

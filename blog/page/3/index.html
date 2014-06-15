@@ -9,7 +9,7 @@
   <meta name="author" content="Milad Rastian">
 
   
-  <meta name="description" content="In some case you need to monitor your service, and SNMP is ROCKs in reporting.But if you don&#8217;t like to read bunch of document about SNMP &hellip;">
+  <meta name="description" content="In a project we have servers which were in different cities, and they connected to each other with Radio connection.We want to setup DNS server in &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,46 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/09/08/how-to-config-slave-dns-server/">How to Config Slave DNS Server</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-09-08T00:00:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2009</time>
+        
+           | <a href="/blog/2009/09/08/how-to-config-slave-dns-server/#disqus_thread"
+             data-disqus-identifier="http://slashmili.org/blog/2009/09/08/how-to-config-slave-dns-server/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+In a project we have servers which were in different cities, and they connected to each other with Radio connection.<div>We want to setup DNS server in each server for easy use, but configuring dns in each server was to painful if server of one IP changed. we should change config in all server.</div><div><br /></div><div>So I setup a master DNS server and config other server as Slave.</div><div>Slave config is :</div><div><br /></div><div><div>zone &#8220;sip.server.loc&#8221;{</div><div>        type slave;</div><div>        file &#8220;/etc/bind/sip.server.loc&#8221;;</div><div>        masters {172.16.20.1;};</div><div>};</div><div><br /></div><div>Setting file value is useful when Master server is not accessible and Slave response requests with last config file(which updated that file from Master)</div></div></div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -438,46 +478,6 @@ When I wake up today as my usual task I do in my computer, try to find logs in m
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2007/10/28/play-with-your-gsm-cell-phone/">Play With Your GSM Cell Phone</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-10-28T00:00:00+08:00" pubdate data-updated="true">Oct 28<span>th</span>, 2007</time>
-        
-           | <a href="/blog/2007/10/28/play-with-your-gsm-cell-phone/#disqus_thread"
-             data-disqus-identifier="http://slashmili.org/blog/2007/10/28/play-with-your-gsm-cell-phone/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-Tonight suddenly I interested in using <a href="http://en.wikipedia.org/wiki/AT_command">AT Command</a> on Cell Phone From Python.<br />It was so fantastic for me, I can connect to my Cell Phone. really Python powered me so much !<br /><br />All you need are Cell Phone and USB connector, when it connect, you could see device as /dev/ttyACM0  (or /dev/ttyACM[number] )<br />Don&#8217;t forget check your device connected correctly by this command :<pre>$ls -l /dev/ttyACM*<br />crw-rw---- 1 root dialout 166, 0 2007-10-28 00:40 /dev/ttyACM0</pre>And here is sample code which show Manufacturer, Model and IMEI of your Cell Phone.<br /><pre class="code" id="codemain" style="margin: 6px;"><span class="keyword">import</span> serial<br />&nbsp;<br /><span class="keyword">def</span> send(ser,command):<br />    <span class="keyword">if</span> ser.isOpen():<br />        ser.write(command)<br />        <span class="keyword">while</span> 1:<br />            out=ser.readline()<br />            <span class="keyword">if</span> out.strip()==<span class="literal">'OK\r\n'</span>:<br />                <span class="keyword">break</span>  <br />            <span class="keyword">if</span> out.strip()!=<span class="literal">''</span>:<br />                <span class="keyword">print</span> out<br />&nbsp;<br />ser=serial.Serial(<span class="literal">'/dev/ttyACM0'</span>)<br />ser.open()&nbsp;<br /><span class="keyword">if</span> ser.isOpen():<br />    send(ser,<span class="literal">'at+cgmi\r'</span>) <span class="comment">#Get Manufacturer<br /></span>    send(ser,<span class="literal">'at+cgmm\r'</span>) <span class="comment">#Get Model<br /></span>    send(ser,<span class="literal">'at+cgsn\r'</span>) <span class="comment">#Get IMEI<br /></span>ser.close()</pre><br />It&#8217;s my output :<pre><br />at+cgmi<br />Nokia<br />at+cgmm<br />Nokia 3230<br />at+cgsn<br />X5X399X06X34X5X (sorry I replace some numbers with X)</pre>It isn&#8217;t all you can do! see more AT Commands <a href="http://doc.trolltech.com/qtopia4.1/atcommands.html">here</a> also see <a href="http://pyserial.sourceforge.net/">pyserial</a> manual .</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -500,6 +500,10 @@ Tonight suddenly I interested in using <a href="http://en.wikipedia.org/wiki/AT_
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/06/16/debugging-application-crash-in-linux/">Debugging Application Crash in Linux</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/11/17/unleash-the-daemons/">Unleash the Daemons</a>
       </li>
     
@@ -513,10 +517,6 @@ Tonight suddenly I interested in using <a href="http://en.wikipedia.org/wiki/AT_
     
       <li class="post">
         <a href="/blog/2012/03/16/monitor-zenoss-with-chrome-plugin/">Monitor Zenoss With Chrome&#8217;s Plugin</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/02/03/configure-and-manage-your-servers-in/">Configure and Manage Your Servers in a FLASH</a>
       </li>
     
   </ul>
@@ -561,7 +561,7 @@ Tonight suddenly I interested in using <a href="http://en.wikipedia.org/wiki/AT_
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Milad Rastian -
+  Copyright &copy; 2014 - Milad Rastian -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: GDB | /mili]]></title>
+  <link href="http://slashmili.org/blog/categories/gdb/atom.xml" rel="self"/>
+  <link href="http://slashmili.org/"/>
+  <updated>2014-06-16T06:57:13+08:00</updated>
+  <id>http://slashmili.org/</id>
+  <author>
+    <name><![CDATA[Milad Rastian]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Debugging Application Crash in Linux]]></title>
+    <link href="http://slashmili.org/blog/2014/06/16/debugging-application-crash-in-linux/"/>
+    <updated>2014-06-16T06:56:00+08:00</updated>
+    <id>http://slashmili.org/blog/2014/06/16/debugging-application-crash-in-linux</id>
+    <content type="html"><![CDATA[<p>Recently we had an issue with <a href="http://www.rsyslog.com/">rsyslog</a> daemon, now and then it was crashing and the only way to debug such an application (especially if it&rsquo;s not something developed by your team) is using <a href="http://en.wikipedia.org/wiki/Core_dump">core dump</a>. It&rsquo;s not kind of task that you do every day and it took me a while to search and remember how did it last time.</p>
+
+<h2>Enable Core Dump</h2>
+
+<p>The first is step is to enable the Core Dump, It&rsquo;s pretty simple. Follow <a href="http://www.unixmen.com/how-to-enable-core-dumps-in-rhel6/">this guide</a> and you can enable it in no time.</p>
+
+<blockquote><p>The core dump only will be generated for those process that started after the above changes. Don&rsquo;t forget to restart the daemon or application you have problem with.</p></blockquote>
+
+<h2>Wait for the next crash!</h2>
+
+<p>Make coffee and enjoy the life and be prepared for the next crash :)</p>
+
+<blockquote><p>We are using <a href="http://zenoss.org">Zenoss</a>, it&rsquo;s monitoring the important services like apache, rsyslog and etc. If the process is not running we get an SMS right away.</p></blockquote>
+
+<h2>Install debugging packages</h2>
+
+<p>Make sure you have <strong>gdb</strong> package installed.
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>yum install gdb</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>GDB is <a href="http://en.wikipedia.org/wiki/GNU_Debugger">GNU Debugger</a> is the standard debugger for the GNU operating system.</p>
+
+<p>If you are using Centos during the debugging you might see some messages like
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Reading symbols from /lib64/libc.so.6&hellip;(no debugging symbols found)&hellip;done.
+</span><span class='line'>Loaded symbols for /lib64/libc.so.6</span></code></pre></td></tr></table></div></figure></notextile></div>
+In order to be able to debug and see the full stacktrace you need to install <code>yum-utils</code>. Then you need to install the debugging packages for the application with <code>debuginfo-install</code>. It installs headers and debugging tools that are required to debug rsyslog daemon.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>yum install yum-utils
+</span><span class='line'>debuginfo-install  rsyslog-5.8.10-8.el6.x86_64</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h2>Read the Core dump</h2>
+
+<p>What you are going to get out of this core dump is <a href="http://en.wikipedia.org/wiki/Stack_trace">stacktrace</a> of application and the exact line of code that caused this failure which requires some programming skills. . I&rsquo;m going to explain how did I debug and read the stacktrace for rsyslog but you can follow the same steps to do it for any other application.</p>
+
+<ul>
+<li>Run <code>gdb</code> for the core dump</li>
+</ul>
+
+
+<p>You need to run the following command to start the <code>gdb</code> for that specific core dump.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gdb /sbin/rsyslogd /tmp/core-rs-action-que-6-0-0-28309-1402524331
+</span><span class='line'>GNU gdb (GDB) Red Hat Enterprise Linux (7.2-60.el6_4.1)
+</span><span class='line'>&hellip;&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>Core was generated by `/sbin/rsyslogd -i /var/run/syslogd.pid -c 5'.
+</span><span class='line'>Program terminated with signal 6, Aborted.
+</span><span class='line'> 0x00007fea37ff0925 in raise (sig=6) at ../nptl/sysdeps/unix/sysv/linux/raise.c:64
+</span><span class='line'>64  return INLINE_SYSCALL (tgkill, 3, pid, selftid, sig);
+</span><span class='line'>(gdb)</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<blockquote><p>Based on my configuration the core dump saved under <code>/tmp/core-rs-action-que-6-0-0-28309-1402524331</code>.</p></blockquote>
+
+<ul>
+<li>Now gdb prompt is ready for a command.</li>
+</ul>
+
+
+<blockquote><p>If you are new to gdb give yourself a faviour and check this <a href="http://www.cprogramming.com/gdb.html">gdb crash course</a></p></blockquote>
+
+<p>The First command that I usally run especially in this suiation is <strong>where</strong>. It spits out the stacktrace and the line of code which was running when the crash happend.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>(gdb) where
+</span><span class='line'> #0  0x00007fea37ff0925 in raise (sig=6) at ../nptl/sysdeps/unix/sysv/linux/raise.c:64
+</span><span class='line'> #1  0x00007fea37ff2105 in abort () at abort.c:92
+</span><span class='line'> #2  0x00007fea38fece17 in sigsegvHdlr (signum=6) at debug.c:830
+</span><span class='line'> #3  &lt;signal handler called>
+</span><span class='line'> #4  0x00007fea37ff0925 in raise (sig=6) at ../nptl/sysdeps/unix/sysv/linux/raise.c:64
+</span><span class='line'> #5  0x00007fea37ff2105 in abort () at abort.c:92
+</span><span class='line'> #6  0x00007fea3802e837 in __ libc _ message (do_abort=2, fmt=0x7fea38116ac0 &ldquo;&lt;strong>&lt;em> glibc detected &lt;/em>&lt;/strong> %s: %s: 0x%s ***\n&rdquo;)&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>at ../sysdeps/unix/sysv/linux/libc_fatal.c:198
+</span><span class='line'>#7  0x00007fea38034166 in malloc_printerr (action=3, str=0x7fea38114bdc "invalid fastbin entry (free)", ptr=&lt;value optimized out&gt;)
+</span><span class='line'>    at malloc.c:6332
+</span><span class='line'>    #8  0x00007fea38ffadf9 in qDelLinkedList (pThis=&lt;value optimized out&gt;) at queue.c:586
+</span><span class='line'>    #9  0x00007fea38ffb95c in DoDeleteBatchFromQStore (pThis=0x7fea398d9da0, nElem=1) at queue.c:1340
+</span><span class='line'>    #10 0x00007fea38ffe40d in DeleteBatchFromQStore (pThis=0x7fea398d9da0, pWti=&lt;value optimized out&gt;) at queue.c:1368
+</span><span class='line'>    #11 DeleteProcessedBatch (pThis=0x7fea398d9da0, pWti=&lt;value optimized out&gt;) at queue.c:1428
+</span><span class='line'>    #12 DequeueConsumableElements (pThis=0x7fea398d9da0, pWti=&lt;value optimized out&gt;) at queue.c:1457
+</span><span class='line'>    #13 DequeueConsumable (pThis=0x7fea398d9da0, pWti=&lt;value optimized out&gt;) at queue.c:1505
+</span><span class='line'>    #14 0x00007fea38ffe603 in DequeueForConsumer (pThis=&lt;value optimized out&gt;, pWti=&lt;value optimized out&gt;) at queue.c:1642
+</span><span class='line'>    #15 ConsumerReg (pThis=&lt;value optimized out&gt;, pWti=&lt;value optimized out&gt;) at queue.c:1696
+</span><span class='line'>    #16 0x00007fea38ff7126 in wtiWorker (pThis=0x7fea398da220) at wti.c:313
+</span><span class='line'>    #17 0x00007fea38ff6c1a in wtpWorker (arg=0x7fea398da220) at wtp.c:387
+</span><span class='line'>    #18 0x00007fea3897b9d1 in start_thread (arg=0x7fea17fff700) at pthread_create.c:301
+</span><span class='line'>    #19 0x00007fea380a6b6d in clone () at ../sysdeps/unix/sysv/linux/x86_64/clone.S:115
+</span><span class='line'>    (gdb) 
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>What I can read from this output is the program crashed in queue.c in function qDelLinkedList at line 586. My gut feeling is it has something to do with memory allocation. In order to follow up more deeply I had to find the right source code that matches with my application. We found out that the application crashed on calling <strong>free</strong> system call over a variable. That looks like a dead end to me! Fortunately there was a new package of <strong>libc</strong> available on Centos, we upgraded it and so for everything works smoothly.</p>
+
+<blockquote><p>These steps are just a starting point for debugging a crash. I wish you a wonderful journey!</p></blockquote>
+
+<hr />
+]]></content>
+  </entry>
+  
+</feed>
