@@ -17,6 +17,8 @@ The first is step is to enable the Core Dump, It's pretty simple. Follow [this g
 
 > The core dump only will be generated for those process that started after the above changes. Don't forget to restart the daemon or application you have problem with.
 
+<!-- more -->
+
 ##Wait for the next crash!##
 
 Make coffee and enjoy the life and be prepared for the next crash :)
