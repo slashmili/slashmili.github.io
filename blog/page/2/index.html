@@ -9,7 +9,7 @@
   <meta name="author" content="Milad Rastian">
 
   
-  <meta name="description" content="WTF !Every day you wake up, you hear new language is growing in town. after that language becomes mature, you fill unstable in your current position &hellip;">
+  <meta name="description" content="For a while that I&#8217;ve been reading Scala I find it as a strong and powerfull language which helps you to write your application perfectly, it &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,46 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/03/06/matching-list-and-map-in-scala/">Matching List and Map in Scala</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-06T00:00:00+08:00" pubdate data-updated="true">Mar 6<span>th</span>, 2011</time>
+        
+           | <a href="/blog/2011/03/06/matching-list-and-map-in-scala/#disqus_thread"
+             data-disqus-identifier="http://slashmili.org/blog/2011/03/06/matching-list-and-map-in-scala/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div class='posterous_autopost'><p>For a while that I&#8217;ve been reading Scala I find it as a strong and powerfull language which helps you to write your application perfectly, it&#8217;s not like Java that ties you to follow some&nbsp;arid rules and it&#8217;s not like PHP that let you screw in your application(of course you can handle your code in PHP). Programing in Scala is fun as programming Python and it&#8217;s powerful as Java!</p>  <p>Scala&#8217;s Match syntax is liitle like Switch-Case but you can match value, type, regex, special type of class and more.&nbsp;</p>  <p>Here is a syntax of matching for List and map in Scala, for finding these codes I search a lot to ! so I wrote these samples for future usage.&nbsp;</p>  <p><code>    val foobar = Map("foo"-&gt;"bar")    foobar&nbsp;match {&nbsp;    &nbsp;&nbsp;case map :&nbsp;&nbsp;scala.collection.Map[_, _] =&gt; println(map)    }    </code></p>  <p>&nbsp;</p>  <p><code>    val foobar = List("foo","bar")    foobar&nbsp;match {&nbsp;    &nbsp;&nbsp;case &nbsp;list:Seq[_] =&gt; println(list)    }    </code></p>  <p>&nbsp;</p>  <p>So maybe you ask that why you need to handle something like this ?</p>  <p>It&#8217;s real world senario: I wanna to pass mix value of Map and List and String to function and get JSON string from that. some thing like this :</p>  <p><code>    def toJson(ob: Any):String = {    &nbsp;&nbsp;ob match {    &nbsp;&nbsp; &nbsp;case s : String&nbsp;&nbsp; =&gt; return "\""+ s + "\""    &nbsp;&nbsp;&nbsp; case d:Double&nbsp;&nbsp; =&gt; return "\""+ d.toString + "\""    &nbsp;&nbsp;&nbsp; case map:scala.collection.Map[_, _] =&gt; return "{" + ((for((k,v) &lt;- map) yield toJson(k) + ":" + toJson(v) ).reduceLeft(_ + ", " + _) ) + "}"    &nbsp;&nbsp;&nbsp; case list @ List(_*)&nbsp;&nbsp; =&gt; return "[" + ((for (m&lt;-list) yield toJson(m)).reduceLeft(_ + ", " + _) )&nbsp;&nbsp; + "]"    }    </code></p>  <p>Mabye last code doesn&#8217;t work probably ! because I write it to just show you how you can use this feature</p></div></div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -438,46 +478,6 @@ About 3 month ago we had a problem on ChanSpy in Asterisk. sounds were out of sy
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/09/08/hylafax-t30-t1-timeout-problem/">Hylafax T.30 T1 Timeout Problem</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-09-08T00:00:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2009</time>
-        
-           | <a href="/blog/2009/09/08/hylafax-t30-t1-timeout-problem/#disqus_thread"
-             data-disqus-identifier="http://slashmili.org/blog/2009/09/08/hylafax-t30-t1-timeout-problem/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-I configured  iaxmodem and hylafax for on of our customer last week. I test FAX with sending fax internal extensions and everything worked prefect.<div>But today they called me and said they have a problem in sending and receiving FAX ! Again troubleshooting !</div><div><br /></div><div>I checked out log file log file was :</div><div><span class="Apple-style-span" style="font-weight: bold;">SEND FAILED: JOB 4 DEST 88276650 ERR [126] No receiver protocol (T.30 T1 timeout)</span><br /></div><div><br /></div><div>I googled about this problem and there was no direct answer to this. someone said there is a problem on connection your device and you have some thing like &#8220;UDP being a lossy medium&#8221;.</div><div><br /></div><div>Anyway after question from friends problem solved with changing <a href="http://www.quintum.com/">Tenor</a> configure:</div><div><br /><code>#config<br />#iprg<br />#set FaxRelay G.711 Mu-Law</code></div><div><br /></div>If you have a same problem set FaxRelay to Mu-Law maybe cause to solve yours.<br /><div><br /></div></div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -500,6 +500,10 @@ I configured  iaxmodem and hylafax for on of our customer last week. I test FAX
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/11/23/dependency-manager-for-php/">Dependency Manager for PHP</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/16/debugging-application-crash-in-linux/">Debugging Application Crash in Linux</a>
       </li>
     
@@ -513,10 +517,6 @@ I configured  iaxmodem and hylafax for on of our customer last week. I test FAX
     
       <li class="post">
         <a href="/blog/2012/03/16/online-course-with-coursera/">Online Course With Coursera</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/03/16/monitor-zenoss-with-chrome-plugin/">Monitor Zenoss With Chrome&#8217;s Plugin</a>
       </li>
     
   </ul>

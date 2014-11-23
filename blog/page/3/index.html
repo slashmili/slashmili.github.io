@@ -9,7 +9,7 @@
   <meta name="author" content="Milad Rastian">
 
   
-  <meta name="description" content="In a project we have servers which were in different cities, and they connected to each other with Radio connection.We want to setup DNS server in &hellip;">
+  <meta name="description" content="I configured  iaxmodem and hylafax for on of our customer last week. I test FAX with sending fax internal extensions and everything worked prefect. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,46 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/09/08/hylafax-t30-t1-timeout-problem/">Hylafax T.30 T1 Timeout Problem</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-09-08T00:00:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2009</time>
+        
+           | <a href="/blog/2009/09/08/hylafax-t30-t1-timeout-problem/#disqus_thread"
+             data-disqus-identifier="http://slashmili.org/blog/2009/09/08/hylafax-t30-t1-timeout-problem/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+I configured  iaxmodem and hylafax for on of our customer last week. I test FAX with sending fax internal extensions and everything worked prefect.<div>But today they called me and said they have a problem in sending and receiving FAX ! Again troubleshooting !</div><div><br /></div><div>I checked out log file log file was :</div><div><span class="Apple-style-span" style="font-weight: bold;">SEND FAILED: JOB 4 DEST 88276650 ERR [126] No receiver protocol (T.30 T1 timeout)</span><br /></div><div><br /></div><div>I googled about this problem and there was no direct answer to this. someone said there is a problem on connection your device and you have some thing like &#8220;UDP being a lossy medium&#8221;.</div><div><br /></div><div>Anyway after question from friends problem solved with changing <a href="http://www.quintum.com/">Tenor</a> configure:</div><div><br /><code>#config<br />#iprg<br />#set FaxRelay G.711 Mu-Law</code></div><div><br /></div>If you have a same problem set FaxRelay to Mu-Law maybe cause to solve yours.<br /><div><br /></div></div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -438,46 +478,6 @@ I always had a problem with iptables !<br />For this reason about 3 years ago I 
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2007/10/28/save-your-dreams-with-dream-demon/">Save Your Dreams With Dream Demon !</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-10-28T00:00:00+08:00" pubdate data-updated="true">Oct 28<span>th</span>, 2007</time>
-        
-           | <a href="/blog/2007/10/28/save-your-dreams-with-dream-demon/#disqus_thread"
-             data-disqus-identifier="http://slashmili.org/blog/2007/10/28/save-your-dreams-with-dream-demon/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-When I wake up today as my usual task I do in my computer, try to find logs in my brain !!!<br />Logs about my dreams saw last night !<br />I know, I will be mad soon<br />Anyway if you want run dream demon like me, run this code in your brain when you want sleep :<br /><pre class="code" id="codemain" style="margin: 6px;"><span class="keyword">import</span> dream<br /><span class="keyword">import</span> time<br /><span class="keyword">import</span> threading&nbsp;<br /><span class="keyword">class </span>Milad ( threading.Thread ):<br />        <span class="keyword">def</span> run ( self ):<br />                <span class="keyword">try</span> :<br />                        <span class="comment">#don't fear ! if you want wake up just want <br />                        #after that time.Wakeup exception will be happen</span><br />                        time.sleep(dream.ONE_YEAR)<br />                <span class="keyword">except</span> dream.StartStory story:<br />                        f=open(<span class="literal">"dreams.txt"</span>)<br />                        f.write(<span class="literal">"%s\n"</span>%(story))<br />                        f.close()<br />                        self.run()<br />                <span class="keyword">except</span> time.Wakeup :<br />                        <span class="keyword">pass</span>&nbsp;<br />Milad().start()</pre>of course don&#8217;t forget to change class name with your name, else I don&#8217;t know it would work for you or not !</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -500,6 +500,10 @@ When I wake up today as my usual task I do in my computer, try to find logs in m
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/11/23/dependency-manager-for-php/">Dependency Manager for PHP</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/16/debugging-application-crash-in-linux/">Debugging Application Crash in Linux</a>
       </li>
     
@@ -513,10 +517,6 @@ When I wake up today as my usual task I do in my computer, try to find logs in m
     
       <li class="post">
         <a href="/blog/2012/03/16/online-course-with-coursera/">Online Course With Coursera</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/03/16/monitor-zenoss-with-chrome-plugin/">Monitor Zenoss With Chrome&#8217;s Plugin</a>
       </li>
     
   </ul>

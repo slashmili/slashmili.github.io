@@ -4,7 +4,7 @@
   <title><![CDATA[/mili]]></title>
   <link href="http://slashmili.org/atom.xml" rel="self"/>
   <link href="http://slashmili.org/"/>
-  <updated>2014-06-30T23:48:50+08:00</updated>
+  <updated>2014-11-23T21:31:50+08:00</updated>
   <id>http://slashmili.org/</id>
   <author>
     <name><![CDATA[Milad Rastian]]></name>
@@ -12,6 +12,102 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Dependency Manager for PHP]]></title>
+    <link href="http://slashmili.org/blog/2014/11/23/dependency-manager-for-php/"/>
+    <updated>2014-11-23T20:14:00+08:00</updated>
+    <id>http://slashmili.org/blog/2014/11/23/dependency-manager-for-php</id>
+    <content type="html"><![CDATA[<h2>What is dependency manager?</h2>
+
+<p>Let&rsquo;s say in your application you need to send a tweet to your Twitter account, what would you do? There are a many <a href="https://dev.twitter.com/overview/api/twitter-libraries#php">PHP Twitter client</a> out there.</p>
+
+<p>The quick way is just download one of them and put all the files in your application root. Well not a smart choice! You are adding someone code to your code base you need to maintain it, update it and so forth. What if there is a way that you say I want Library XYZ in my project version 2.0 and everything would be ready magically!</p>
+
+<p>Say welcome to <a href="https://getcomposer.org/">Composer</a>.</p>
+
+<!-- more -->
+
+
+<h2>What is composer?</h2>
+
+<p>Composer is a tool that helps you to manage your PHP project dependency and setup and install PHP library that other developers shared in <a href="https://packagist.org/">https://packagist.org/</a></p>
+
+<h2>How to use it</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ curl -sS https://getcomposer.org/installer | php</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And let&rsquo;s say I pick <a href="https://packagist.org/packages/jublonet/codebird-php">codebird-php</a> to talk to Twitter API. I&rsquo;d go to the <a href="https://packagist.org/packages/jublonet/codebird-php">library&rsquo;s page in packagist</a> and check the available version. Right now version <em>2.6.0</em> is the latest. I create a file named <em>composer.json</em> in my root of project:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{
+</span><span class='line'>    "require": {
+</span><span class='line'>        "jublonet/codebird-php": "2.6.0"
+</span><span class='line'>    }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ php composer.phar install
+</span><span class='line'>Loading composer repositories with package information
+</span><span class='line'>Installing dependencies (including require-dev)
+</span><span class='line'>  - Installing composer/installers (v1.0.18)
+</span><span class='line'>    Downloading: 100%
+</span><span class='line'>
+</span><span class='line'>  - Installing jublonet/codebird-php (2.6.0)
+</span><span class='line'>    Downloading: 100%
+</span><span class='line'>
+</span><span class='line'>Writing lock file
+</span><span class='line'>Generating autoload files</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And that&rsquo;s it! If you look at the directory that composer.json is saved, you&rsquo;ll find out that a new file <em>composer.lock</em> and a new directory <em>vendor</em> are created after you ran the above command.</p>
+
+<p>To use the new library you need to include <em>vendor/autoload.php</em> to your PHP files:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>//app.php
+</span><span class='line'>require_once __DIR__ . 'vendor/autoload.php'
+</span><span class='line'>$cb = Codebird\Codebird::getInstance();
+</span><span class='line'>
+</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you can see you don&rsquo;t need to worry about place that the library is downloaded all you need to do is just include <em>vendor/autoload.php</em> and use the libraries in your application.</p>
+
+<h2>Should I use it?</h2>
+
+<p>Definitely! Tools for managing dependencies are de facto in writing and building modern applications.</p>
+
+<p>Other languages Like Perl, Python, Ruby, Java, JavaScript they all have their own tools to manage dependencies for their program and it&rsquo;s proven that improves productivity and helps to build reusable software.</p>
+
+<h2>What&rsquo;s next?</h2>
+
+<p>Composer is a powerful tool and it&rsquo;s easy to mix up the idea and miss use. In the next post I&rsquo;ll talk about the best practices in using composer.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Debugging Application Crash in Linux]]></title>
@@ -351,16 +447,6 @@ About 2 months a ago, one day server of our customer decided to response empty s
     <id>http://slashmili.org/blog/2009/09/10/asterisks-chanspy-is-out-of-sync</id>
     <content type="html"><![CDATA[<div class='post'>
 About 3 month ago we had a problem on ChanSpy in Asterisk. sounds were out of sync.<div>We do everything ! changing asterisk version, compiling different version of asterisk ! </div><div>Users of that customer use EyeBeam as SIP Client, in asterisk bug tracker someone wrote there is a problem with onboard sound cards. so that we take a PAP2 and test ChanSpy with ordinary telephone and Bingoo ! everything was sync !</div><div><br /></div><div>We did update  EyeBeams and problem solved.</div><div><br /></div><div>These days I have problem like before, this time problem is files which recorded by MixMonitor are out of sync. tomorrow I am going to take PAP2 to that location and test files. I hope problem solves by changing EyeBeam or even add PCI sound card.</div><div><br /></div><div>I will update this post when get answer.<span style="font-weight: bold;"><br />Update<span style="font-weight: bold;"> : </span></span><span><br />problem solved by updating asterisk to 1.4.27.3</span><span style="font-weight: bold;"><span style="font-weight: bold;"></span> !<br /><span style="font-weight: bold;"><span style="font-weight: bold;"><span style="font-weight: bold;"></span></span></span><br /></span></div></div>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Hylafax T.30 T1 Timeout Problem]]></title>
-    <link href="http://slashmili.org/blog/2009/09/08/hylafax-t30-t1-timeout-problem/"/>
-    <updated>2009-09-08T00:00:00+08:00</updated>
-    <id>http://slashmili.org/blog/2009/09/08/hylafax-t30-t1-timeout-problem</id>
-    <content type="html"><![CDATA[<div class='post'>
-I configured  iaxmodem and hylafax for on of our customer last week. I test FAX with sending fax internal extensions and everything worked prefect.<div>But today they called me and said they have a problem in sending and receiving FAX ! Again troubleshooting !</div><div><br /></div><div>I checked out log file log file was :</div><div><span class="Apple-style-span" style="font-weight: bold;">SEND FAILED: JOB 4 DEST 88276650 ERR [126] No receiver protocol (T.30 T1 timeout)</span><br /></div><div><br /></div><div>I googled about this problem and there was no direct answer to this. someone said there is a problem on connection your device and you have some thing like &#8220;UDP being a lossy medium&#8221;.</div><div><br /></div><div>Anyway after question from friends problem solved with changing <a href="http://www.quintum.com/">Tenor</a> configure:</div><div><br /><code>#config<br />#iprg<br />#set FaxRelay G.711 Mu-Law</code></div><div><br /></div>If you have a same problem set FaxRelay to Mu-Law maybe cause to solve yours.<br /><div><br /></div></div>
 ]]></content>
   </entry>
   

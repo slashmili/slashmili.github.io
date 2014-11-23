@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: php | /mili]]></title>
+  <link href="http://slashmili.org/blog/categories/php/atom.xml" rel="self"/>
+  <link href="http://slashmili.org/"/>
+  <updated>2014-11-23T21:31:50+08:00</updated>
+  <id>http://slashmili.org/</id>
+  <author>
+    <name><![CDATA[Milad Rastian]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Dependency Manager for PHP]]></title>
+    <link href="http://slashmili.org/blog/2014/11/23/dependency-manager-for-php/"/>
+    <updated>2014-11-23T20:14:00+08:00</updated>
+    <id>http://slashmili.org/blog/2014/11/23/dependency-manager-for-php</id>
+    <content type="html"><![CDATA[<h2>What is dependency manager?</h2>
+
+<p>Let&rsquo;s say in your application you need to send a tweet to your Twitter account, what would you do? There are a many <a href="https://dev.twitter.com/overview/api/twitter-libraries#php">PHP Twitter client</a> out there.</p>
+
+<p>The quick way is just download one of them and put all the files in your application root. Well not a smart choice! You are adding someone code to your code base you need to maintain it, update it and so forth. What if there is a way that you say I want Library XYZ in my project version 2.0 and everything would be ready magically!</p>
+
+<p>Say welcome to <a href="https://getcomposer.org/">Composer</a>.</p>
+
+<!-- more -->
+
+
+<h2>What is composer?</h2>
+
+<p>Composer is a tool that helps you to manage your PHP project dependency and setup and install PHP library that other developers shared in <a href="https://packagist.org/">https://packagist.org/</a></p>
+
+<h2>How to use it</h2>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ curl -sS &lt;a href="https://getcomposer.org/installer">https://getcomposer.org/installer&lt;/a> | php</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>And let&rsquo;s say I pick <a href="https://packagist.org/packages/jublonet/codebird-php">codebird-php</a> to talk to Twitter API. I&rsquo;d go to the <a href="https://packagist.org/packages/jublonet/codebird-php">library&rsquo;s page in packagist</a> and check the available version. Right now version <em>2.6.0</em> is the latest. I create a file named <em>composer.json</em> in my root of project:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>"require": {
+</span><span class='line'>    "jublonet/codebird-php": "2.6.0"
+</span><span class='line'>}
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>}</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ php composer.phar install
+</span><span class='line'>Loading composer repositories with package information
+</span><span class='line'>Installing dependencies (including require-dev)
+</span><span class='line'>  &ndash; Installing composer/installers (v1.0.18)&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>Downloading: 100%
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;ul>
+</span><span class='line'>&lt;li>Installing jublonet/codebird-php (2.6.0)
+</span><span class='line'>Downloading: 100%&lt;/li>
+</span><span class='line'>&lt;/ul>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>&lt;p>Writing lock file
+</span><span class='line'>Generating autoload files</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>And that&rsquo;s it! If you look at the directory that composer.json is saved, you&rsquo;ll find out that a new file <em>composer.lock</em> and a new directory <em>vendor</em> are created after you ran the above command.</p>
+
+<p>To use the new library you need to include <em>vendor/autoload.php</em> to your PHP files:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>//app.php
+</span><span class='line'>require_once &lt;strong>DIR&lt;/strong> . &lsquo;vendor/autoload.php&rsquo;
+</span><span class='line'>$cb = Codebird\Codebird::getInstance();&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>&hellip;</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>As you can see you don&rsquo;t need to worry about place that the library is downloaded all you need to do is just include <em>vendor/autoload.php</em> and use the libraries in your application.</p>
+
+<h2>Should I use it?</h2>
+
+<p>Definitely! Tools for managing dependencies are de facto in writing and building modern applications.</p>
+
+<p>Other languages Like Perl, Python, Ruby, Java, JavaScript they all have their own tools to manage dependencies for their program and it&rsquo;s proven that improves productivity and helps to build reusable software.</p>
+
+<h2>What&rsquo;s next?</h2>
+
+<p>Composer is a powerful tool and it&rsquo;s easy to mix up the idea and miss use. In the next post I&rsquo;ll talk about the best practices in using composer.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -9,7 +9,7 @@
   <meta name="author" content="Milad Rastian">
 
   
-  <meta name="description" content="Recently we had an issue with rsyslog daemon, now and then it was crashing and the only way to debug such an application (especially if it&rsquo;s &hellip;">
+  <meta name="description" content="What is dependency manager? Let&rsquo;s say in your application you need to send a tweet to your Twitter account, what would you do? There are a many &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/23/dependency-manager-for-php/">Dependency Manager for PHP</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-23T20:14:00+08:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2014</time>
+        
+           | <a href="/blog/2014/11/23/dependency-manager-for-php/#disqus_thread"
+             data-disqus-identifier="http://slashmili.org/blog/2014/11/23/dependency-manager-for-php/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>What is dependency manager?</h2>
+
+<p>Let&rsquo;s say in your application you need to send a tweet to your Twitter account, what would you do? There are a many <a href="https://dev.twitter.com/overview/api/twitter-libraries#php">PHP Twitter client</a> out there.</p>
+
+<p>The quick way is just download one of them and put all the files in your application root. Well not a smart choice! You are adding someone code to your code base you need to maintain it, update it and so forth. What if there is a way that you say I want Library XYZ in my project version 2.0 and everything would be ready magically!</p>
+
+<p>Say welcome to <a href="https://getcomposer.org/">Composer</a>.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/11/23/dependency-manager-for-php/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -458,46 +508,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/03/06/matching-list-and-map-in-scala/">Matching List and Map in Scala</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-03-06T00:00:00+08:00" pubdate data-updated="true">Mar 6<span>th</span>, 2011</time>
-        
-           | <a href="/blog/2011/03/06/matching-list-and-map-in-scala/#disqus_thread"
-             data-disqus-identifier="http://slashmili.org/blog/2011/03/06/matching-list-and-map-in-scala/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<div class='posterous_autopost'><p>For a while that I&#8217;ve been reading Scala I find it as a strong and powerfull language which helps you to write your application perfectly, it&#8217;s not like Java that ties you to follow some&nbsp;arid rules and it&#8217;s not like PHP that let you screw in your application(of course you can handle your code in PHP). Programing in Scala is fun as programming Python and it&#8217;s powerful as Java!</p>  <p>Scala&#8217;s Match syntax is liitle like Switch-Case but you can match value, type, regex, special type of class and more.&nbsp;</p>  <p>Here is a syntax of matching for List and map in Scala, for finding these codes I search a lot to ! so I wrote these samples for future usage.&nbsp;</p>  <p><code>    val foobar = Map("foo"-&gt;"bar")    foobar&nbsp;match {&nbsp;    &nbsp;&nbsp;case map :&nbsp;&nbsp;scala.collection.Map[_, _] =&gt; println(map)    }    </code></p>  <p>&nbsp;</p>  <p><code>    val foobar = List("foo","bar")    foobar&nbsp;match {&nbsp;    &nbsp;&nbsp;case &nbsp;list:Seq[_] =&gt; println(list)    }    </code></p>  <p>&nbsp;</p>  <p>So maybe you ask that why you need to handle something like this ?</p>  <p>It&#8217;s real world senario: I wanna to pass mix value of Map and List and String to function and get JSON string from that. some thing like this :</p>  <p><code>    def toJson(ob: Any):String = {    &nbsp;&nbsp;ob match {    &nbsp;&nbsp; &nbsp;case s : String&nbsp;&nbsp; =&gt; return "\""+ s + "\""    &nbsp;&nbsp;&nbsp; case d:Double&nbsp;&nbsp; =&gt; return "\""+ d.toString + "\""    &nbsp;&nbsp;&nbsp; case map:scala.collection.Map[_, _] =&gt; return "{" + ((for((k,v) &lt;- map) yield toJson(k) + ":" + toJson(v) ).reduceLeft(_ + ", " + _) ) + "}"    &nbsp;&nbsp;&nbsp; case list @ List(_*)&nbsp;&nbsp; =&gt; return "[" + ((for (m&lt;-list) yield toJson(m)).reduceLeft(_ + ", " + _) )&nbsp;&nbsp; + "]"    }    </code></p>  <p>Mabye last code doesn&#8217;t work probably ! because I write it to just show you how you can use this feature</p></div></div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -518,6 +528,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/11/23/dependency-manager-for-php/">Dependency Manager for PHP</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/16/debugging-application-crash-in-linux/">Debugging Application Crash in Linux</a>
       </li>
     
@@ -531,10 +545,6 @@
     
       <li class="post">
         <a href="/blog/2012/03/16/online-course-with-coursera/">Online Course With Coursera</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/03/16/monitor-zenoss-with-chrome-plugin/">Monitor Zenoss With Chrome&#8217;s Plugin</a>
       </li>
     
   </ul>

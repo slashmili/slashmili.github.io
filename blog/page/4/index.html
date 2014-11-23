@@ -9,7 +9,7 @@
   <meta name="author" content="Milad Rastian">
 
   
-  <meta name="description" content="Tonight suddenly I interested in using AT Command on Cell Phone From Python.It was so fantastic for me, I can connect to my Cell Phone. really &hellip;">
+  <meta name="description" content="When I wake up today as my usual task I do in my computer, try to find logs in my brain !!!Logs about my dreams saw last night !I know, I will be &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,46 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2007/10/28/save-your-dreams-with-dream-demon/">Save Your Dreams With Dream Demon !</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-10-28T00:00:00+08:00" pubdate data-updated="true">Oct 28<span>th</span>, 2007</time>
+        
+           | <a href="/blog/2007/10/28/save-your-dreams-with-dream-demon/#disqus_thread"
+             data-disqus-identifier="http://slashmili.org/blog/2007/10/28/save-your-dreams-with-dream-demon/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+When I wake up today as my usual task I do in my computer, try to find logs in my brain !!!<br />Logs about my dreams saw last night !<br />I know, I will be mad soon<br />Anyway if you want run dream demon like me, run this code in your brain when you want sleep :<br /><pre class="code" id="codemain" style="margin: 6px;"><span class="keyword">import</span> dream<br /><span class="keyword">import</span> time<br /><span class="keyword">import</span> threading&nbsp;<br /><span class="keyword">class </span>Milad ( threading.Thread ):<br />        <span class="keyword">def</span> run ( self ):<br />                <span class="keyword">try</span> :<br />                        <span class="comment">#don't fear ! if you want wake up just want <br />                        #after that time.Wakeup exception will be happen</span><br />                        time.sleep(dream.ONE_YEAR)<br />                <span class="keyword">except</span> dream.StartStory story:<br />                        f=open(<span class="literal">"dreams.txt"</span>)<br />                        f.write(<span class="literal">"%s\n"</span>%(story))<br />                        f.close()<br />                        self.run()<br />                <span class="keyword">except</span> time.Wakeup :<br />                        <span class="keyword">pass</span>&nbsp;<br />Milad().start()</pre>of course don&#8217;t forget to change class name with your name, else I don&#8217;t know it would work for you or not !</div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -178,6 +218,10 @@ These days I am trying to use gksu from python but this module has no documentio
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/11/23/dependency-manager-for-php/">Dependency Manager for PHP</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/16/debugging-application-crash-in-linux/">Debugging Application Crash in Linux</a>
       </li>
     
@@ -191,10 +235,6 @@ These days I am trying to use gksu from python but this module has no documentio
     
       <li class="post">
         <a href="/blog/2012/03/16/online-course-with-coursera/">Online Course With Coursera</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/03/16/monitor-zenoss-with-chrome-plugin/">Monitor Zenoss With Chrome&#8217;s Plugin</a>
       </li>
     
   </ul>
