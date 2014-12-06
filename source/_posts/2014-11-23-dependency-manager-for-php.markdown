@@ -64,7 +64,7 @@ To use the new library you need to include _vendor/autoload.php_ to your PHP fil
 
 {% codeblock %}
 //app.php
-require_once __DIR__ . 'vendor/autoload.php'
+require_once __DIR__ . '/vendor/autoload.php'
 $cb = Codebird\Codebird::getInstance();
 
 ...
