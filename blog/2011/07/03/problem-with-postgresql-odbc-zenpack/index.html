@@ -7,25 +7,36 @@
   <meta charset="utf-8">
   <title>Problem with PostgreSQL ODBC ZenPack - /mili</title>
   <meta name="author" content="Milad Rastian">
+  <link rel="author" href="humans.txt">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
+  
+    
   
   <meta name="description" content="In my new job(if after 8 months you can count it as new!) I am responsible to maintain Zenoss and some week I am on call for Zenoss&#8217;s Alarm. &hellip;">
   
-
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://slashmili.org/blog/2011/07/03/problem-with-postgresql-odbc-zenpack">
+  <link rel="canonical" href="http://slashmili.org/blog/2011/07/03/problem-with-postgresql-odbc-zenpack/">
   <link href="/favicon.png" rel="icon">
+  <link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="/mili" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <meta name="og:type" content="website" />
+  <meta name="og:site_name" content="/mili" />
+  <meta name="og:title" content="Problem with PostgreSQL ODBC ZenPack" />
+  <meta name="og:description" content="In my new job(if after 8 months you can count it as new!) I am responsible to maintain Zenoss and some week I am on call for Zenoss&#8217;s Alarm. &hellip;" />
+  <meta name="og:url" content="http://slashmili.org/blog/2011/07/03/problem-with-postgresql-odbc-zenpack/"/>
+  <meta name="url" content="http://slashmili.org/blog/2011/07/03/problem-with-postgresql-odbc-zenpack/">
+  
+  <meta name="subject" content=""/>
+  <meta name="category" content=""/>
+  
+  <meta name="distribution" content="global">
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -47,44 +58,53 @@
 </head>
 
 <body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">/mili</a></h1>
-  
-    <h2>Lets try the blogging again!</h2>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:slashmili.org" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
-
+  <nav role="navigation"><div class="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="/">/mili</a>
+    <ul class="nav">
+      <li><a href="/">Home</a></li>
+      <li><a href="/blog/archives">Archives</a></li>
+    </ul>
+    <ul class="nav" data-subscription="rss">
+      <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+      
+    </ul>
+      
+    <form class="navbar-form" action="http://google.com/search" method="get">
+      <fieldset role="search">
+        <input type="hidden" name="q" value="site:slashmili.org" />
+        <input class="span2" type="text" name="q" results="0" placeholder="Search"/>
+      </fieldset>
+    </form>
+      
+    
+  </div>
+</div>
 </nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
-  
+  <div class="wrapper_single">
+    <div class="container">
+      <div class="row">
+        <article class="span8 offset2" role="article">
+          <div class="article-format">
+
   <header>
     
-      <h1 class="entry-title">Problem With PostgreSQL ODBC ZenPack</h1>
+      
+        <h1 class="entry-title">Problem With PostgreSQL ODBC ZenPack</h1>
+      
     
     
       <p class="meta">
         
+  
+
+
+  
+    <span class="byline author vcard">by <span class="fn">Milad Rastian</span></span>
+  
+
+ - 
+        
 
 
 
@@ -96,19 +116,25 @@
   
 
 
-<time datetime="2011-07-03T00:00:00+08:00" pubdate data-updated="true">Jul 3<span>rd</span>, 2011</time>
+<time datetime="2011-07-03T00:00:00+08:00" pubdate data-updated="true">Jul 3<span>rd</span>, 2011</time> - 
         
-           | <a href="#disqus_thread"
-             data-disqus-identifier="http://slashmili.org">Comments</a>
+
+
+        
+         | <a href="#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><div class='post'>
+  <div class="entry-content"><div class='post'>
 <div class="posterous_autopost"><p>In my new job(if after 8 months you can count it as new!) I am responsible to maintain <a href="http://zenoss.org/" target="_blank">Zenoss</a> and some week I am on call for Zenoss&#8217;s Alarm.</p>  <p>One of the strangest problem that we had was about <a href="http://community.zenoss.org/docs/DOC-3497">PostgreSQL ODBC Database Monitor</a> package. suddenly zenperfsql stopped without any log.</p>  <p>I tried to run zenperfsql in debug mode and I hoped that I would fix the problem. but after the daemon died again the error that I saw was : </p>  <p><code>python: pthread_mutex_lock.c:62: __pthread_mutex_lock: Assertion `mutex-&gt;__data.__owner == 0' failed.</code></p>  <p>I never thought that I would face to python&#8217;s thread stuff ! as far as I knew Zenoss use <a href="http://twistedmatrix.com/">Twisted</a> framework and this error just happened for sql daemon so I reviewed the way that we had installed the packahe</p>  <p>For using this package you need to follow these steps </p>  <p><code>    /usr/local/zenoss/python/bin/easy_install pyodbc    apt-get install odbc-postgresq    apt-get install unixodbc-dev    </code></p>  <p>And edit /etc/odbcinst.ini, here is the tricky part, if you follow unixodbc document, it recommends you to config like :</p>  <p><code>    [PostgreSQL] Description     = PostgreSQL ODBC driver (Unicode version) Driver          = /usr/lib/odbc/psqlodbca.so Setup           = /usr/lib/odbc/libodbcpsqlS.so    </code></p>  <p>But you need to add an other line which is specifying number of Threads </p>  <p>  </p><p><code>    [PostgreSQL] Description     = PostgreSQL ODBC driver (Unicode version) Driver          = /usr/lib/odbc/psqlodbca.so Setup           = /usr/lib/odbc/libodbcpsqlS.so Threading = 2    </code></p>  <p> </p>  <p>After adding Threading line I never face that problem, I dunno why Twisted which is built as asynchronous framework can not handle this and we need to limit ODBC&#8217;s Thread.</p>  <p> </p>  <p><strong>UPDATE :</strong></p>  <p>I found another blog that he faced same problem and he explains the reason (<a href="http://hynek.me/blog/2011/04/twisted-sybase/">see more</a>)</p>  <p>  </p></div></div>
 </div>
+
+
+
+
 
 
   <footer>
@@ -116,8 +142,12 @@
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Milad Rastian</span></span>
 
+  
+    <span class="byline author vcard">by <span class="fn">Milad Rastian</span></span>
+  
+
+ - 
       
 
 
@@ -130,7 +160,7 @@
   
 
 
-<time datetime="2011-07-03T00:00:00+08:00" pubdate data-updated="true">Jul 3<span>rd</span>, 2011</time>
+<time datetime="2011-07-03T00:00:00+08:00" pubdate data-updated="true">Jul 3<span>rd</span>, 2011</time> - 
       
 
 
@@ -147,118 +177,143 @@
 </div>
 
     
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2011/03/06/when-you-are-not-free-even-to-do-rm-rf/" title="Previous Post: When you are not free even to do rm -rf / !">&laquo; When you are not free even to do rm -rf / !</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2011/07/03/zendroid-android-application-to-monitor/" title="Next Post: Zendroid - Android Application to Monitor Zenoss's Events">Zendroid - Android Application to Monitor Zenoss's Events &raquo;</a>
-      
-    </p>
+    
+      <a class="pull-left" href="/blog/2011/03/06/when-you-are-not-free-even-to-do-rm-rf/" title="Previous Post: When you are not free even to do rm -rf / !">&laquo; When you are not free even to do rm -rf / !</a>
+    
+    
+      <a class="pull-right" href="/blog/2011/07/03/zendroid-android-application-to-monitor/" title="Next Post: Zendroid - Android Application to Monitor Zenoss's Events">Zendroid - Android Application to Monitor Zenoss's Events &raquo;</a>
+    
   </footer>
-</article>
-
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  </section>
 
 </div>
 
-<aside class="sidebar">
-  
-    <section>
-  <h1>About Me</h1>
-  <p>You've reached Milad!<br/ >I'm software enthusiast and interested in free software culture. You might also find me in DevOps jobs as well!</p>
-  <p>You may find more interesting stuff on my <a href="http://linkedin.com/in/miladrastian">Linkedin</a>, <a href="https://github.com/slashmili">Github</a> or <a href="https://twitter.com/slashmili">Twitter</a> pages.</p>
-</section>
-<section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2014/11/23/dependency-manager-for-php/">Dependency Manager for PHP</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/06/16/debugging-application-crash-in-linux/">Debugging Application Crash in Linux</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/11/17/unleash-the-daemons/">Unleash the Daemons</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/08/11/monitor-your-apps-behaviour/">Monitor Your App's Behaviour</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/03/16/online-course-with-coursera/">Online Course With Coursera</a>
-      </li>
-    
-  </ul>
-</section>
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
-  </ul>
-  
-  <a href="https://github.com/slashmili">@slashmili</a> on GitHub
-  
-  <script type="text/javascript">
-    $(document).ready(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'slashmili',
-            count: 0,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-
-
-
-  
-</aside>
-
-
+          
+            <div class="article-format">
+              <h1>Comments</h1>
+              <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            </div>
+          
+        </article>
+      </div>
     </div>
   </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - Milad Rastian -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  <div id="footer-widgets">
+  <div class="container">
+    <div class="row">
+  <div class="span3">
+    <h2>recent posts</h2>
+    <ul class="recent_posts">
+      
+        <li>
+          <a href="/blog/2014/11/23/dependency-manager-for-php/">Dependency Manager for PHP</a>
+        </li>
+      
+        <li>
+          <a href="/blog/2014/06/16/debugging-application-crash-in-linux/">Debugging Application Crash in Linux</a>
+        </li>
+      
+        <li>
+          <a href="/blog/2013/11/17/unleash-the-daemons/">Unleash The Daemons</a>
+        </li>
+      
+        <li>
+          <a href="/blog/2013/08/11/monitor-your-apps-behaviour/">Monitor your app's behaviour</a>
+        </li>
+      
+        <li>
+          <a href="/blog/2012/03/16/online-course-with-coursera/">Online Course with Coursera</a>
+        </li>
+      
+    </ul>
+    <h2><a href="/blog/archives">archives</a></h2>
+  </div>
+  <div class="span3">
+    
+
+  </div>
+  <div class="span4">
+    
+<h2>twitter</h2>
+<a href="https://twitter.com/slashmili" class="twitter-follow-button" data-show-count="true" data-lang="en">Follow @slashmili</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<div class="tweet" data-twitter-user="slashmili">
+</div>
+
+
+  </div>
+  <div class="span2">
+    <h2>found on</h2>
+
+<a href="https://github.com/slashmili/" rel="tooltip" title="Github"><img class="social_icon" title="Github" alt="github icon" src="/images/glyphicons_381_github.png"></a>
+
+
+
+
+
+
+
+<a href="http://twitter.com/slashmili" rel="tooltip" title="Twitter"><img class="social_icon" title="Twitter" alt="Twitter icon" src="/images/glyphicons_391_twitter_t.png"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+</div>
+
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-left">
+  <a href="/">/mili</a>
+  - Copyright &copy; 2014 - Milad Rastian
+</p>
+<p class="pull-right">
+  <span>Powered by <a href="http://octopress.org/">Octopress</a>.</span>
+  
+    <span>Designed by <a href="http://www.AdrianArtiles.com">Adrian Artiles</a>.</span>
+  
 </p>
 
+  </div>
 </footer>
-  
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+<script>window.jQuery || document.write('<script src="/javascripts/libs/jquery-1.7.2.min.js" type="text/javascript"><\/script>')</script>
+<script src="/javascripts/libs/bootstrap.min.js" type="text/javascript"></script>
+<script src="/javascripts/jquery.tweet.js" type="text/javascript"></script>
+<script src="/javascripts/jquery.instagram.js" type="text/javascript"></script>
+<script src="/javascripts/libs/jquery.masonry.min.js" type="text/javascript"></script>
+<script src="/javascripts/custom.js" type="text/javascript"></script>
+
 
 <script type="text/javascript">
       var disqus_shortname = 'militheblog';
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://slashmili.org/blog/2011/07/03/problem-with-postgresql-odbc-zenpack/';
-        var disqus_url = 'http://slashmili.org/blog/2011/07/03/problem-with-postgresql-odbc-zenpack/';
+        var disqus_identifier = 'http://slashmili.org%2Fblog%2F2011%2F07%2F03%2Fproblem-with-postgresql-odbc-zenpack%2F';
+        var disqus_url = 'http://slashmili.org%2Fblog%2F2011%2F07%2F03%2Fproblem-with-postgresql-odbc-zenpack%2F';
         var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     }());
 </script>
@@ -269,7 +324,7 @@
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id; js.async = true;
+  js = d.createElement(s); js.id = id;
   js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
@@ -283,11 +338,10 @@
       var twitterWidgets = document.createElement('script');
       twitterWidgets.type = 'text/javascript';
       twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>
-
 
 
 
