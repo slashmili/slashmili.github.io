@@ -10,7 +10,7 @@ categories:
 
 ##What is dependency manager?
 
-Let's say in your application you need to send a tweet to your Twitter account, what would you do? There are a many [PHP Twitter client](https://dev.twitter.com/overview/api/twitter-libraries#php) out there.
+Let's say in your application you need to send a tweet from your Twitter account, what would you do? There are a many [PHP Twitter client](https://dev.twitter.com/overview/api/twitter-libraries#php) out there.
 
 The quick way is just download one of them and put all the files in your application root. Well not a smart choice! You are adding someone code to your code base you need to maintain it, update it and so forth. What if there is a way that you say I want Library XYZ in my project version 2.0 and everything would be ready magically!
 
