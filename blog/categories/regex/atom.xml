@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: regex | /mili]]></title>
+  <link href="http://slashmili.org/blog/categories/regex/atom.xml" rel="self"/>
+  <link href="http://slashmili.org/"/>
+  <updated>2014-12-07T02:44:15+08:00</updated>
+  <id>http://slashmili.org/</id>
+  <author>
+    <name><![CDATA[Milad Rastian]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Find and replace regex group match in VIM]]></title>
+    <link href="http://slashmili.org/blog/2014/12/07/find-and-replace-regex-group-match-in-vim/"/>
+    <updated>2014-12-07T01:57:00+08:00</updated>
+    <id>http://slashmili.org/blog/2014/12/07/find-and-replace-regex-group-match-in-vim</id>
+    <content type="html"><![CDATA[<h1>Intro</h1>
+
+<p>Regular expression is a special text string for describing a search pattern and since VIM is a full-fledged editor you can use a regex string to find what you&rsquo;re looking for in a file.</p>
+
+<p>If you are a VIM user you might already know that, same goes here! Until few days back I needed to do more than a usual search in my file.</p>
+
+<p>I received a file with this content:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>1-2-13,3700,26840,0,mt,0,EUR,0,USD
+</span><span class='line'>10-21-13,3700,26807,0,mt,0,EUR,0,USD
+</span><span class='line'>&hellip;</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>And I had to import into a table in database. I found a way to import CSV file to the database but after I imported all the records I noticed that the date column was wrong in the database. As you can see in the first column, date format isn&rsquo;t what usually databases accept, the format should be like &lsquo;2013-1-2&rsquo;. Well I had two ways to fix the problem, either write a small script to fix the date or use VIM&rsquo;s search and replace feature to fix the problem.</p>
+
+<!-- more -->
+
+
+<h2>Search a Regex string in VIM</h2>
+
+<p>The regex was simple it can be used in VIM&rsquo;s search like this:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>\d{1,2}&ndash;\d{1,2}&ndash;\d\d</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<blockquote><p>In order to search in VIM, you need to go to Normal mode(press escape) and press / and start typing to find your match</p></blockquote>
+
+<p>The month and day length might be one or two, that&rsquo;s we why have \d\{1,2\} to make sure it matches with both cases. The first surprise that I had was this weird backslash before curly brackets. If you are familiar with regex, you don&rsquo;t need to escape the curlys!</p>
+
+<h2>Replace matched Regex in VIM</h2>
+
+<p>So far we managed to match the date string but how can we reuse our matched string and change the order? The answer is Grouping feature in regex. All we need to do is put the part that we want to group in parentheses and then use it. What does it mean?! Let&rsquo;s try it out:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>(\d{1,2})&ndash;(\d{1,2})&ndash;(\d\d)</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>This thing might be bit scary but if you take look closer, I just added parentheses around month, day and year regex.</p>
+
+<p>To reuses the matched string and replace it with the correct order you can use VIM&rsquo;s replace feature:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>%s//21\3-\1-\2/g</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<blockquote><p>In order to replace a string in VIM, you need to go to Normal mode(press escape) and press : and start typing the above command</p></blockquote>
+
+<p>By this replace command we replace the date with 21(third match group)&ndash;(first match group)&ndash;(second match group).</p>
+]]></content>
+  </entry>
+  
+</feed>

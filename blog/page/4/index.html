@@ -127,6 +127,70 @@
   <header>
     
       <!-- Now we're back to normal posts. Note the links used under href in both headers.--> 
+        <h1 class="entry-title"><a href="/blog/2007/11/07/firehole-rocks/">FireHole ROCKS !</a></h1>
+        
+    
+    
+      <p class="meta">
+        
+  
+
+
+  
+    <span class="byline author vcard">by <span class="fn">Milad Rastian</span></span>
+  
+
+ - 
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-11-07T00:00:00+08:00" pubdate data-updated="true">Nov 7<span>th</span>, 2007</time> - 
+        
+
+posted in
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/gnu-slash-linux/'>GNU/Linux</a>
+  
+</span>
+
+
+        
+         | <a href="/blog/2007/11/07/firehole-rocks/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+I always had a problem with iptables !<br />For this reason about 3 years ago I bought <a href="http://www.oreilly.com/catalog/lnxiptablespr/">Linux iptables Pocket Reference</a> Book.<br />But I never read it completely, always read it until page 7-8 and after that I through it away !<br />A few days ago <a href="http://www.oreilly.com/catalog/lnxiptablespr/">Siavash</a> suggested me <a href="http://firehol.sourceforge.net/">FireHole</a>, I install it but didn&#8217;t use it until 1 hour ago   !<br />I used it for sharing internet connection.<br />It has too fast config ! it&#8217;s too cool !<br />FireHole&#8217;s document is enough good but I write down my config here (maybe you don&#8217;t like read that document because you are as lazy as me !) <br /><pre class="code"><br />#/etc/firehol/firehol.conf<br />version 5<br />#your LAN card config<br />home_ips="192.168.0.1/24"<br />&nbsp;<br />#my lan interface was eth2<br />interface eth2 home  src "${home_ips}"<br />        policy reject<br />        server "ssh ftp http"    accept #allow use this services from LAN to eth2<br />&nbsp;<br />#my internet interface was name ppp0 - don't change anything else !<br />interface ppp0 internet src not "${home_ips} ${UNROUTABLE_IPS}"<br />        protection strong 10/sec 10<br />        server          custom          fb              tcp/1511        default accept<br />        server          ident           reject          with            tcp-reset<br />        client          all             accept<br />&nbsp;<br />#we want share internet from ppp0 to our LAN (eth2)<br />router home2internet inface eth2 outface ppp0<br />        masquerade<br />        route all accept</pre><br />After this change, restart your firehole.<br /><br />If you just want share internet and don&#8217;t like face with this configs I suggest you <a href="http://parsix.org">Parsix</a> ics script.<br />All you thing you should do is &#8220;/etc/init.d/ics start&#8221; without any config !!!</div>
+</div>
+  
+  
+  
+
+
+</div>
+
+      </article>
+    
+    
+      <article class="span4">
+        <div class="article-format">
+
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.--> 
         <h1 class="entry-title"><a href="/blog/2007/10/28/save-your-dreams-with-dream-demon/">Save Your Dreams With Dream Demon !</a></h1>
         
     
@@ -335,6 +399,10 @@ These days I am trying to use gksu from python but this module has no documentio
     <ul class="recent_posts">
       
         <li>
+          <a href="/blog/2014/12/07/find-and-replace-regex-group-match-in-vim/">Find and replace regex group match in VIM</a>
+        </li>
+      
+        <li>
           <a href="/blog/2014/11/23/dependency-manager-for-php/">Dependency Manager for PHP</a>
         </li>
       
@@ -348,10 +416,6 @@ These days I am trying to use gksu from python but this module has no documentio
       
         <li>
           <a href="/blog/2013/08/11/monitor-your-apps-behaviour/">Monitor your app's behaviour</a>
-        </li>
-      
-        <li>
-          <a href="/blog/2012/03/16/online-course-with-coursera/">Online Course with Coursera</a>
         </li>
       
     </ul>

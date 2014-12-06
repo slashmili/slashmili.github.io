@@ -127,6 +127,90 @@
   <header>
     
       <!-- Now we're back to normal posts. Note the links used under href in both headers.--> 
+        <h1 class="entry-title"><a href="/blog/2014/12/07/find-and-replace-regex-group-match-in-vim/">Find and Replace Regex Group Match in VIM</a></h1>
+        
+    
+    
+      <p class="meta">
+        
+  
+
+
+  
+    <span class="byline author vcard">by <span class="fn">Milad Rastian</span></span>
+  
+
+ - 
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-12-07T01:57:00+08:00" pubdate data-updated="true">Dec 7<span>th</span>, 2014</time> - 
+        
+
+posted in
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/regex/'>regex</a>, <a class='category' href='/blog/categories/vim/'>vim</a>
+  
+</span>
+
+
+        
+         | <a href="/blog/2014/12/07/find-and-replace-regex-group-match-in-vim/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>Intro</h1>
+
+<p>Regular expression is a special text string for describing a search pattern and since VIM is a full-fledged editor you can use a regex string to find what you&rsquo;re looking for in a file.</p>
+
+<p>If you are a VIM user you might already know that, same goes here! Until few days back I needed to do more than a usual search in my file.</p>
+
+<p>I received a file with this content:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>1-2-13,3700,26840,0,mt,0,EUR,0,USD
+</span><span class='line'>10-21-13,3700,26807,0,mt,0,EUR,0,USD
+</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And I had to import into a table in database. I found a way to import CSV file to the database but after I imported all the records I noticed that the date column was wrong in the database. As you can see in the first column, date format isn&rsquo;t what usually databases accept, the format should be like &lsquo;2013-1-2&rsquo;. Well I had two ways to fix the problem, either write a small script to fix the date or use VIM&rsquo;s search and replace feature to fix the problem.</p>
+
+</div>
+  
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/12/07/find-and-replace-regex-group-match-in-vim/">Read on &rarr;</a>
+    </footer>
+  
+
+
+</div>
+
+      </article>
+    
+    
+      <article class="span4">
+        <div class="article-format">
+
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.--> 
         <h1 class="entry-title"><a href="/blog/2014/11/23/dependency-manager-for-php/">Dependency Manager for PHP</a></h1>
         
     
@@ -706,63 +790,6 @@ posted in
 
       </article>
     
-    
-      <article class="span4">
-        <div class="article-format">
-
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.--> 
-        <h1 class="entry-title"><a href="/blog/2011/03/06/when-you-are-not-free-even-to-do-rm-rf/">When You Are Not Free Even to Do Rm -rf / !</a></h1>
-        
-    
-    
-      <p class="meta">
-        
-  
-
-
-  
-    <span class="byline author vcard">by <span class="fn">Milad Rastian</span></span>
-  
-
- - 
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-03-06T00:00:00+08:00" pubdate data-updated="true">Mar 6<span>th</span>, 2011</time> - 
-        
-
-
-        
-         | <a href="/blog/2011/03/06/when-you-are-not-free-even-to-do-rm-rf/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<div class='posterous_autopost'><p>How much it is painful that you can&#8217;t do rm -rf / in your machine !</p>  <p>when I did rm I got this error :</p>  <p><span style="font-size: x-small;">rm: cannot remove root directory `/&#8217; </span></p>  <p>In past great responsibility brought great power but this days you are not free.</p>  <p>&nbsp;</p>  <p>Cheers for past that you can do every thing you want !</p>  <p>&nbsp;</p></div></div>
-</div>
-  
-  
-  
-
-
-</div>
-
-      </article>
-    
     </div>
       <div class="row">
         <ul class="pager">
@@ -786,6 +813,10 @@ posted in
     <ul class="recent_posts">
       
         <li>
+          <a href="/blog/2014/12/07/find-and-replace-regex-group-match-in-vim/">Find and replace regex group match in VIM</a>
+        </li>
+      
+        <li>
           <a href="/blog/2014/11/23/dependency-manager-for-php/">Dependency Manager for PHP</a>
         </li>
       
@@ -799,10 +830,6 @@ posted in
       
         <li>
           <a href="/blog/2013/08/11/monitor-your-apps-behaviour/">Monitor your app's behaviour</a>
-        </li>
-      
-        <li>
-          <a href="/blog/2012/03/16/online-course-with-coursera/">Online Course with Coursera</a>
         </li>
       
     </ul>

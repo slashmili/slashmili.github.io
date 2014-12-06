@@ -4,7 +4,7 @@
   <title><![CDATA[/mili]]></title>
   <link href="http://slashmili.org/atom.xml" rel="self"/>
   <link href="http://slashmili.org/"/>
-  <updated>2014-12-07T01:54:03+08:00</updated>
+  <updated>2014-12-07T02:44:15+08:00</updated>
   <id>http://slashmili.org/</id>
   <author>
     <name><![CDATA[Milad Rastian]]></name>
@@ -12,6 +12,66 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Find and replace regex group match in VIM]]></title>
+    <link href="http://slashmili.org/blog/2014/12/07/find-and-replace-regex-group-match-in-vim/"/>
+    <updated>2014-12-07T01:57:00+08:00</updated>
+    <id>http://slashmili.org/blog/2014/12/07/find-and-replace-regex-group-match-in-vim</id>
+    <content type="html"><![CDATA[<h1>Intro</h1>
+
+<p>Regular expression is a special text string for describing a search pattern and since VIM is a full-fledged editor you can use a regex string to find what you&rsquo;re looking for in a file.</p>
+
+<p>If you are a VIM user you might already know that, same goes here! Until few days back I needed to do more than a usual search in my file.</p>
+
+<p>I received a file with this content:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>1-2-13,3700,26840,0,mt,0,EUR,0,USD
+</span><span class='line'>10-21-13,3700,26807,0,mt,0,EUR,0,USD
+</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And I had to import into a table in database. I found a way to import CSV file to the database but after I imported all the records I noticed that the date column was wrong in the database. As you can see in the first column, date format isn&rsquo;t what usually databases accept, the format should be like &lsquo;2013-1-2&rsquo;. Well I had two ways to fix the problem, either write a small script to fix the date or use VIM&rsquo;s search and replace feature to fix the problem.</p>
+
+<!-- more -->
+
+
+<h2>Search a Regex string in VIM</h2>
+
+<p>The regex was simple it can be used in VIM&rsquo;s search like this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>\d\{1,2\}-\d\{1,2\}-\d\d</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>In order to search in VIM, you need to go to Normal mode(press escape) and press / and start typing to find your match</p></blockquote>
+
+<p>The month and day length might be one or two, that&rsquo;s we why have \d\{1,2\} to make sure it matches with both cases. The first surprise that I had was this weird backslash before curly brackets. If you are familiar with regex, you don&rsquo;t need to escape the curlys!</p>
+
+<h2>Replace matched Regex in VIM</h2>
+
+<p>So far we managed to match the date string but how can we reuse our matched string and change the order? The answer is Grouping feature in regex. All we need to do is put the part that we want to group in parentheses and then use it. What does it mean?! Let&rsquo;s try it out:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>\(\d\{1,2\}\)-\(\d\{1,2\}\)-\(\d\d\)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This thing might be bit scary but if you take look closer, I just added parentheses around month, day and year regex.</p>
+
+<p>To reuses the matched string and replace it with the correct order you can use VIM&rsquo;s replace feature:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>%s//21\3-\1-\2/g</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>In order to replace a string in VIM, you need to go to Normal mode(press escape) and press : and start typing the above command</p></blockquote>
+
+<p>By this replace command we replace the date with 21(third match group)&ndash;(first match group)&ndash;(second match group).</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Dependency Manager for PHP]]></title>
@@ -437,16 +497,6 @@ In an application we had  many connection to  MySQL database to insert and selec
     <id>http://slashmili.org/blog/2009/09/12/asterisks-ami-return-empty-string</id>
     <content type="html"><![CDATA[<div class='post'>
 About 2 months a ago, one day server of our customer decided to response empty string on <a href="http://www.voip-info.org/wiki/view/Asterisk+Manager+API+Action+Command">Command Action</a>. we feed bunch of data for reporting with AMI and especially with Command Action.<div><br /><div>It was so mystery for us ! what happen suddenly ? anyway we were lucky, we had a backup and moved server to backup ones.</div><div><br /></div><div>After works on that server we discovered this problem solved when we run asterisk as a root !</div><div>Anyway we did not work on that server until today. I get asterisk source code and debug lines and found a problem :</div><div>For unknown reason ownership of /tmp was different from always and a function wants to create temporary file but could not access to /tmp (file main/manager.c about line 1736).</div><div><br /></div><div>If Asterisk Developers checks  return value of mkstemp and debug if value is -1, life would be more pleasure </div></div></div>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Asterisk's Chanspy is Out of Sync]]></title>
-    <link href="http://slashmili.org/blog/2009/09/10/asterisks-chanspy-is-out-of-sync/"/>
-    <updated>2009-09-10T00:00:00+08:00</updated>
-    <id>http://slashmili.org/blog/2009/09/10/asterisks-chanspy-is-out-of-sync</id>
-    <content type="html"><![CDATA[<div class='post'>
-About 3 month ago we had a problem on ChanSpy in Asterisk. sounds were out of sync.<div>We do everything ! changing asterisk version, compiling different version of asterisk ! </div><div>Users of that customer use EyeBeam as SIP Client, in asterisk bug tracker someone wrote there is a problem with onboard sound cards. so that we take a PAP2 and test ChanSpy with ordinary telephone and Bingoo ! everything was sync !</div><div><br /></div><div>We did update  EyeBeams and problem solved.</div><div><br /></div><div>These days I have problem like before, this time problem is files which recorded by MixMonitor are out of sync. tomorrow I am going to take PAP2 to that location and test files. I hope problem solves by changing EyeBeam or even add PCI sound card.</div><div><br /></div><div>I will update this post when get answer.<span style="font-weight: bold;"><br />Update<span style="font-weight: bold;"> : </span></span><span><br />problem solved by updating asterisk to 1.4.27.3</span><span style="font-weight: bold;"><span style="font-weight: bold;"></span> !<br /><span style="font-weight: bold;"><span style="font-weight: bold;"><span style="font-weight: bold;"></span></span></span><br /></span></div></div>
 ]]></content>
   </entry>
   
