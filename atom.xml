@@ -4,7 +4,7 @@
   <title><![CDATA[/mili]]></title>
   <link href="http://slashmili.org/atom.xml" rel="self"/>
   <link href="http://slashmili.org/"/>
-  <updated>2014-12-07T01:49:57+08:00</updated>
+  <updated>2014-12-07T01:51:34+08:00</updated>
   <id>http://slashmili.org/</id>
   <author>
     <name><![CDATA[Milad Rastian]]></name>
@@ -20,7 +20,7 @@
     <id>http://slashmili.org/blog/2014/11/23/dependency-manager-for-php</id>
     <content type="html"><![CDATA[<h2>What is dependency manager?</h2>
 
-<p>Let&rsquo;s say in your application you need to send a tweet to your Twitter account, what would you do? There are a many <a href="https://dev.twitter.com/overview/api/twitter-libraries#php">PHP Twitter client</a> out there.</p>
+<p>Let&rsquo;s say in your application you need to send a tweet from your Twitter account, what would you do? There are a many <a href="https://dev.twitter.com/overview/api/twitter-libraries#php">PHP Twitter client</a> out there.</p>
 
 <p>The quick way is just download one of them and put all the files in your application root. Well not a smart choice! You are adding someone code to your code base you need to maintain it, update it and so forth. What if there is a way that you say I want Library XYZ in my project version 2.0 and everything would be ready magically!</p>
 
