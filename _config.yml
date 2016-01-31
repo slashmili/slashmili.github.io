@@ -4,7 +4,7 @@
 
 url: http://slashmili.org
 title: /mili
-subtitle: Lets try the blogging again!
+subtitle:
 author: Milad Rastian
 simple_search: http://google.com/search
 description:
@@ -90,11 +90,11 @@ delicious_user:
 delicious_count: 3
 
 # Disqus Comments
-disqus_short_name: militheblog
-disqus_show_comment_count: true
+disqus_short_name:
+disqus_show_comment_count: false
 
 # Google Analytics
 google_analytics_tracking_id: "UA-45055199-1"
 
 # Facebook Like
-facebook_like: true
+facebook_like: false
