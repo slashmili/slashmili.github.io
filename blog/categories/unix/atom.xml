@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Unix | /mili]]></title>
   <link href="http://slashmili.org/blog/categories/unix/atom.xml" rel="self"/>
   <link href="http://slashmili.org/"/>
-  <updated>2014-12-07T02:44:15+08:00</updated>
+  <updated>2016-01-31T12:43:50+08:00</updated>
   <id>http://slashmili.org/</id>
   <author>
     <name><![CDATA[Milad Rastian]]></name>
@@ -14,11 +14,11 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Unleash The Daemons]]></title>
+    <title type="html"><![CDATA[Unleash the Daemons]]></title>
     <link href="http://slashmili.org/blog/2013/11/17/unleash-the-daemons/"/>
     <updated>2013-11-17T22:43:00+08:00</updated>
     <id>http://slashmili.org/blog/2013/11/17/unleash-the-daemons</id>
-    <content type="html"><![CDATA[<p>I did a talk at <a href="https://github.com/klxrb">KL Ruby Brigade</a> monthly meeting about Daemons in Unix environment.</p>
+    <content type="html"><![CDATA[<p>I gave a talk at <a href="https://github.com/klxrb">KL Ruby Brigade</a> monthly meeting about Daemons in Unix environment.</p>
 
 <p>If you want to know what the Daemon is, here is a quick explanation:</p>
 

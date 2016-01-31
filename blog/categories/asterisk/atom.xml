@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Asterisk | /mili]]></title>
   <link href="http://slashmili.org/blog/categories/asterisk/atom.xml" rel="self"/>
   <link href="http://slashmili.org/"/>
-  <updated>2014-12-07T02:44:15+08:00</updated>
+  <updated>2016-01-31T12:43:50+08:00</updated>
   <id>http://slashmili.org/</id>
   <author>
     <name><![CDATA[Milad Rastian]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[PHP AGI is so slow]]></title>
+    <title type="html"><![CDATA[PHP AGI Is So Slow]]></title>
     <link href="http://slashmili.org/blog/2010/04/13/php-agi-is-so-slow/"/>
     <updated>2010-04-13T00:00:00+08:00</updated>
     <id>http://slashmili.org/blog/2010/04/13/php-agi-is-so-slow</id>
@@ -36,7 +36,7 @@ In some case we need to set call-limit=1 in sip config but after a while a SIP c
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[MusicOnHold is Choppy in Asterisk]]></title>
+    <title type="html"><![CDATA[MusicOnHold Is Choppy in Asterisk]]></title>
     <link href="http://slashmili.org/blog/2010/01/27/musiconhold-is-choppy-in-asterisk/"/>
     <updated>2010-01-27T00:00:00+08:00</updated>
     <id>http://slashmili.org/blog/2010/01/27/musiconhold-is-choppy-in-asterisk</id>
@@ -58,7 +58,7 @@ About 2 months a ago, one day server of our customer decided to response empty s
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Asterisk's Chanspy is Out of Sync]]></title>
+    <title type="html"><![CDATA[Asterisk's Chanspy Is Out of Sync]]></title>
     <link href="http://slashmili.org/blog/2009/09/10/asterisks-chanspy-is-out-of-sync/"/>
     <updated>2009-09-10T00:00:00+08:00</updated>
     <id>http://slashmili.org/blog/2009/09/10/asterisks-chanspy-is-out-of-sync</id>

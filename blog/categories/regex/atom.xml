@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: regex | /mili]]></title>
+  <title><![CDATA[Category: Regex | /mili]]></title>
   <link href="http://slashmili.org/blog/categories/regex/atom.xml" rel="self"/>
   <link href="http://slashmili.org/"/>
-  <updated>2014-12-07T02:44:15+08:00</updated>
+  <updated>2016-01-31T12:43:50+08:00</updated>
   <id>http://slashmili.org/</id>
   <author>
     <name><![CDATA[Milad Rastian]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Find and replace regex group match in VIM]]></title>
+    <title type="html"><![CDATA[Find and Replace Regex Group Match in VIM]]></title>
     <link href="http://slashmili.org/blog/2014/12/07/find-and-replace-regex-group-match-in-vim/"/>
     <updated>2014-12-07T01:57:00+08:00</updated>
     <id>http://slashmili.org/blog/2014/12/07/find-and-replace-regex-group-match-in-vim</id>

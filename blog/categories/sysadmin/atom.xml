@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: sysadmin | /mili]]></title>
+  <title><![CDATA[Category: Sysadmin | /mili]]></title>
   <link href="http://slashmili.org/blog/categories/sysadmin/atom.xml" rel="self"/>
   <link href="http://slashmili.org/"/>
-  <updated>2014-12-07T02:44:15+08:00</updated>
+  <updated>2016-01-31T12:43:50+08:00</updated>
   <id>http://slashmili.org/</id>
   <author>
     <name><![CDATA[Milad Rastian]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Configure and Manage your servers in a FLASH]]></title>
+    <title type="html"><![CDATA[Configure and Manage Your Servers in a FLASH]]></title>
     <link href="http://slashmili.org/blog/2012/02/03/configure-and-manage-your-servers-in/"/>
     <updated>2012-02-03T00:00:00+08:00</updated>
     <id>http://slashmili.org/blog/2012/02/03/configure-and-manage-your-servers-in</id>

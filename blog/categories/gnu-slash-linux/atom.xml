@@ -4,7 +4,7 @@
   <title><![CDATA[Category: GNU/Linux | /mili]]></title>
   <link href="http://slashmili.org/blog/categories/gnu-slash-linux/atom.xml" rel="self"/>
   <link href="http://slashmili.org/"/>
-  <updated>2014-12-07T02:44:15+08:00</updated>
+  <updated>2016-01-31T12:43:50+08:00</updated>
   <id>http://slashmili.org/</id>
   <author>
     <name><![CDATA[Milad Rastian]]></name>
@@ -25,7 +25,7 @@ In a project we have servers which were in different cities, and they connected 
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[How To Use libjalali]]></title>
+    <title type="html"><![CDATA[How to Use Libjalali]]></title>
     <link href="http://slashmili.org/blog/2008/06/17/how-to-use-libjalali/"/>
     <updated>2008-06-17T00:00:00+08:00</updated>
     <id>http://slashmili.org/blog/2008/06/17/how-to-use-libjalali</id>
@@ -36,7 +36,7 @@ About 2 years ago my friend <a href="http://ashkan.selfip.org/">Ashkan Ghassemi<
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Configure Asterisk  and Zaptel on Ubuntu 6.*]]></title>
+    <title type="html"><![CDATA[Configure Asterisk and Zaptel on Ubuntu 6.*]]></title>
     <link href="http://slashmili.org/blog/2008/06/02/configure-asterisk-and-zaptel-on-ubuntu/"/>
     <updated>2008-06-02T00:00:00+08:00</updated>
     <id>http://slashmili.org/blog/2008/06/02/configure-asterisk-and-zaptel-on-ubuntu</id>
@@ -47,7 +47,7 @@ Always I installed <a href="http://www.asterisk.org/">Asterisk</a> and <a href="
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Script For Removing Changed Host Identification]]></title>
+    <title type="html"><![CDATA[Script for Removing Changed Host Identification]]></title>
     <link href="http://slashmili.org/blog/2008/05/04/script-for-removing-changed-host/"/>
     <updated>2008-05-04T00:00:00+08:00</updated>
     <id>http://slashmili.org/blog/2008/05/04/script-for-removing-changed-host</id>
