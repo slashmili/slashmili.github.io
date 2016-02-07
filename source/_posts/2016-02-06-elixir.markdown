@@ -22,10 +22,21 @@ I believe that every one should take advantage of the language and the platform 
 <!-- more -->
 ### Elegant & Expressive
 
-...
+```elixir
+urls = ["http://google.com", "http://trello.com"]
+random_url = urls |> Enum.shuffle |> List.first
+```
+
+Do I need to explain the code? Don't think so!
+And if you have a bit of unix background this code should make sense to you.
+
+> <small>Note: yes, there is an easy way to get random item(`Enum.random`), the above code is just for making the point.</small>
+
+If you are not familiar with functional programming, it might take sometime to get to use
+to that, after you un-learn your OOP skills, you'll find that every thing make sense in Elixir land.
 
 ### Meta programming
-..
+...
 
 ### Concurrent
 ...
