@@ -1,0 +1,39 @@
+---
+layout: post
+title: "Why Elixir is Awesome?"
+date: 2016-02-06 09:33
+comments: false
+categories:
+  - elixir
+  - lang
+  - otp
+---
+
+It was almost a year ago that I got introduced to [Elixir](http://elixir-lang.org).
+I remember my first impression was yet another language on top of another one.
+In addition running a software on [Erlang/OTP](http://www.erlang.org/), it's totally different beast,
+so I was a bit skeptical it. However I gave it a chance and after a year,
+I'm totally happy with the time I spend and
+I believe that every one should take advantage of the language and the platform that is running on.
+
+
+## Why Elixir?
+
+<!-- more -->
+### Elegant & Expressive
+
+...
+
+### Meta programming
+..
+
+### Concurrent
+...
+### Distributed
+...
+### Mature Environment
+...
+
+
+
+> You may wanna to take look at my presentation slides [Elixir @klxrb June 2015](https://github.com/slashmili/talks/tree/master/2015/elixir-klxrb-june)
