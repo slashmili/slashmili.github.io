@@ -36,7 +36,58 @@ If you are not familiar with functional programming, it might take sometime to g
 to that, after you un-learn your OOP skills, you'll find that every thing make sense in Elixir land.
 
 ### Meta programming
-...
+Whenever I'm learning a new language, after I get enough familiar with the language and it's syntax the first thing
+I'm looking for is how can I write a code that writes code for me!
+
+The way that elixir does that is pretty unique. Elixir's
+[AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree) can be represented by Elixir's own data
+structures. Having the AST accessible by normal Elixir code lets you do very powerful
+things because you can operate at the level typically reserved only for compilers and language designers.
+
+Let's say you want to be able to humanize a mathematical equation, the interface and output should be like this:
+
+```elixir
+iex > Math.say 1 + 2
+1 plus 2 is 3
+3
+iex > Math.say 5 + 7
+5 plus 7 is 12
+12
+```
+
+To achieve that we need to write a `macro` that matches with AST of `1 + 2`.
+Thanks to Elixir's `quote` function it's easy to find out how it looks like:
+
+```elixir
+iex > quote do: 1 + 2
+{:+, [context: Elixir, import: Kernel], [1, 2]}
+```
+
+Now that we know how `1 + 2` is represented in Elixir's format we can write a `defmacro` that
+matches with that data:
+
+```elixir
+defmodule Math do
+  defmacro say({:+, _, [lhs, rhs]}) do
+    quote do
+      lhs = unquote lhs
+      rhs = unquote rhs
+      result = lhs + rhs
+      IO.puts "#{lhs} plus #{rhs} is #{result}"
+      result
+    end
+  end
+end
+```
+
+You can read more about macros in
+[Metaprogramming Elixir](https://pragprog.com/book/cmelixir/metaprogramming-elixir) book.
+
+> <small>Note: I picked up this example is from the same book</small>
+
+I have to mention that
+[if](http://elixir-lang.org/docs/master/elixir/Kernel.html#if/2) and most of the Elixir's keywords
+are implemented as a `macro`.
 
 ### Concurrent
 ...
@@ -44,7 +95,6 @@ to that, after you un-learn your OOP skills, you'll find that every thing make s
 ...
 ### Mature Environment
 ...
-
 
 
 > You may wanna to take look at my presentation slides [Elixir @klxrb June 2015](https://github.com/slashmili/talks/tree/master/2015/elixir-klxrb-june)
