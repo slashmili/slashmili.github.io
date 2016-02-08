@@ -91,7 +91,57 @@ I have to mention that
 are implemented as a `macro`.
 
 ### Concurrent
-...
+Having a concurrent system in Elixir is inevitable. In addition because the data
+are immutable you don't need to worry about concurrent processes stepping on each others toes.
+Elixir achieves that by running on top of Erlang Virtual Machine (BEAM).
+
+How does it work? Let's say you want run a few queries and send the results back to the user
+
+```elixir
+iex > run_query = fn (query) ->
+  1000
+  |> :random.uniform
+  |> :timer.sleep
+  IO.inspect "query #{query} executed"
+end
+```
+> <small> Not all the queries finish in the same time, to simulate that we sleep random amount of time</small>
+
+It would be nice to run independent queries concurrently, let's try it in `iex`:
+
+```elixir
+iex > spawn(fn -> run_query.('select * from users') end)
+#PID<0.132.0>
+iex > spawn(fn -> run_query.('select * from reports') end)
+#PID<0.134.0>
+"query select * from users executed"
+"query select * from reports executed"
+```
+
+As you can see both queries executed concurrently.
+> <small>Just a quick reminder, when I say these two queries ran concurrently it doesn't mean that they ran in the same time.
+> However since my Macbook has 8 processors I had the leverage of running the queries in the same time.</small>
+
+You might ask how can I get back the results and use them on the main process? The answer is *Message Passing*.
+
+```elixir
+iex > caller = send
+iex > spawn(fn -> send(caller, {:query_result, run_query.('select * from reports')}) end)
+#PID<0.138.0>
+"query select * from reports executed"
+iex > receive do
+    {:query_result, result} -> IO.inspect "result is #{result}"
+    end
+"result is query select * from reports executed"
+"result is query select * from reports executed"
+```
+
+The processes in Elixir(it's not same as unix processe) can talk to each other through message.
+Each process has it's own mailbox and can process one item at a time.
+
+> <small> When you want to write production grade application, you'll find yourself using
+> [OTP](https://en.wikipedia.org/wiki/Open_Telecom_Platform) framework.</small>
+
 ### Distributed
 ...
 ### Mature Environment
