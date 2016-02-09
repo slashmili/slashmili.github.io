@@ -1,0 +1,210 @@
+---
+layout: post
+title: "Elixir"
+date: 2016-02-06 09:33
+comments: false
+categories:
+  - elixir
+  - lang
+  - otp
+---
+
+It was almost a year ago that I got introduced to [Elixir](http://elixir-lang.org).
+I remember my first impression was yet another language on top of another one.
+In addition running a software on [Erlang/OTP](http://www.erlang.org/), it's totally different beast
+and I was a bit skeptical about it. However I gave it a chance and after a year,
+I'm totally happy with the time I spend and
+I believe that everyone should take advantage of the language and the platform that is running on.
+
+
+<!-- more -->
+
+## Why Elixir?
+
+### Elegant & Expressive
+
+```elixir
+urls = ["http://google.com", "http://trello.com"]
+random_url = urls |> Enum.shuffle |> List.first
+```
+
+Do I need to explain the code? Don't think so!
+And if you have a bit of unix background this code should make sense to you.
+
+> <small>Yes, there is an easy way to get random item, the above code is just for making the point.</small>
+
+BTW did I tell you Elixir is a functional programming language?
+If you are not familiar with functional programming, it might take sometime to get to use
+to that, after you un-learn your OOP skills, you'll find that every thing make sense in Elixir land.
+
+### Mature Environment
+
+Elixir comes with tools that help you to develop and build your project:
+
+* [Mix](http://elixir-lang.org/docs/stable/mix/Mix.html) is a build tool to run your tasks.
+* [Hex](https://hex.pm/) is a package manager that is done right.
+* [ExUnit](http://elixir-lang.org/docs/stable/ex_unit/ExUnit.html) is your unit testing framework.
+* [ExDoc](https://github.com/elixir-lang/ex_doc) generates documentation for your Elixir projects.
+
+Also Elixir runs on [Erlang Virtual Machine(BEAM)](https://www.erlang.org/) which has been [around us](https://www.quora.com/Which-companies-use-the-Erlang-language) for quite some time.
+
+
+### Metaprogramming
+Whenever I'm learning a new language, after I get enough familiar with the language and it's syntax the first thing
+I'm looking for is how can I write a code that writes code for me!
+
+The way that elixir does that is quite interesting.
+Elixir's [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree) can be represented by Elixir's own data
+structures. Having the AST accessible by normal Elixir code lets you do very powerful
+things because you can operate at the level typically reserved only for compilers and language designers.
+
+Let's say you want to humanize a mathematical equation, the interface and output should be like this:
+
+```elixir
+iex > Math.say 1 + 2
+1 plus 2 is 3
+3
+iex > Math.say 5 + 7
+5 plus 7 is 12
+12
+```
+
+To achieve that we need to write a `macro` that matches with AST of `1 + 2`.
+Thanks to Elixir's `quote` function it's easy to find out how it looks like:
+
+```elixir
+iex > quote do: 1 + 2
+{:+, [context: Elixir, import: Kernel], [1, 2]}
+```
+
+Now that we know how `1 + 2` is represented in Elixir's format we can write a `defmacro` that
+matches with that data:
+
+```elixir
+defmodule Math do
+  defmacro say({:+, _, [lhs, rhs]}) do
+    quote do
+      lhs = unquote lhs
+      rhs = unquote rhs
+      result = lhs + rhs
+      IO.puts "#{lhs} plus #{rhs} is #{result}"
+      result
+    end
+  end
+end
+```
+
+You can read more about macros in
+[Metaprogramming Elixir](https://pragprog.com/book/cmelixir/metaprogramming-elixir) book.
+
+> <small>this example is from the same book</small>
+
+I have to mention that
+[if](http://elixir-lang.org/docs/master/elixir/Kernel.html#if/2) and most of the Elixir's keywords
+are implemented as a `macro`.
+
+### Concurrent
+Having a concurrent system in Elixir is inevitable. In addition because the data
+are immutable you don't need to worry about concurrent processes stepping on each others toes.
+Elixir achieves that by running on top of BEAM.
+
+How does it work? Let's say you want run a few queries and send the results back to the user
+
+```elixir
+iex > run_query = fn (query) ->
+  1000
+  |> :random.uniform
+  |> :timer.sleep
+  IO.inspect "query #{query} executed"
+end
+```
+> <small> Not all the queries finish in the same time, to simulate that we sleep random amount of time</small>
+
+It would be nice to run independent queries concurrently, let's try it in `iex`:
+
+```elixir
+iex > spawn(fn -> run_query.('select * from users') end)
+#PID<0.132.0>
+iex > spawn(fn -> run_query.('select * from reports') end)
+#PID<0.134.0>
+"query select * from users executed"
+"query select * from reports executed"
+```
+
+As you can see both queries executed concurrently.
+
+You might ask how can I get back the results and use them in the main process? The answer is *Message Passing*.
+
+```elixir
+iex > caller = self
+iex > spawn(fn -> send(caller, {:query_result, run_query.('select * from reports')}) end)
+#PID<0.138.0>
+"query select * from reports executed"
+iex > receive do
+    {:query_result, result} -> IO.inspect "result is #{result}"
+    end
+"result is query select * from reports executed"
+"result is query select * from reports executed"
+```
+
+The processes in Elixir(it's not same as unix processes) can talk to each other through message.
+Each process has it's own mailbox and can process one item at a time.
+
+
+### Distributed
+I save the best for last.
+
+Erlang and its BEAM was implemented to be run in distributed environment.
+You can easily connect two Erlang nodes together:
+
+Node1:
+```elixir
+$ iex --sname node1
+iex(node1@localhost)>
+```
+
+Node2:
+```elixir
+$ iex --sname node2
+iex(node2@localhost)> Node.connect(:"node1@localhost")
+iex(node2@localhost)> Node.list
+[:"node1@localhost"]
+```
+
+After the nodes recognize each other,
+you can run any peace of code in any node in the cluster.
+
+Node2:
+```elixir
+iex(node2@localhost)> Node.spawn(
+  :"node1@localhost",
+  fn -> IO.puts "This code ran from #{node}" end)
+This code ran from node1@localhost
+#PID<8771.79.0>
+```
+
+It looks simple, isn't it? To be fair, building distributed application requires
+more thought but hey at least the language and its environment are in your side!
+
+## My experience
+
+Well I said why I like Elixir but learning a new language is challenging and it's get
+more complicated if it's running under different environment(Erlang/OTP).
+
+* I did struggle with the idea of immutable data but after a while I got use to that.
+* Elixir has a few Hash/List like data structures and few times I got confused to choose between them. It's getting better since Elixir is depreciating `HashDict`.
+* Building a concurrent, fault-tolerant system under BEAM requires knowledge about OTP framework([Elixir in Action](https://www.manning.com/books/elixir-in-action) can help you a lot).
+* Even though Elixir code runs under the VM, the development cycle is fast! Mix and Hex are doing great job, the dependencies are downloaded and compiled very fast. I can fire up `iex` console or run `mix test` and quickly get the result back.
+
+## Where to start
+
+Are you interested? Spending most of my time reading Elixir/Erlang related book I can give you some suggestions
+
+* [Programming Elixir](https://pragprog.com/book/elixir12/programming-elixir-1-2)
+This book helps you to get familiar with the language and master it.
+* [Elixir in Action](https://www.manning.com/books/elixir-in-action)
+You've read _Programming Elixir_ but still have lot of questions about using OTP? This book is for you.
+* [Programming Phoenix](https://pragprog.com/book/phoenix/programming-phoenix)
+Are you ready to write your first app in Elixir? If it's a web app you can use Phoenix.
+* [Metaprogramming Elixir](https://pragprog.com/book/cmelixir/metaprogramming-elixir)
+You've built your first app in Phoenix but wondering how Phoenix does all of those tricks? It's time to level up and become master in Elixir Metaprogramming by reading this book.
