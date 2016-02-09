@@ -9,7 +9,7 @@
   <meta name="author" content="Milad Rastian">
 
   
-  <meta name="description" content="About 3 month ago we had a problem on ChanSpy in Asterisk. sounds were out of sync.We do everything ! changing asterisk version, compiling different &hellip;">
+  <meta name="description" content="About 2 months a ago, one day server of our customer decided to response empty string on Command Action. we feed bunch of data for reporting with &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +69,44 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/09/12/asterisks-ami-return-empty-string/">Asterisk&#8217;s AMI Return Empty String</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2009-09-12T00:00:00+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+About 2 months a ago, one day server of our customer decided to response empty string on <a href="http://www.voip-info.org/wiki/view/Asterisk+Manager+API+Action+Command">Command Action</a>. we feed bunch of data for reporting with AMI and especially with Command Action.<div><br /><div>It was so mystery for us ! what happen suddenly ? anyway we were lucky, we had a backup and moved server to backup ones.</div><div><br /></div><div>After works on that server we discovered this problem solved when we run asterisk as a root !</div><div>Anyway we did not work on that server until today. I get asterisk source code and debug lines and found a problem :</div><div>For unknown reason ownership of /tmp was different from always and a function wants to create temporary file but could not access to /tmp (file main/manager.c about line 1736).</div><div><br /></div><div>If Asterisk Developers checks  return value of mkstemp and debug if value is -1, life would be more pleasure </div></div></div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -412,44 +450,6 @@ I am going to work some place which needs learning  <a href="http://turbogears.c
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2008/01/21/how-to-show-list-of-blogger-labels-in/">How to Show List of Blogger&#8217; Labels in Our Server</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2008-01-21T00:00:00+08:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-If you use blogger system, you know it add label and categorizing feature for posts.<br />And if you use blogspot hosting you able to list all labels beside your blog, but if you have your own hosting just show label in each post. but as you see in my blog I have it !<br /><code><span style="color: #000000"><br /><span style="color: #0000BB">&lt;?<br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">get_labels</span><span style="color: #007700">(</span><span style="color: #0000BB">$post_number</span><span style="color: #007700">=</span><span style="color: #0000BB">true</span><span style="color: #007700">,<br /></span>            <span style="color: #0000BB">$label_dir</span><span style="color: #007700">=</span><span style="color: #DD0000">'/home/yourusername/public_html/blog/labels'</span><span style="color: #007700">){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$style</span><span style="color: #007700">[]=</span><span style="color: #DD0000">'font-size:8pt;'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$style</span><span style="color: #007700">[]=</span><span style="color: #DD0000">'font-size:11pt;'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$style</span><span style="color: #007700">[]=</span><span style="color: #DD0000">'font-size:12pt;'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$style</span><span style="color: #007700">[]=</span><span style="color: #DD0000">'font-size:12pt;'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$style</span><span style="color: #007700">[]=</span><span style="color: #DD0000">'font-size:5pt;'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$style</span><span style="color: #007700">[]=</span><span style="color: #DD0000">'font-size:20pt;'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$style</span><span style="color: #007700">[]=</span><span style="color: #DD0000">'font-size:24pt;'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$ret</span><span style="color: #007700">=</span><span style="color: #DD0000">''</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$d&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dir</span><span style="color: #007700">(</span><span style="color: #0000BB">$label_dir</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;(</span><span style="color: #0000BB">false&nbsp;</span><span style="color: #007700">!==&nbsp;(</span><span style="color: #0000BB">$entry&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$d</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">read</span><span style="color: #007700">()))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(</span><span style="color: #0000BB">$entry</span><span style="color: #007700">==</span><span style="color: #DD0000">'.'&nbsp;</span><span style="color: #007700">or&nbsp;</span><span style="color: #0000BB">$entry</span><span style="color: #007700">==</span><span style="color: #DD0000">'..'</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue;<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$ret</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">"&lt;a&nbsp;href=\"http://yourdomain.com/blog/labels/$entry\"&nbsp;style=\""</span><span style="color: #007700">.<br /></span><span style="color: #0000BB">$style</span><span style="color: #007700">[</span><span style="color: #0000BB">rand</span><span style="color: #007700">(</span><span style="color: #0000BB">0</span><span style="color: #007700">,</span><span style="color: #0000BB">6</span><span style="color: #007700">)].</span><span style="color: #DD0000">"\"&gt;"</span><span style="color: #007700">.</span><span style="color: #0000BB">str_replace</span><span style="color: #007700">(</span><span style="color: #DD0000">'.php'</span><span style="color: #007700">,</span><span style="color: #DD0000">''</span><span style="color: #007700">,</span><span style="color: #0000BB">str_replace</span><span style="color: #007700">(</span><span style="color: #DD0000">'__'</span><span style="color: #007700">,</span><span style="color: #DD0000">'/'</span><span style="color: #007700">,</span><span style="color: #0000BB">$entry</span><span style="color: #007700">)).</span><span style="color: #DD0000">"&lt;/a&gt;\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$ret</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;<br /></span></span></code>I created it a few month ago and now just copy and past it ! so I don&#8217;t remember what is variable $post_number doing ! (surely don&#8217;t effect in this function)</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -480,6 +480,10 @@ If you use blogger system, you know it add label and categorizing feature for po
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/02/06/elixir/">Elixir</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/12/07/find-and-replace-regex-group-match-in-vim/">Find and Replace Regex Group Match in VIM</a>
       </li>
     
@@ -493,10 +497,6 @@ If you use blogger system, you know it add label and categorizing feature for po
     
       <li class="post">
         <a href="/blog/2013/11/17/unleash-the-daemons/">Unleash the Daemons</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/08/11/monitor-your-apps-behaviour/">Monitor Your App&#8217;s Behaviour</a>
       </li>
     
   </ul>

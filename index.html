@@ -9,7 +9,9 @@
   <meta name="author" content="Milad Rastian">
 
   
-  <meta name="description" content="Intro Regular expression is a special text string for describing a search pattern and since VIM is a full-fledged editor you can use a regex string &hellip;">
+  <meta name="description" content="It was almost a year ago that I got introduced to Elixir.
+I remember my first impression was yet another language on top of another one.
+In addition &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +71,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/02/06/elixir/">Elixir</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2016-02-06T09:33:00+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>It was almost a year ago that I got introduced to <a href="http://elixir-lang.org">Elixir</a>.
+I remember my first impression was yet another language on top of another one.
+In addition running a software on <a href="http://www.erlang.org/">Erlang/OTP</a>, it&rsquo;s totally different beast
+and I was a bit skeptical about it. However I gave it a chance and after a year,
+I&rsquo;m totally happy with the time I spend and
+I believe that everyone should take advantage of the language and the platform that is running on.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/02/06/elixir/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -465,44 +514,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/07/03/problem-with-postgresql-odbc-zenpack/">Problem With PostgreSQL ODBC ZenPack</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2011-07-03T00:00:00+08:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<div class="posterous_autopost"><p>In my new job(if after 8 months you can count it as new!) I am responsible to maintain <a href="http://zenoss.org/" target="_blank">Zenoss</a> and some week I am on call for Zenoss&#8217;s Alarm.</p>  <p>One of the strangest problem that we had was about <a href="http://community.zenoss.org/docs/DOC-3497">PostgreSQL ODBC Database Monitor</a> package. suddenly zenperfsql stopped without any log.</p>  <p>I tried to run zenperfsql in debug mode and I hoped that I would fix the problem. but after the daemon died again the error that I saw was : </p>  <p><code>python: pthread_mutex_lock.c:62: __pthread_mutex_lock: Assertion `mutex-&gt;__data.__owner == 0' failed.</code></p>  <p>I never thought that I would face to python&#8217;s thread stuff ! as far as I knew Zenoss use <a href="http://twistedmatrix.com/">Twisted</a> framework and this error just happened for sql daemon so I reviewed the way that we had installed the packahe</p>  <p>For using this package you need to follow these steps </p>  <p><code>    /usr/local/zenoss/python/bin/easy_install pyodbc    apt-get install odbc-postgresq    apt-get install unixodbc-dev    </code></p>  <p>And edit /etc/odbcinst.ini, here is the tricky part, if you follow unixodbc document, it recommends you to config like :</p>  <p><code>    [PostgreSQL] Description     = PostgreSQL ODBC driver (Unicode version) Driver          = /usr/lib/odbc/psqlodbca.so Setup           = /usr/lib/odbc/libodbcpsqlS.so    </code></p>  <p>But you need to add an other line which is specifying number of Threads </p>  <p>  </p><p><code>    [PostgreSQL] Description     = PostgreSQL ODBC driver (Unicode version) Driver          = /usr/lib/odbc/psqlodbca.so Setup           = /usr/lib/odbc/libodbcpsqlS.so Threading = 2    </code></p>  <p> </p>  <p>After adding Threading line I never face that problem, I dunno why Twisted which is built as asynchronous framework can not handle this and we need to limit ODBC&#8217;s Thread.</p>  <p> </p>  <p><strong>UPDATE :</strong></p>  <p>I found another blog that he faced same problem and he explains the reason (<a href="http://hynek.me/blog/2011/04/twisted-sybase/">see more</a>)</p>  <p>  </p></div></div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -531,6 +542,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/02/06/elixir/">Elixir</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/12/07/find-and-replace-regex-group-match-in-vim/">Find and Replace Regex Group Match in VIM</a>
       </li>
     
@@ -544,10 +559,6 @@
     
       <li class="post">
         <a href="/blog/2013/11/17/unleash-the-daemons/">Unleash the Daemons</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/08/11/monitor-your-apps-behaviour/">Monitor Your App&#8217;s Behaviour</a>
       </li>
     
   </ul>

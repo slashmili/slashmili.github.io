@@ -4,7 +4,7 @@
   <title><![CDATA[/mili]]></title>
   <link href="http://slashmili.org/atom.xml" rel="self"/>
   <link href="http://slashmili.org/"/>
-  <updated>2016-01-31T12:43:50+08:00</updated>
+  <updated>2016-02-09T23:05:58+08:00</updated>
   <id>http://slashmili.org/</id>
   <author>
     <name><![CDATA[Milad Rastian]]></name>
@@ -12,6 +12,280 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Elixir]]></title>
+    <link href="http://slashmili.org/blog/2016/02/06/elixir/"/>
+    <updated>2016-02-06T09:33:00+08:00</updated>
+    <id>http://slashmili.org/blog/2016/02/06/elixir</id>
+    <content type="html"><![CDATA[<p>It was almost a year ago that I got introduced to <a href="http://elixir-lang.org">Elixir</a>.
+I remember my first impression was yet another language on top of another one.
+In addition running a software on <a href="http://www.erlang.org/">Erlang/OTP</a>, it&rsquo;s totally different beast
+and I was a bit skeptical about it. However I gave it a chance and after a year,
+I&rsquo;m totally happy with the time I spend and
+I believe that everyone should take advantage of the language and the platform that is running on.</p>
+
+<!-- more -->
+
+
+<h2>Why Elixir?</h2>
+
+<h3>Elegant &amp; Expressive</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='elixir'><span class='line'><span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;http://google.com&quot;</span><span class="p">,</span> <span class="s2">&quot;http://trello.com&quot;</span><span class="p">]</span>
+</span><span class='line'><span class="n">random_url</span> <span class="o">=</span> <span class="n">urls</span> <span class="o">|&gt;</span> <span class="no">Enum</span><span class="o">.</span><span class="n">shuffle</span> <span class="o">|&gt;</span> <span class="no">List</span><span class="o">.</span><span class="n">first</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Do I need to explain the code? Don&rsquo;t think so!
+And if you have a bit of unix background this code should make sense to you.</p>
+
+<blockquote><p><small>Yes, there is an easy way to get random item, the above code is just for making the point.</small></p></blockquote>
+
+<p>BTW did I tell you Elixir is a functional programming language?
+If you are not familiar with functional programming, it might take sometime to get to use
+to that, after you un-learn your OOP skills, you&rsquo;ll find that every thing make sense in Elixir land.</p>
+
+<h3>Mature Environment</h3>
+
+<p>Elixir comes with tools that help you to develop and build your project:</p>
+
+<ul>
+<li><a href="http://elixir-lang.org/docs/stable/mix/Mix.html">Mix</a> is a build tool to run your tasks.</li>
+<li><a href="https://hex.pm/">Hex</a> is a package manager that is done right.</li>
+<li><a href="http://elixir-lang.org/docs/stable/ex_unit/ExUnit.html">ExUnit</a> is your unit testing framework.</li>
+<li><a href="https://github.com/elixir-lang/ex_doc">ExDoc</a> generates documentation for your Elixir projects.</li>
+</ul>
+
+
+<p>Also Elixir runs on <a href="https://www.erlang.org/">Erlang Virtual Machine(BEAM)</a> which has been <a href="https://www.quora.com/Which-companies-use-the-Erlang-language">around us</a> for quite some time.</p>
+
+<h3>Metaprogramming</h3>
+
+<p>Whenever I&rsquo;m learning a new language, after I get enough familiar with the language and it&rsquo;s syntax the first thing
+I&rsquo;m looking for is how can I write a code that writes code for me!</p>
+
+<p>The way that elixir does that is quite interesting.
+Elixir&rsquo;s <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">AST</a> can be represented by Elixir&rsquo;s own data
+structures. Having the AST accessible by normal Elixir code lets you do very powerful
+things because you can operate at the level typically reserved only for compilers and language designers.</p>
+
+<p>Let&rsquo;s say you want to humanize a mathematical equation, the interface and output should be like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='elixir'><span class='line'><span class="n">iex</span> <span class="o">&gt;</span> <span class="no">Math</span><span class="o">.</span><span class="n">say</span> <span class="m">1</span> <span class="o">+</span> <span class="m">2</span>
+</span><span class='line'><span class="m">1</span> <span class="n">plus</span> <span class="m">2</span> <span class="n">is</span> <span class="m">3</span>
+</span><span class='line'><span class="m">3</span>
+</span><span class='line'><span class="n">iex</span> <span class="o">&gt;</span> <span class="no">Math</span><span class="o">.</span><span class="n">say</span> <span class="m">5</span> <span class="o">+</span> <span class="m">7</span>
+</span><span class='line'><span class="m">5</span> <span class="n">plus</span> <span class="m">7</span> <span class="n">is</span> <span class="m">12</span>
+</span><span class='line'><span class="m">12</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To achieve that we need to write a <code>macro</code> that matches with AST of <code>1 + 2</code>.
+Thanks to Elixir&rsquo;s <code>quote</code> function it&rsquo;s easy to find out how it looks like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='elixir'><span class='line'><span class="n">iex</span> <span class="o">&gt;</span> <span class="kn">quote</span> <span class="k">do</span><span class="p">:</span> <span class="m">1</span> <span class="o">+</span> <span class="m">2</span>
+</span><span class='line'><span class="p">{</span><span class="ss">:+</span><span class="p">,</span> <span class="p">[</span><span class="ss">context:</span> <span class="no">Elixir</span><span class="p">,</span> <span class="kn">import</span><span class="p">:</span> <span class="no">Kernel</span><span class="p">],</span> <span class="p">[</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">]}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now that we know how <code>1 + 2</code> is represented in Elixir&rsquo;s format we can write a <code>defmacro</code> that
+matches with that data:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='elixir'><span class='line'><span class="k">defmodule</span> <span class="no">Math</span> <span class="k">do</span>
+</span><span class='line'><span class="k">  defmacro</span> <span class="n">say</span><span class="p">({</span><span class="ss">:+</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="p">[</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">]})</span> <span class="k">do</span>
+</span><span class='line'><span class="k">    </span><span class="kn">quote</span> <span class="k">do</span>
+</span><span class='line'><span class="k">      </span><span class="n">lhs</span> <span class="o">=</span> <span class="kn">unquote</span> <span class="n">lhs</span>
+</span><span class='line'>      <span class="n">rhs</span> <span class="o">=</span> <span class="kn">unquote</span> <span class="n">rhs</span>
+</span><span class='line'>      <span class="n">result</span> <span class="o">=</span> <span class="n">lhs</span> <span class="o">+</span> <span class="n">rhs</span>
+</span><span class='line'>      <span class="no">IO</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">lhs</span><span class="si">}</span><span class="s2"> plus </span><span class="si">#{</span><span class="n">rhs</span><span class="si">}</span><span class="s2"> is </span><span class="si">#{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>      <span class="n">result</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can read more about macros in
+<a href="https://pragprog.com/book/cmelixir/metaprogramming-elixir">Metaprogramming Elixir</a> book.</p>
+
+<blockquote><p><small>this example is from the same book</small></p></blockquote>
+
+<p>I have to mention that
+<a href="http://elixir-lang.org/docs/master/elixir/Kernel.html#if/2">if</a> and most of the Elixir&rsquo;s keywords
+are implemented as a <code>macro</code>.</p>
+
+<h3>Concurrent</h3>
+
+<p>Having a concurrent system in Elixir is inevitable. In addition because the data
+are immutable you don&rsquo;t need to worry about concurrent processes stepping on each others toes.
+Elixir achieves that by running on top of BEAM.</p>
+
+<p>How does it work? Let&rsquo;s say you want run a few queries and send the results back to the user</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='elixir'><span class='line'><span class="n">iex</span> <span class="o">&gt;</span> <span class="n">run_query</span> <span class="o">=</span> <span class="k">fn</span> <span class="p">(</span><span class="n">query</span><span class="p">)</span> <span class="o">-&gt;</span>
+</span><span class='line'>  <span class="m">1000</span>
+</span><span class='line'>  <span class="o">|&gt;</span> <span class="ss">:random</span><span class="o">.</span><span class="n">uniform</span>
+</span><span class='line'>  <span class="o">|&gt;</span> <span class="ss">:timer</span><span class="o">.</span><span class="n">sleep</span>
+</span><span class='line'>  <span class="no">IO</span><span class="o">.</span><span class="n">inspect</span> <span class="s2">&quot;query </span><span class="si">#{</span><span class="n">query</span><span class="si">}</span><span class="s2"> executed&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p><small> Not all the queries finish in the same time, to simulate that we sleep random amount of time</small></p></blockquote>
+
+<p>It would be nice to run independent queries concurrently, let&rsquo;s try it in <code>iex</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='elixir'><span class='line'><span class="n">iex</span> <span class="o">&gt;</span> <span class="n">spawn</span><span class="p">(</span><span class="k">fn</span> <span class="o">-&gt;</span> <span class="n">run_query</span><span class="o">.</span><span class="p">(</span><span class="s1">&#39;select * from users&#39;</span><span class="p">)</span> <span class="k">end</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#PID&lt;0.132.0&gt;</span>
+</span><span class='line'><span class="n">iex</span> <span class="o">&gt;</span> <span class="n">spawn</span><span class="p">(</span><span class="k">fn</span> <span class="o">-&gt;</span> <span class="n">run_query</span><span class="o">.</span><span class="p">(</span><span class="s1">&#39;select * from reports&#39;</span><span class="p">)</span> <span class="k">end</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#PID&lt;0.134.0&gt;</span>
+</span><span class='line'><span class="s2">&quot;query select * from users executed&quot;</span>
+</span><span class='line'><span class="s2">&quot;query select * from reports executed&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you can see both queries executed concurrently.</p>
+
+<p>You might ask how can I get back the results and use them in the main process? The answer is <em>Message Passing</em>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='elixir'><span class='line'><span class="n">iex</span> <span class="o">&gt;</span> <span class="n">caller</span> <span class="o">=</span> <span class="n">self</span>
+</span><span class='line'><span class="n">iex</span> <span class="o">&gt;</span> <span class="n">spawn</span><span class="p">(</span><span class="k">fn</span> <span class="o">-&gt;</span> <span class="n">send</span><span class="p">(</span><span class="n">caller</span><span class="p">,</span> <span class="p">{</span><span class="ss">:query_result</span><span class="p">,</span> <span class="n">run_query</span><span class="o">.</span><span class="p">(</span><span class="s1">&#39;select * from reports&#39;</span><span class="p">)})</span> <span class="k">end</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#PID&lt;0.138.0&gt;</span>
+</span><span class='line'><span class="s2">&quot;query select * from reports executed&quot;</span>
+</span><span class='line'><span class="n">iex</span> <span class="o">&gt;</span> <span class="k">receive</span> <span class="k">do</span>
+</span><span class='line'><span class="k">    </span><span class="p">{</span><span class="ss">:query_result</span><span class="p">,</span> <span class="n">result</span><span class="p">}</span> <span class="o">-&gt;</span> <span class="no">IO</span><span class="o">.</span><span class="n">inspect</span> <span class="s2">&quot;result is </span><span class="si">#{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'><span class="s2">&quot;result is query select * from reports executed&quot;</span>
+</span><span class='line'><span class="s2">&quot;result is query select * from reports executed&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The processes in Elixir(it&rsquo;s not same as unix processes) can talk to each other through message.
+Each process has it&rsquo;s own mailbox and can process one item at a time.</p>
+
+<h3>Distributed</h3>
+
+<p>I save the best for last.</p>
+
+<p>Erlang and its BEAM was implemented to be run in distributed environment.
+You can easily connect two Erlang nodes together:</p>
+
+<p>Node1:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='elixir'><span class='line'><span class="err">$</span> <span class="n">iex</span> <span class="o">--</span><span class="n">sname</span> <span class="n">node1</span>
+</span><span class='line'><span class="n">iex</span><span class="p">(</span><span class="n">node1</span><span class="nv">@localhost</span><span class="p">)</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Node2:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='elixir'><span class='line'><span class="err">$</span> <span class="n">iex</span> <span class="o">--</span><span class="n">sname</span> <span class="n">node2</span>
+</span><span class='line'><span class="n">iex</span><span class="p">(</span><span class="n">node2</span><span class="nv">@localhost</span><span class="p">)</span><span class="o">&gt;</span> <span class="no">Node</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="ss">:&quot;node1@localhost&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="n">iex</span><span class="p">(</span><span class="n">node2</span><span class="nv">@localhost</span><span class="p">)</span><span class="o">&gt;</span> <span class="no">Node</span><span class="o">.</span><span class="n">list</span>
+</span><span class='line'><span class="p">[</span><span class="ss">:&quot;node1@localhost&quot;</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After the nodes recognize each other,
+you can run any peace of code in any node in the cluster.</p>
+
+<p>Node2:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='elixir'><span class='line'><span class="n">iex</span><span class="p">(</span><span class="n">node2</span><span class="nv">@localhost</span><span class="p">)</span><span class="o">&gt;</span> <span class="no">Node</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span>
+</span><span class='line'>  <span class="ss">:&quot;node1@localhost&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="k">fn</span> <span class="o">-&gt;</span> <span class="no">IO</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;This code ran from </span><span class="si">#{</span><span class="n">node</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">end</span><span class="p">)</span>
+</span><span class='line'><span class="no">This</span> <span class="n">code</span> <span class="n">ran</span> <span class="n">from</span> <span class="n">node1</span><span class="nv">@localhost</span>
+</span><span class='line'><span class="c1">#PID&lt;8771.79.0&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It looks simple, isn&rsquo;t it? To be fair, building distributed application requires
+more thought but hey at least the language and its environment are in your side!</p>
+
+<h2>My experience</h2>
+
+<p>Well I said why I like Elixir but learning a new language is challenging and it&rsquo;s get
+more complicated if it&rsquo;s running under different environment(Erlang/OTP).</p>
+
+<ul>
+<li>I did struggle with the idea of immutable data but after a while I got use to that.</li>
+<li>Elixir has a few Hash/List like data structures and few times I got confused to choose between them. It&rsquo;s getting better since Elixir is depreciating <code>HashDict</code>.</li>
+<li>Building a concurrent, fault-tolerant system under BEAM requires knowledge about OTP framework(<a href="https://www.manning.com/books/elixir-in-action">Elixir in Action</a> can help you a lot).</li>
+<li>Even though Elixir code runs under the VM, the development cycle is fast! Mix and Hex are doing great job, the dependencies are downloaded and compiled very fast. I can fire up <code>iex</code> console or run <code>mix test</code> and quickly get the result back.</li>
+</ul>
+
+
+<h2>Where to start</h2>
+
+<p>Are you interested? Spending most of my time reading Elixir/Erlang related book I can give you some suggestions</p>
+
+<ul>
+<li><a href="https://pragprog.com/book/elixir12/programming-elixir-1-2">Programming Elixir</a>
+This book helps you to get familiar with the language and master it.</li>
+<li><a href="https://www.manning.com/books/elixir-in-action">Elixir in Action</a>
+You&rsquo;ve read <em>Programming Elixir</em> but still have lot of questions about using OTP? This book is for you.</li>
+<li><a href="https://pragprog.com/book/phoenix/programming-phoenix">Programming Phoenix</a>
+Are you ready to write your first app in Elixir? If it&rsquo;s a web app you can use Phoenix.</li>
+<li><a href="https://pragprog.com/book/cmelixir/metaprogramming-elixir">Metaprogramming Elixir</a>
+You&rsquo;ve built your first app in Phoenix but wondering how Phoenix does all of those tricks? It&rsquo;s time to level up and become master in Elixir Metaprogramming by reading this book.</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Find and Replace Regex Group Match in VIM]]></title>
@@ -487,16 +761,6 @@ Sometimes after you setup your Asterisk system maybe you hear MOH-Music so chopp
     <id>http://slashmili.org/blog/2009/11/03/monitor-slow-queries-in-mysql</id>
     <content type="html"><![CDATA[<div class='post'>
 In an application we had  many connection to  MySQL database to insert and select data.<div>Always MySQL cup usage was about 30%, I googled and found a MySQL option which store slow queries in a log file.</div><div>That&#8217;s awesome !  </div><div>You should add log-slow-queries to file /etc/my.cnf and restart MySQL service and here it is !</div><div><br /></div><div>Go and check around ! make a tea for your self and after a while check log file in /var/run/mysqld/mysqld-slow.log</div><div><br /></div><div>You can read more about this config in <a href="http://dev.mysql.com/doc/refman/5.1/en/slow-query-log.html">MySQL Reference</a> </div></div>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Asterisk's AMI Return Empty String]]></title>
-    <link href="http://slashmili.org/blog/2009/09/12/asterisks-ami-return-empty-string/"/>
-    <updated>2009-09-12T00:00:00+08:00</updated>
-    <id>http://slashmili.org/blog/2009/09/12/asterisks-ami-return-empty-string</id>
-    <content type="html"><![CDATA[<div class='post'>
-About 2 months a ago, one day server of our customer decided to response empty string on <a href="http://www.voip-info.org/wiki/view/Asterisk+Manager+API+Action+Command">Command Action</a>. we feed bunch of data for reporting with AMI and especially with Command Action.<div><br /><div>It was so mystery for us ! what happen suddenly ? anyway we were lucky, we had a backup and moved server to backup ones.</div><div><br /></div><div>After works on that server we discovered this problem solved when we run asterisk as a root !</div><div>Anyway we did not work on that server until today. I get asterisk source code and debug lines and found a problem :</div><div>For unknown reason ownership of /tmp was different from always and a function wants to create temporary file but could not access to /tmp (file main/manager.c about line 1736).</div><div><br /></div><div>If Asterisk Developers checks  return value of mkstemp and debug if value is -1, life would be more pleasure </div></div></div>
 ]]></content>
   </entry>
   
