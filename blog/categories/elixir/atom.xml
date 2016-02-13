@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Elixir | /mili]]></title>
   <link href="http://slashmili.org/blog/categories/elixir/atom.xml" rel="self"/>
   <link href="http://slashmili.org/"/>
-  <updated>2016-02-09T23:05:58+08:00</updated>
+  <updated>2016-02-13T17:37:32+08:00</updated>
   <id>http://slashmili.org/</id>
   <author>
     <name><![CDATA[Milad Rastian]]></name>
@@ -30,7 +30,7 @@ I believe that everyone should take advantage of the language and the platform t
 
 <h2>Why Elixir?</h2>
 
-<h3>Elegant &amp; Expressive</h3>
+<h3>Eloquent &amp; Expressive</h3>
 
 <p><code>elixir
 urls = ["http://google.com", "http://trello.com"]
