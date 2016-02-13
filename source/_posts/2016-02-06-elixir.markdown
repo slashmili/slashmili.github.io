@@ -21,7 +21,7 @@ I believe that everyone should take advantage of the language and the platform t
 
 ## Why Elixir?
 
-### Elegant & Expressive
+### Eloquent & Expressive
 
 ```elixir
 urls = ["http://google.com", "http://trello.com"]
