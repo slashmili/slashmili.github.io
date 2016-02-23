@@ -172,7 +172,7 @@ iex(node2@localhost)> Node.list
 ```
 
 After the nodes recognize each other,
-you can run any peace of code in any node in the cluster.
+you can run any piece of code in any node in the cluster.
 
 Node2:
 ```elixir
