@@ -275,7 +275,6 @@ For example my controller would look like:</p>
 <span class='line-number'>17</span>
 <span class='line-number'>18</span>
 <span class='line-number'>19</span>
-<span class='line-number'>20</span>
 </pre></td><td class='code'><pre><code class='elixir'><span class='line'>  <span class="k">def</span> <span class="n">go</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="err">%</span><span class="p">{</span><span class="s2">&quot;slug&quot;</span> <span class="o">=&gt;</span> <span class="n">slug</span><span class="p">})</span> <span class="k">do</span>
 </span><span class='line'><span class="k">    </span><span class="n">slug</span>
 </span><span class='line'>    <span class="o">|&gt;</span> <span class="no">ElinkServer</span><span class="o">.</span><span class="n">get_elink</span>
@@ -290,10 +289,9 @@ For example my controller would look like:</p>
 </span><span class='line'>  <span class="k">end</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="k">defp</span> <span class="n">redirect_to_url</span><span class="p">({</span><span class="ss">:ok</span><span class="p">,</span> <span class="n">elink</span><span class="p">},</span> <span class="n">conn</span><span class="p">)</span> <span class="k">do</span>
-</span><span class='line'><span class="k">    </span><span class="n">url</span> <span class="o">=</span> <span class="n">elink</span><span class="o">.</span><span class="n">urls</span> <span class="o">|&gt;</span> <span class="no">Enum</span><span class="o">.</span><span class="n">shuffle</span> <span class="o">|&gt;</span> <span class="no">List</span><span class="o">.</span><span class="n">first</span>
-</span><span class='line'>    <span class="n">conn</span>
+</span><span class='line'><span class="k">    </span><span class="n">conn</span>
 </span><span class='line'>    <span class="o">|&gt;</span> <span class="n">inc_stat</span><span class="p">(</span><span class="n">elink</span><span class="p">)</span>
-</span><span class='line'>    <span class="o">|&gt;</span> <span class="n">redirect</span><span class="p">(</span><span class="ss">external:</span> <span class="n">url</span><span class="o">.</span><span class="n">link</span><span class="p">)</span>
+</span><span class='line'>    <span class="o">|&gt;</span> <span class="n">redirect</span><span class="p">(</span><span class="ss">external:</span> <span class="n">elink</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
 </span><span class='line'>    <span class="o">|&gt;</span> <span class="n">halt</span>
 </span><span class='line'>  <span class="k">end</span>
 </span></code></pre></td></tr></table></div></figure>

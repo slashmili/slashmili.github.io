@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Elixir | /mili]]></title>
   <link href="http://slashmili.org/blog/categories/elixir/atom.xml" rel="self"/>
   <link href="http://slashmili.org/"/>
-  <updated>2016-03-13T22:31:19+08:00</updated>
+  <updated>2016-03-13T22:47:24+08:00</updated>
   <id>http://slashmili.org/</id>
   <author>
     <name><![CDATA[Milad Rastian]]></name>
@@ -168,10 +168,9 @@ For example my controller would look like:</p>
 
 <p>  defp redirect_to_url({:ok, elink}, conn) do</p>
 
-<pre><code>url = elink.urls |&gt; Enum.shuffle |&gt; List.first
-conn
+<pre><code>conn
 |&gt; inc_stat(elink)
-|&gt; redirect(external: url.link)
+|&gt; redirect(external: elink.url)
 |&gt; halt
 </code></pre>
 
