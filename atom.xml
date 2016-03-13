@@ -4,7 +4,7 @@
   <title><![CDATA[/mili]]></title>
   <link href="http://slashmili.org/atom.xml" rel="self"/>
   <link href="http://slashmili.org/"/>
-  <updated>2016-03-13T22:29:55+08:00</updated>
+  <updated>2016-03-13T22:31:19+08:00</updated>
   <id>http://slashmili.org/</id>
   <author>
     <name><![CDATA[Milad Rastian]]></name>
@@ -21,6 +21,9 @@
     <content type="html"><![CDATA[<p>When you start learning Elixir, the first you&rsquo;ll learn is the culture of <code>let it crash</code>.
 Which sounds great! It measn that you don&rsquo;t need to handle exceptions and the system heal itself
 , it&rsquo;s to easy to fall in to trap of not catching any exception like I did.</p>
+
+<!-- more -->
+
 
 <p>After your application is ready to go live,
 you&rsquo;ll understand that not every thing should crash. Consider this example from
