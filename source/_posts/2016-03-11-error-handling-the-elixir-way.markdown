@@ -10,6 +10,9 @@ When you start learning Elixir, the first you'll learn is the culture of `let it
 Which sounds great! It measn that you don't need to handle exceptions and the system heal itself
 , it's to easy to fall in to trap of not catching any exception like I did.
 
+<!-- more -->
+
+
 After your application is ready to go live,
 you'll understand that not every thing should crash. Consider this example from
 [Elide](https://github.com/slashmili/elide/) project and the [changes](https://github.com/slashmili/elide/pull/8)
