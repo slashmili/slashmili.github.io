@@ -9,7 +9,7 @@
   <meta name="author" content="Milad Rastian">
 
   
-  <meta name="description" content="About 2 months a ago, one day server of our customer decided to response empty string on Command Action. we feed bunch of data for reporting with &hellip;">
+  <meta name="description" content="In an application we had many connection to MySQL database to insert and select data.Always MySQL cup usage was about 30%, I googled and found a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +69,44 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/11/03/monitor-slow-queries-in-mysql/">Monitor Slow Queries in MySQL</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2009-11-03T00:00:00+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+In an application we had  many connection to  MySQL database to insert and select data.<div>Always MySQL cup usage was about 30%, I googled and found a MySQL option which store slow queries in a log file.</div><div>That&#8217;s awesome !  </div><div>You should add log-slow-queries to file /etc/my.cnf and restart MySQL service and here it is !</div><div><br /></div><div>Go and check around ! make a tea for your self and after a while check log file in /var/run/mysqld/mysqld-slow.log</div><div><br /></div><div>You can read more about this config in <a href="http://dev.mysql.com/doc/refman/5.1/en/slow-query-log.html">MySQL Reference</a> </div></div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -412,44 +450,6 @@ As I am working as a system administer this days and always had a problem with c
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2008/01/31/first-view-of-turebogears-framework/">First View of TurboGears Framework</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2008-01-31T00:00:00+08:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-I am going to work some place which needs learning  <a href="http://turbogears.com/">TurboGears</a> framework.<br /><br />Before this I played with <a href="http://djangoproject.com/">Django</a> and until now that I am in chapter 5 from <a href="http://turbogearsbook.com/">Rapid Web Applications with TurboGears</a> book, I think  Django is more easy and faster.<br /><br />One thing that can be effect on selection of those, TG has a built-in AJAX widgets (I didn&#8217;t see any thing like <a href="http://cakephp.org/">CakePHP</a>&#8217;s build-in widgets until now)<br /><br />And other limitation I see in TG, you should insert all of your model in model.py file and all your controller in  controller.py file. when you working in a group, you will know how it&#8217;s bad idea, because all developer working in single file !<br /><br />Other reason I don&#8217;t like TG until now is TG using <a href="http://mochikit.com/">MochiKit</a> for JavaScript and AJAX. I like <a href="http://script.aculo.us/">script.aculo.us</a> much more and I have good style on that but it seems I should change my way :(<br /><br />Any way maybe I am newbie in TG and don&#8217;t know how it solve that problem and what is exactly it is !<br /><br />OH ! I forget to say, Django has a <a href="http://www.djangobook.com/">Free book</a>, but TG don&#8217;t.</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -480,6 +480,10 @@ I am going to work some place which needs learning  <a href="http://turbogears.c
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/03/11/error-handling-the-elixir-way/">Error Handling, the Elixir Way</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/02/06/elixir/">Elixir</a>
       </li>
     
@@ -493,10 +497,6 @@ I am going to work some place which needs learning  <a href="http://turbogears.c
     
       <li class="post">
         <a href="/blog/2014/06/16/debugging-application-crash-in-linux/">Debugging Application Crash in Linux</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/11/17/unleash-the-daemons/">Unleash the Daemons</a>
       </li>
     
   </ul>

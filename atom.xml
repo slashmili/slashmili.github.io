@@ -4,7 +4,7 @@
   <title><![CDATA[/mili]]></title>
   <link href="http://slashmili.org/atom.xml" rel="self"/>
   <link href="http://slashmili.org/"/>
-  <updated>2016-02-24T00:15:39+08:00</updated>
+  <updated>2016-03-13T22:29:55+08:00</updated>
   <id>http://slashmili.org/</id>
   <author>
     <name><![CDATA[Milad Rastian]]></name>
@@ -12,6 +12,214 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Error Handling, the Elixir Way]]></title>
+    <link href="http://slashmili.org/blog/2016/03/11/error-handling-the-elixir-way/"/>
+    <updated>2016-03-11T17:39:00+08:00</updated>
+    <id>http://slashmili.org/blog/2016/03/11/error-handling-the-elixir-way</id>
+    <content type="html"><![CDATA[<p>When you start learning Elixir, the first you&rsquo;ll learn is the culture of <code>let it crash</code>.
+Which sounds great! It measn that you don&rsquo;t need to handle exceptions and the system heal itself
+, it&rsquo;s to easy to fall in to trap of not catching any exception like I did.</p>
+
+<p>After your application is ready to go live,
+you&rsquo;ll understand that not every thing should crash. Consider this example from
+<a href="https://github.com/slashmili/elide/">Elide</a> project and the <a href="https://github.com/slashmili/elide/pull/8">changes</a>
+I&rsquo;ve made to handle exceptions.</p>
+
+<p>Elide project is a url shortener service, that I&rsquo;m using to experiment with Elixir and Phoenix.
+I&rsquo;m using <a href="https://hex.pm/packages/hashids">hashids</a> to generate the short urls and later when people
+use short urls I use the same library to decode a short url to meaning full data that I have in the app,
+all simple simple stuff. However while I was developing, I followed my own understanding of <code>let it crash</code>
+which was to never handle any unexpected behaviour.</p>
+
+<p>Consider simplified version of getting a short url entity:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='elixir'><span class='line'><span class="k">defmodule</span> <span class="no">Elide</span><span class="o">.</span><span class="no">ElinkServer</span>
+</span><span class='line'>  <span class="n">alias</span> <span class="no">Elide</span><span class="o">.</span><span class="p">{</span><span class="no">Repo</span><span class="p">,</span> <span class="no">Elink</span><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="n">get_elink</span><span class="p">(</span><span class="n">slug</span><span class="p">)</span> <span class="k">do</span>
+</span><span class='line'><span class="k">    </span><span class="n">slug</span>
+</span><span class='line'>    <span class="o">|&gt;</span> <span class="n">by_slug</span>
+</span><span class='line'>    <span class="o">|&gt;</span> <span class="no">Repo</span><span class="o">.</span><span class="n">one</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">defp</span> <span class="n">by_slug</span><span class="p">(</span><span class="n">my_slug</span><span class="p">)</span> <span class="k">do</span>
+</span><span class='line'><span class="k">    </span><span class="n">elink_seq</span> <span class="o">=</span> <span class="n">get_details_by_slug</span><span class="p">(</span><span class="n">my_slug</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">from</span> <span class="n">e</span> <span class="ow">in</span> <span class="no">Elink</span><span class="p">,</span>
+</span><span class='line'>      <span class="ss">where:</span> <span class="n">e</span><span class="o">.</span><span class="n">elink_seq</span> <span class="o">==</span> <span class="o">^</span><span class="n">elink_seq</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">defp</span> <span class="n">get_details_by_slug</span><span class="p">(</span><span class="n">my_slug</span><span class="p">)</span> <span class="k">do</span>
+</span><span class='line'><span class="k">    </span><span class="n">s</span> <span class="o">=</span> <span class="no">Hashids</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">min_len:</span> <span class="m">1</span><span class="p">,</span> <span class="ss">salt:</span> <span class="n">salt</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span><span class="ss">:ok</span><span class="p">,</span> <span class="p">[</span><span class="n">elink_seq</span><span class="p">]}</span> <span class="o">=</span> <span class="no">Hashids</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">my_slug</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">elink_seq</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The code looks simple and I thought if someone wants to open an invalid short url,
+well I <code>let it crash</code>!</p>
+
+<p>As soon as I had the project on the production server I noticed that:</p>
+
+<ul>
+<li>If any users enters an invalid short url, they&rsquo;ll face an ugly page with error <code>Server internal error</code></li>
+<li>I am getting a lot of false alarms on <a href="http://honeybadger.io">honeybadger</a> from bots on the internet,
+they don&rsquo;t care that I don&rsquo;t handle corner cases, they just hit the web server with invalid urls</li>
+</ul>
+
+
+<p>To be honest I knew I should handle this case and I postponed it.</p>
+
+<p>So what are the options? How can I handle it in elixir in a decent way</p>
+
+<ul>
+<li>Returning nil on case of failure. Nah, I certainly don&rsquo;t like this one.
+How can I know what was the error in the first place if I only return nil.</li>
+<li>Using <code>try/catch</code>, yeah it does the job but doesn&rsquo;t look decent. Generally I don&rsquo;t like the codes that are guarded with exceptions.
+If I don&rsquo;t have any option, sure but there should be a better way in Elixir and Erlang.</li>
+<li>Returning a tuple of <code>{:ok, result}</code> in case of success and <code>{:error, reason}</code> in case of failure.
+I&rsquo;ve seen this one I was using <a href="http://elixir-lang.org/docs/stable/elixir/File.html">File</a> module.
+Looks like that is convention that people are following in Erlang and Elixir.</li>
+</ul>
+
+
+<p>The idea behind using using tuple as opposed to using <code>try/catch</code> is we shouldn&rsquo;t use errors as control flow
+(<a href="http://elixir-lang.org/getting-started/try-catch-and-rescue.html">read more</a>).
+If a short url doesn&rsquo;t exist in database because a bot requested a random url should be considered as
+an invalid data and treated as invalid data. Let&rsquo;s how can we refactor this code to handle invalid data in Elixir way:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='elixir'><span class='line'><span class="k">defmodule</span> <span class="no">Elide</span><span class="o">.</span><span class="no">ElinkServer</span>
+</span><span class='line'>  <span class="n">alias</span> <span class="no">Elide</span><span class="o">.</span><span class="p">{</span><span class="no">Repo</span><span class="p">,</span> <span class="no">Elink</span><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="n">get_elink</span><span class="p">(</span><span class="n">slug</span><span class="p">)</span> <span class="k">do</span>
+</span><span class='line'><span class="k">    </span><span class="n">slug</span>
+</span><span class='line'>    <span class="o">|&gt;</span> <span class="n">by_slug</span>
+</span><span class='line'>    <span class="o">|&gt;</span> <span class="n">fetch_one</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">defp</span> <span class="n">fetch_one</span><span class="p">({</span><span class="ss">:error</span><span class="p">,</span> <span class="n">_</span><span class="p">}</span> <span class="o">=</span> <span class="n">error</span><span class="p">),</span> <span class="k">do</span><span class="p">:</span> <span class="n">error</span>
+</span><span class='line'>  <span class="k">defp</span> <span class="n">fetch_one</span><span class="p">({</span><span class="ss">:ok</span><span class="p">,</span> <span class="n">query</span><span class="p">})</span> <span class="o">=</span> <span class="p">{</span><span class="ss">:ok</span><span class="p">,</span> <span class="no">Repo</span><span class="o">.</span><span class="n">one</span><span class="p">(</span><span class="n">query</span><span class="p">)}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">defp</span> <span class="n">by_slug</span><span class="p">(</span><span class="n">my_slug</span><span class="p">)</span> <span class="k">do</span>
+</span><span class='line'><span class="k">    case</span> <span class="n">get_details_by_slug</span><span class="p">(</span><span class="n">my_slug</span><span class="p">)</span> <span class="k">do</span>
+</span><span class='line'><span class="k">      </span><span class="p">{</span><span class="ss">:error</span><span class="p">,</span> <span class="n">_</span><span class="p">}</span> <span class="o">=</span> <span class="n">error</span> <span class="o">-&gt;</span> <span class="n">error</span>
+</span><span class='line'>      <span class="p">{</span><span class="ss">:ok</span><span class="p">,</span> <span class="n">elink_seq</span><span class="p">}</span> <span class="o">-&gt;</span>
+</span><span class='line'>        <span class="p">{</span><span class="ss">:ok</span><span class="p">,</span> <span class="n">from</span> <span class="n">e</span> <span class="ow">in</span> <span class="no">Elink</span><span class="p">,</span>
+</span><span class='line'>          <span class="ss">where:</span> <span class="n">e</span><span class="o">.</span><span class="n">elink_seq</span> <span class="o">==</span> <span class="o">^</span><span class="n">elink_seq</span><span class="p">}</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">defp</span> <span class="n">get_details_by_slug</span><span class="p">(</span><span class="n">my_slug</span><span class="p">)</span> <span class="k">do</span>
+</span><span class='line'><span class="k">    </span><span class="n">s</span> <span class="o">=</span> <span class="no">Hashids</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">min_len:</span> <span class="m">1</span><span class="p">,</span> <span class="ss">salt:</span> <span class="n">salt</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">case</span> <span class="no">Hashids</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">my_slug</span><span class="p">)</span> <span class="k">do</span>
+</span><span class='line'><span class="k">        </span><span class="p">{</span><span class="ss">:ok</span><span class="p">,</span> <span class="p">[</span><span class="n">elink_seq</span><span class="p">]}</span> <span class="o">-&gt;</span> <span class="p">{</span><span class="ss">:ok</span><span class="p">,</span> <span class="n">elink_seq</span><span class="p">}</span>
+</span><span class='line'>        <span class="n">_</span> <span class="o">-&gt;</span> <span class="p">{</span><span class="ss">:error</span><span class="p">,</span> <span class="ss">:failed_to_decode</span><span class="p">}</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Does it worth it? I believe so with this approach I can simply pattern match the return value and keep the <code>flow</code> going.
+For example my controller would look like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='elixir'><span class='line'>  <span class="k">def</span> <span class="n">go</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="err">%</span><span class="p">{</span><span class="s2">&quot;slug&quot;</span> <span class="o">=&gt;</span> <span class="n">slug</span><span class="p">})</span> <span class="k">do</span>
+</span><span class='line'><span class="k">    </span><span class="n">slug</span>
+</span><span class='line'>    <span class="o">|&gt;</span> <span class="no">ElinkServer</span><span class="o">.</span><span class="n">get_elink</span>
+</span><span class='line'>    <span class="o">|&gt;</span> <span class="n">redirect_to_url</span><span class="p">(</span><span class="n">conn</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">defp</span> <span class="n">redirect_to_url</span><span class="p">({</span><span class="ss">:error</span><span class="p">,</span> <span class="n">_</span><span class="p">},</span> <span class="n">conn</span><span class="p">)</span> <span class="k">do</span>
+</span><span class='line'><span class="k">    </span><span class="n">conn</span>
+</span><span class='line'>    <span class="o">|&gt;</span> <span class="n">put_status</span><span class="p">(</span><span class="m">404</span><span class="p">)</span>
+</span><span class='line'>    <span class="o">|&gt;</span> <span class="n">render</span><span class="p">(</span><span class="no">Elide</span><span class="o">.</span><span class="no">ErrorView</span><span class="p">,</span> <span class="s2">&quot;404.html&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="o">|&gt;</span> <span class="n">halt</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">defp</span> <span class="n">redirect_to_url</span><span class="p">({</span><span class="ss">:ok</span><span class="p">,</span> <span class="n">elink</span><span class="p">},</span> <span class="n">conn</span><span class="p">)</span> <span class="k">do</span>
+</span><span class='line'><span class="k">    </span><span class="n">url</span> <span class="o">=</span> <span class="n">elink</span><span class="o">.</span><span class="n">urls</span> <span class="o">|&gt;</span> <span class="no">Enum</span><span class="o">.</span><span class="n">shuffle</span> <span class="o">|&gt;</span> <span class="no">List</span><span class="o">.</span><span class="n">first</span>
+</span><span class='line'>    <span class="n">conn</span>
+</span><span class='line'>    <span class="o">|&gt;</span> <span class="n">inc_stat</span><span class="p">(</span><span class="n">elink</span><span class="p">)</span>
+</span><span class='line'>    <span class="o">|&gt;</span> <span class="n">redirect</span><span class="p">(</span><span class="ss">external:</span> <span class="n">url</span><span class="o">.</span><span class="n">link</span><span class="p">)</span>
+</span><span class='line'>    <span class="o">|&gt;</span> <span class="n">halt</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I could have just used <code>try/catch</code> in <code>go</code> function and call it done but I certainly like this code much better!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Elixir]]></title>
@@ -751,16 +959,6 @@ In some case we need to set call-limit=1 in sip config but after a while a SIP c
     <id>http://slashmili.org/blog/2010/01/27/musiconhold-is-choppy-in-asterisk</id>
     <content type="html"><![CDATA[<div class='post'>
 Sometimes after you setup your Asterisk system maybe you hear MOH-Music so choppy.<br /><br />Solutions which I test and solved problems are :<br /><ol><li>check your Zaptel  and especially module ztdummy (you can use <a href="http://tinyurl.com/ye2gb5g">this guide</a>)</li><li>check you VoiceGateway <span style="font-weight: bold;">VAD</span> (Voice Activity Detection) config and <span style="font-weight: bold;">Disabled it</span> !  you can follow my samples for Cisco AS5300 and Quintum Tenor<br /></li></ol><span style="font-weight: bold;">VAD Configurations : </span><br />1. Cisco AS5300 :<br /><ol><li>Login to your Cisco<br /></li><li>Type : &#8220;conf terminal&#8221;</li><li>Enter your voip dial peer : &#8220;dial-peer voice 200 voip&#8221; (200 is my dial-peer, yours maybe is something else )</li><li>Type : &#8220;no vad&#8221;</li><li>Press Ctr+C</li><li>write your configuration by typing write command : &#8221; write&#8221;</li></ol>2.  Quintum Tenor<br /><ol><li>Login to your Tenor</li><li>Type: &#8220;config&#8221;</li><li>Type : &#8220;IPRoutingGroup&#8221; (depends on your config maybe need to add a number after this command )</li><li>Type : &#8220;set VADEnable 0&#8221;</li><li>Save your config with command : &#8220;Submit&#8221;<br /></li></ol></div>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Monitor Slow Queries in MySQL]]></title>
-    <link href="http://slashmili.org/blog/2009/11/03/monitor-slow-queries-in-mysql/"/>
-    <updated>2009-11-03T00:00:00+08:00</updated>
-    <id>http://slashmili.org/blog/2009/11/03/monitor-slow-queries-in-mysql</id>
-    <content type="html"><![CDATA[<div class='post'>
-In an application we had  many connection to  MySQL database to insert and select data.<div>Always MySQL cup usage was about 30%, I googled and found a MySQL option which store slow queries in a log file.</div><div>That&#8217;s awesome !  </div><div>You should add log-slow-queries to file /etc/my.cnf and restart MySQL service and here it is !</div><div><br /></div><div>Go and check around ! make a tea for your self and after a while check log file in /var/run/mysqld/mysqld-slow.log</div><div><br /></div><div>You can read more about this config in <a href="http://dev.mysql.com/doc/refman/5.1/en/slow-query-log.html">MySQL Reference</a> </div></div>
 ]]></content>
   </entry>
   
