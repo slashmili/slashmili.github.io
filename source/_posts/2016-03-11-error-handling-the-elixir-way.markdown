@@ -125,10 +125,9 @@ For example my controller would look like:
   end
 
   defp redirect_to_url({:ok, elink}, conn) do
-    url = elink.urls |> Enum.shuffle |> List.first
     conn
     |> inc_stat(elink)
-    |> redirect(external: url.link)
+    |> redirect(external: elink.url)
     |> halt
   end
 ```
